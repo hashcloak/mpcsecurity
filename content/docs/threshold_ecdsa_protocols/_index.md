@@ -35,10 +35,27 @@ Now, let $H: \\{0, 1\\}^* \rightarrow \mathbb{Z}_q$ be a hash function (in pract
 
 Notice that extracting the first component of a point on the elliptic curve is commonly used here. That can be represented as a function $F: \mathbb{G} \rightarrow \mathbb{Z}_q$, and in the case of ECDSA, it can be defined as $F(x, y) = x \mod q$. It is important to highlight that when we consider a generic abstract cyclic group, a generic function $H: \\{0, 1\\}^* \rightarrow \mathbb{Z}_q$, and a generic function $F: \mathbb{G} \rightarrow \mathbb{Z}_q$, assuming that the discrete logarithm problem and modeling $H$ and $F$ as random oracles, one can prove that such abstract version of the signature scheme is secure. When the ECDSA is instantiated as described in the algorithms $(\textsf{Gen}, \textsf{Sign}, \textsf{Verify})$, is reasonable to model $H$ as a random oracle, but modeling $F$ as a random oracle in this case is not a correct model because $F$ is far from behave as a random function. Despite this, ECDSA has been used and studied and the scrutiny process so far has revealed no significant attack.
 
-## Standalone ECDSA security concerns
+### Standalone ECDSA security concerns
 
 - Bad generation and manipulation of $k \in \mathbb{Z}_q^*$ in DSA/ECDSA can lead to catastrophic results (see Katz & Lindell, 2014, Section 12.5.2). If the attacker can predict the value of $k$, or if the same $k$ is used twice in two different signature generations, the attacker can obtain the secret key (the later can occur even if $k$ is unpredictable). The later attack was used to extract the master key on PS3 :open_mouth:.
 - Let $m \in \\{0, 1\\}^*$ the message to be signed. Before all the process start, we should compute $m'$ to be the $\vert q \vert$ leftmost bits of $\textsf{SHA256}(m)$, where $\vert q \vert$ is the bit-length of $q$. This is in fact the message that should be signed, and not $m$ itself (see Lindell, 2021).
+
+## Libraries for computing threshold ECDSA
+
+- [ZenGo-X/multi-party-ecdsa](https://github.com/ZenGo-X/multi-party-ecdsa): written in Rust. It has implementations for Lindell (2021), Genaro & Goldfeder (2019) and Genaro & Goldfeder (2020).
+- [cfromknecht/tpec](https://github.com/cfromknecht/tpec): written in Go. It has implementations for Lindell (2021).
+- [neucrypt/mpecdsa](https://gitlab.com/neucrypt/mpecdsa): written in Rust. It has implementations for Doerner et al. (2018) and Doerner et al. (2019).
+- [sonr-io/kryptology](https://github.com/sonr-io/kryptology): written in Go. It has implementations for Doerner et al. (2018) and Genaro & Goldfeder (2020).
+- [taurusgroup/multi-party-sig](https://github.com/taurusgroup/multi-party-sig): written in Go. Contains an implementation of the protocol proposed by [Canetti et al. (2021)](https://eprint.iacr.org/2021/060), also known as CGGMP.
+- [boltlabs-inc/tss-ecdsa](https://github.com/boltlabs-inc/tss-ecdsa): written in Rust. Implementation of the protocol proposed by [Canetti et al. (2021)](https://eprint.iacr.org/2021/060).
+- [coinbase/kryptology](https://github.com/coinbase/kryptology): written in Go. Implementations of various protocols. Among them we can find:
+    - Doerner et al. (2018).
+    - Gennaro & Goldfeder (2020).
+- [Safeheron/multi-party-ecdsa-cpp](https://github.com/Safeheron/multi-party-ecdsa-cpp): written in C++. Contains implementations of multiple ECDSA protocols. Among them, we can find:
+    - Gennaro & Goldfeder (2019).
+    - Gennaro & Goldfeder (2020).
+    - Canetti et al. (2021).
+- [webb-tools/cggmp-threshold-ecdsa](https://github.com/webb-tools/cggmp-threshold-ecdsa): written in Rust. Implementation of the threshold ECDSA signature protocol from Canetti et al. (2021) with slight modifications.
 
 # References
 
