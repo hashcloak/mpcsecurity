@@ -122,19 +122,19 @@ On input $(\textsf{sid}, \textsf{KeyGen})$, party $P_i$ acts as follows:
 On input $(\textsf{sid}, \textsf{Sign}, \textsf{oid}_x, m)$, party $P_i$ acts as follows:
 
 1. Abort if $\textsf{oid}_x$ was not stored.
-2. Let $\textsf{oid}_k = \textsf{sid} \Vert 1$, $\textsf{oid}_\rho = \textsf{sid} \Vert 2$, $\textsf{oid}_{\rho \cdot k} = \textsf{sid} \Vert 3$, $\textsf{oid}_{\rho \cdot x} = \textsf{sid} \Vert 4$, $\textsf{oid}_{r \cdot \rho \cdot x} = \textsf{sid} \Vert 5$, $\textsf{oid}_{\rho \cdot m} = \textsf{sid} \Vert 6$, $\textsf{oid}_\beta = \textsf{sid} \Vert 7$.
+2. Let $\textsf{oid}\_k = \textsf{sid} \Vert 1$, $\textsf{oid}\_\rho = \textsf{sid} \Vert 2$, $\textsf{oid}\_{\rho \cdot k} = \textsf{sid} \Vert 3$, $\textsf{oid}\_{\rho \cdot x} = \textsf{sid} \Vert 4$, $\textsf{oid}\_{r \cdot \rho \cdot x} = \textsf{sid} \Vert 5$, $\textsf{oid}\_{\rho \cdot m} = \textsf{sid} \Vert 6$, $\textsf{oid}\_\beta = \textsf{sid} \Vert 7$.
 3. In parallel, the parties engage in: $\textsf{CreateSharedVal} \left( \textsf{sid}, D, \textsf{oid}_\rho \right)$ and $\textsf{CreateSharedVal} \left( \textsf{sid}, D, \textsf{oid}_k \right)$. Here $\rho$ and $k$ denote the generated values.
 4. In parallel, the parties engage in:
-    1. $\textsf{MultSharedVals}(\textsf{sid}, D, \textsf{oid}_\rho, \textsf{oid}_k, \textsf{oid}_{\rho \cdot k})$.
-    2. $\textsf{MultSharedVals}(\textsf{sid}, D, \textsf{oid}_\rho, \textsf{oid}_x, \textsf{oid}_{\rho \cdot x})$.
+    1. $\textsf{MultSharedVals}(\textsf{sid}, D, \textsf{oid}\_\rho, \textsf{oid}_k, \textsf{oid}\_{\rho \cdot k})$.
+    2. $\textsf{MultSharedVals}(\textsf{sid}, D, \textsf{oid}\_\rho, \textsf{oid}_x, \textsf{oid}\_{\rho \cdot x})$.
 5. The parties engage in $\textsf{OutExpOfSharedVal}(\textsf{sid}, D, \textsf{oid}_k)$. Let $(r', \cdot)$ be the common output and let $r = r' \mod q$.
 6. Each party invokes:
-    1. $\textsf{ScalarMultOfSharedVal}(D, \textsf{oid}_{\rho \cdot x}, \textsf{oid}_{r \cdot \rho \cdot x}, r)$.
-    2. $\textsf{ScalarMultOfSharedVal}(D, \textsf{oid}_{\rho}, \textsf{oid}_{r \cdot m}, H(m))$.
-    3. $\textsf{AdditionOfSharedVals}(D, \textsf{oid}_{r \cdot \rho \cdot x}, \textsf{oid}_{r \cdot m}, \textsf{oid}_{\beta})$.
+    1. $\textsf{ScalarMultOfSharedVal}(D, \textsf{oid}\_{\rho \cdot x}, \textsf{oid}_{r \cdot \rho \cdot x}, r)$.
+    2. $\textsf{ScalarMultOfSharedVal}(D, \textsf{oid}\_{\rho}, \textsf{oid}_{r \cdot m}, H(m))$.
+    3. $\textsf{AdditionOfSharedVals}(D, \textsf{oid}\_{r \cdot \rho \cdot x}, \textsf{oid}\_{r \cdot m}, \textsf{oid}\_{\beta})$.
 7. In parallel, parties engage in:
-    1. $\textsf{OutSharedVal}(D, \textsf{sid}, \textsf{oid}_{\rho \cdot k})$; let $\tau$ be the common output.
-    2. $\textsf{OutSharedVal}(D, \textsf{sid}, \textsf{oid}_{\beta})$; let $\beta$ be the common output.
+    1. $\textsf{OutSharedVal}(D, \textsf{sid}, \textsf{oid}\_{\rho \cdot k})$; let $\tau$ be the common output.
+    2. $\textsf{OutSharedVal}(D, \textsf{sid}, \textsf{oid}\_{\beta})$; let $\beta$ be the common output.
 8. Output $\left( r, s = \tau^{-1} \cdot \beta \right)$.
 
 Next, we describe the protocols $\textsf{CreateSharedVal}$, $\textsf{AdditionOfSharedVals}$, $\textsf{ScalarMultOfSharedVal}$, $\textsf{OutSharedVal}$, $\textsf{OutExpOfSharedVal}$, and $\textsf{MultSharedVals}$
@@ -143,58 +143,58 @@ Next, we describe the protocols $\textsf{CreateSharedVal}$, $\textsf{AdditionOfS
 
 This protocol creates a Pedersen commitment to a uniformly chosen value. Each party will hold a share of this value which will remain private.
 
-![CreateSharedVal](https://hackmd.io/_uploads/ByPdd_562.png)
+![CreateSharedVal](CreateSharedVal.png)
 
 ### Protocol $\textsf{AdditionOfSharedVals}$
 
 This protocol adds two committed values under Pedersen commitment. Remember that Pedersen commitments are additively homomorphic, therefore, this operation can be computed locally by each party.
 
-![AdditionOfSharedVals](https://hackmd.io/_uploads/Hy65uO563.png)
+![AdditionOfSharedVals](AdditionOfSharedVals.png)
 
 ### Protocol $\textsf{ScalarMultOfShareVals}$
 
 This protocol multiplies a publicly known scalar with a previously stored value that is committed under a Pedersen commitment. Knowing that such commitment is additively homomorphic, this operation can be computed locally by each party.
 
-![ScalarMultOfSharedVal](https://hackmd.io/_uploads/Hy6ouu5p3.png)
+![ScalarMultOfSharedVal](ScalarMultOfSharedVals.png)
 
 ### Protocol $\textsf{OutSharedVal}$
 
 This protocol reconstructs an additively shared value whose shares have been committed using a Pedersen commitment.
 
-![OutSharedVal](https://hackmd.io/_uploads/Hy1T_O5a2.png)
+![OutSharedVal](OutSharedVals.png)
 
 ### Protocol $\textsf{OutExpSharedVal}$
 
 This protocol outputs the value $A = a \cdot G$ for a previously stored value $a$. <span style="color:red">**Here, the functionality is omitting that the party should compute $A_i = a_i \cdot G$ at some point before Step 2.**</span>
 
-![OutExpSharedVal](https://hackmd.io/_uploads/S1XAYO9pn.png)
+![OutExpSharedVal](OutExpSharedVals.png)
 
 ### Protocol $\textsf{MultSharedVals}$
 
 This protocol multiplies a pair of previously generated and stored values and stores an additive share of the multiplication. 
 
-![MultSharedVals](https://hackmd.io/_uploads/r1ysiK9T3.png)
+![MultSharedVals](MultSharedVals.png)
 
 The functionality $\mathcal{F}_\textsf{LeakyMult}$ is a many-party leaky multiplication ideal functionality that multiplies two private values and returns the additive share of the multiplication to each party. Here, they say that it is leaky because the functionality allows to the adversary to know whether a linear relationship of the private shares of each value is equal to some value. Also, the functionality allows the adversary to modify their commitments restricted to the condition of preserving the overall sum. The purpose of giving the adversary this freedom is to obtain more efficient implementations of the protocol. Next, we will show the specification of this functionality. <span style="color:red">**Here we correct some typos present in the paper**</span>:
 
 **Functionality $\mathcal{F}_\textsf{LeakyMult}$**:
 
 Parties: $P_1, \dots, P_n$.
-Common input: $\textsf{sid} \in \\{0, 1\\}^*$, $D \in \mathbb{G}$, $\left\\{ \widehat{A}_\mathcal{l}, \widehat{B}_\mathcal{l} \right\\}_{l=1}^n$.
+Common input: $\textsf{sid} \in \\{0, 1\\}^*$, $D \in \mathbb{G}$, $\left\\{ \widehat{A}\_\mathcal{l}, \widehat{B}\_\mathcal{l} \right\\}_{l=1}^n$.
 $P_i$'s input: $\left(a_i, r_i^A \right), \left(b_i, r_i^B \right) \in \mathbb{Z}_q^2$.
 
-1. Abort if for some $\mathcal{l}$ it holds that $\widehat{A}_\mathcal{l} \neq \textsf{PedCom}_D(a_\mathcal{l}, r_\mathcal{l}^A)$ or $\widehat{B}_\mathcal{l} \neq \textsf{PedCom}_D(b_\mathcal{l}, r_\mathcal{l}^B)$
-2. Sample $r_1, \dots, r_n$ uniformly at random from $\mathbb{Z}_q$. Sample $c_1, \dots, c_n$ uniformly at random from $\mathbb{Z}_q$ conditioned on
+1. Abort if for some $\mathcal{l}$ it holds that $\widehat{A}\_\mathcal{l} \neq \textsf{PedCom}\_D(a_\mathcal{l}, r_\mathcal{l}^A)$ or $\widehat{B}\_\mathcal{l} \neq \textsf{PedCom}\_D(b_\mathcal{l}, r\_\mathcal{l}^B)$
+2. Sample $r_1, \dots, r_n$ uniformly at random from $\mathbb{Z}\_q$. Sample $c_1, \dots, c_n$ uniformly at random from $\mathbb{Z}\_q$ conditioned on
     $$
     \sum_{l=1}^n c_l = \left(\sum_{l=1}^n a_l \right) \cdot \left(\sum_{l=1}^n b_l \right).
     $$
-3. Output $\left\\{C_l = \textsf{PedCom}_D(c_l; r_l)\right\\}_{l=1}^n$ as the common output.
+3. Output $\left\\{C_l = \textsf{PedCom}\_D(c_l; r_l)\right\\}_{l=1}^n$ as the common output.
 4. Send $\left( r_l, c_l \right)$ to $P_l$ for each $l = 1, \dots, n$.
 
 After getting the outputs, the corrupted parties $\mathcal{C}$ can make the following calls (at most one of each type):
 
-- **Linear test:** send $\delta \in \mathbb{Z}_q$ and $\left\\{(o_l^A, o_l^B) \in \mathbb{Z}_q^2\right\\}_{l \in [n] \setminus \mathcal{C}}$ to the functionality. The functionality aborts if $\sum_{l \in [n] \setminus \mathcal{C}} (o_l^A \cdot a_l + o_l^B \cdot b_l) \neq \delta$.
-- **Commitment replacement:** Send $\\{(r'_l, c'_l )\\}_{l \in \mathcal{C}}$. The functionality aborts if $\sum_{l \in \mathcal{C}} c_l \neq \sum_{l \in \mathcal{C}} c'_l$. Otherwise the value of $\widehat{C}_l$, for each $l \in \mathcal{C}$, in the common output is updated to $\textsf{PedCom}_D(c'_l; r'_l)$.
+- **Linear test:** send $\delta \in \mathbb{Z}\_q$ and $\left\\{(o_l^A, o_l^B) \in \mathbb{Z}\_q^2\right\\}\_{l \in [n] \setminus \mathcal{C}}$ to the functionality. The functionality aborts if $\sum_{l \in [n] \setminus \mathcal{C}} (o_l^A \cdot a_l + o_l^B \cdot b_l) \neq \delta$.
+- **Commitment replacement:** Send $\\{(r'\_l, c'\_l )\\}\_{l \in \mathcal{C}}$. The functionality aborts if $\sum_{l \in \mathcal{C}} c_l \neq \sum_{l \in \mathcal{C}} c'_l$. Otherwise the value of $\widehat{C}_l$, for each $l \in \mathcal{C}$, in the common output is updated to $\textsf{PedCom}_D(c'_l; r'_l)$.
 
 ## Threshold case
 
@@ -205,9 +205,9 @@ To this moment, the protocol allows an adversary to corrupt at least $n - 1$ par
 
 To achieve threshold signatures (i.e. signatures $t$-out-of-$n$), the approach is as follows. In the key generation, the parties generate additive shares as in the $n$-out-of-$n$ case and transform such shares into $t$-out-of-$n$ shares using Shamir secret-sharing. For the signing phase, the parties take the Shamir $t$-out-of-$n$ shares transform them into $t$-out-of-$t$ shares, and proceed as in the non-threshold case.
 
-The protocol for key generation is presented next. <span style="color:red">**One thing that is missing in the protocol specification is that in Step 2(e)(ii), the parties should execute $\mathcal{F}_{\textsf{zk}}^{\mathcal{R}_\textsf{DL}}$ with respect to $D$ given that, under correct circumstances, this should be a Pedersen commitment of 0. Also, here $p_{i, l}$ is a notation for $p_i(l)$.**</span>
+The protocol for key generation is presented next. <span style="color:red">**One thing that is missing in the protocol specification is that in Step 2(e)(ii), the parties should execute $\mathcal{F}\_{\textsf{zk}}^{\mathcal{R}\_\textsf{DL}}$ with respect to $D$ given that, under correct circumstances, this should be a Pedersen commitment of 0. Also, here $p_{i, l}$ is a notation for $p_i(l)$.**</span>
 
-![Threshold case](https://hackmd.io/_uploads/HyYmcs9an.png)
+![Threshold case](ThresholdCase.png)
 
 The protocol for signing is presented next. <span style="color:red">**Here we present a relevant correction to the protocol presented in the original paper.**</span>
 
@@ -217,32 +217,43 @@ The protocol for signing is presented next. <span style="color:red">**Here we pr
         $$
         o_l = \frac{\prod_{j \in \mathcal{S}\setminus\\{l\\}} j}{\prod_{j \in \mathcal{S}\setminus\\{l\\}} (j - l)}.
         $$
-    2. Let $\left( \\{ \widehat{A}_l \\}_{l=1}^n, a_i, r_i \right) = \textsf{Retrieve}(\textsf{oid}_\textsf{xtsh})$.
-    3. Let $(a'_i, r'_i) = o_i \cdot (a_i, r_i)$, and for each $l \in \mathcal{S}$, let $\widehat{A}'_l = o_l \cdot \widehat{A}_l$.
+    2. Let $\left( \\{ \widehat{A}\_l \\}\_{l=1}^n, a_i, r_i \right) = \textsf{Retrieve}(\textsf{oid}\_\textsf{xtsh})$.
+    3. Let $(a'_i, r'_i) = o_i \cdot (a_i, r_i)$, and for each $l \in \mathcal{S}$, let $\widehat{A}'\_l = o_l \cdot \widehat{A}\_l$.
 3. Sign using additive shares:
-    1. $\textsf{Store}_{\textsf{oid}' = \textsf{sid} \Vert "y"} \left( \\{ \widehat{A}'_l \\}_{l=1}^n, a'_i, r'_i \right)$.
+    1. $\textsf{Store}\_{\textsf{oid}' = \textsf{sid} \Vert "y"} \left( \\{ \widehat{A}'\_l \\}_{l=1}^n, a'_i, r'_i \right)$.
     2. Interact as in the signing phase of the signing protocol for the non-threshold case, while in the call of $\textsf{MultSharedVals}$ done in Round 4(2), use the object-id $\textsf{oid}'$ instead of $\textsf{oid}$.
 
-We remain to present a UC-realization of $\mathcal{F}_\textsf{LeakyMult}$ which is the protocol $\textsf{ManyPartyLeakyMult}$. Such protocol has access to other two ideal functionalities: a two-party multiplication functionality $\mathcal{F}_\textsf{2PC-Mult}$ and a multiplication equality test functionality $\mathcal{F}_\textsf{PedMultEqTest}$. For this text to be self-contained, we present the functionalities next taken from the original paper:
+We remain to present a UC-realization of $\mathcal{F}\_\textsf{LeakyMult}$ which is the protocol $\textsf{ManyPartyLeakyMult}$. Such protocol has access to other two ideal functionalities: a two-party multiplication functionality $\mathcal{F}_\textsf{2PC-Mult}$ and a multiplication equality test functionality $\mathcal{F}\_\textsf{PedMultEqTest}$. For this text to be self-contained, we present the functionalities next taken from the original paper:
 
-![](https://hackmd.io/_uploads/BJtJIooa3.png =500x)
+{{< figure src="F2PC_mult.png" width="500px" >}}
 
-![](https://hackmd.io/_uploads/ByLxUjian.png)
+![Functionality PedMultEqTest](PedMutEqTest.png)
 
-We stress that performing the check using $\mathcal{F}_\textsf{PedMultEqTest}$ is key because the functionality for multiplications does not force the parties to input the correct and committed values, resulting in a wrong output. Then, the functionality for multiplication check will be in charge of testing and avoiding this behavior. The functionality $\mathcal{F}_\textsf{2PC-Mult}$ will be then replaced by a more weak functionality $\mathcal{F}_\textsf{2PC-WeakMult}$. Whose realization can be found in [Haitner et al.](https://eprint.iacr.org/2021/1373), and such replacement will not affect the security of the overall protocol. For reference, we present next the weak functionality. <span style="color:red">**It is important to mention that the version of this functionality in the paper of Lindell et al. has a small typo in the number of elements of $v$. The following functionality has the correct specification.**</span>
+We stress that performing the check using $\mathcal{F}\_\textsf{PedMultEqTest}$ is key because the functionality for multiplications does not force the parties to input the correct and committed values, resulting in a wrong output. Then, the functionality for multiplication check will be in charge of testing and avoiding this behavior. The functionality $\mathcal{F}\_\textsf{2PC-Mult}$ will be then replaced by a more weak functionality $\mathcal{F}\_\textsf{2PC-WeakMult}$. Whose realization can be found in [Haitner et al. (2021)](https://eprint.iacr.org/2021/1373), and such replacement will not affect the security of the overall protocol. For reference, we present next the weak functionality. <span style="color:red">**It is important to mention that the version of this functionality in the paper of Lindell et al. has a small typo in the number of elements of $v$. The following functionality has the correct specification.**</span>
 
-![](https://hackmd.io/_uploads/rJEuwTsa3.png)
+![Weak Multiplication Functionality](WeakMult.png)
 
 Also, we next present the functionality $\mathcal{F}_\textsf{PedMultEqTest}$:
 
-![](https://hackmd.io/_uploads/H1F5K6iah.png)
+![PedMultEqTest Functionality](PedMutEqTest2.png)
 
-Now, having all the functionalities, we present the protocol $\textsf{ManyPartyLeakyMult}$ that UC-realizes $\mathcal{F}_\textsf{LeakyMult}$. We are considering the protocol accessing to the functionality $\mathcal{F}_\textsf{2PC-Mult}$, but replacing it with $\mathcal{F}_\textsf{2PC-WeakMult}$ is done in a natural way.
+Now, having all the functionalities, we present the protocol $\textsf{ManyPartyLeakyMult}$ that UC-realizes $\mathcal{F}\_\textsf{LeakyMult}$. We are considering the protocol accessing to the functionality $\mathcal{F}\_\textsf{2PC-Mult}$, but replacing it with $\mathcal{F}_\textsf{2PC-WeakMult}$ is done in a natural way.
 
-![](https://hackmd.io/_uploads/S1QD-As6n.png)
+![ManyParyLeakyMult protocol](ManyPartyLeakyMult.png)
 
 Finally, we present the protocol that realizes the functionality $\mathcal{F}_\textsf{PedMultEqTest}$. As we mentioned earlier, this protocol is key for checking the correctness of multiplications in the overall protocol.
 
-![](https://hackmd.io/_uploads/H1xsQ0jp2.png)
+![Protocol PedMultEqTest](PedMultEqTest3.png)
 
 Although the protocol presented here is the main version of the Threshold ECDSA protocol, Lindell et al. present multiple improvements to reduce the number of rounds needed to generate keys and compute signatures. These improvements can be found in Sections 3.5 and 4.5.
+
+## Security concerns
+
+- In general, the protocol specification in this work has some notation issues and typos. Although a careful reading of the paper may reveal this errors, they may cause also implementation errors by software developers that are not experts in cryptography. We corrected those typos in this document and the corrections were marked in red inside the text.
+- The protocol assumes an authenticated point-to-point channel between parties. Therefore we must ensure that the channels fulfill this property.
+- The protocol assumes that the environment provides fresh session id on each invocation it makes. To do this the parties need to choose fresh session id which can be computed using a single round coin-flipping protocol. Such protocol consists in the parties sending uniform strings to each other and the session id is set to be the hash of their concatenation.
+- The protocol assumes that all the honest parties agree on the common input. Such agreement can be done by leting the parties send a hash of their common input in the first round of each protocol and its sub-protocols.
+- In both the key generation and the signing protocol, they make calls to the protocol for zero-knowledge functionalities. The parties should verify that the session id and the instance it receives for the zero-knowledge protocol are consistent with the common input of the previous steps of the protocol in which the zero-knowledge is being executed. 
+- In the non-threshold protocol, it is important to consider as public view all the elements that the paper lists in each verification step.
+- Missing an execution of $\mathcal{F}_\textsf{PedMultEqTest}$ in the protocol $\textsf{ManyPartyLeakyMult}$ could end in a wrong multiplication with catastrophic results due to the high possibility of an adversarial behavior.
+- For the key generation and the signing protocol we need to be careful of all the ZK proofs involved in the procedure. **[List all the ZK proofs involved]**.
