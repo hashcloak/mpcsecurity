@@ -257,3 +257,9 @@ Although the protocol presented here is the main version of the Threshold ECDSA 
 - In the non-threshold protocol, it is important to consider as public view all the elements that the paper lists in each verification step.
 - Missing an execution of $\mathcal{F}_\textsf{PedMultEqTest}$ in the protocol $\textsf{ManyPartyLeakyMult}$ could end in a wrong multiplication with catastrophic results due to the high possibility of an adversarial behavior.
 - For the key generation and the signing protocol we need to be careful of all the ZK proofs involved in the procedure. **[List all the ZK proofs involved]**.
+
+# References
+
+- Lindell, Y., & Nof, A. (2018). Fast Secure Multiparty ECDSA with Practical Distributed Key Generation and Applications to Cryptocurrency Custody. Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications Security, 1837–1854. https://doi.org/10.1145/3243734.3243788
+- Haitner, I., Makriyannis, N., Ranellucci, S., & Tsfadia, E. (2022). Highly Efficient OT-Based Multiplication Protocols. In O. Dunkelman & S. Dziembowski (Eds.), Advances in Cryptology – EUROCRYPT 2022 (pp. 180–209). Springer International Publishing.
+- Pedersen, T. P. (1992). Non-Interactive and Information-Theoretic Secure Verifiable Secret Sharing. In J. Feigenbaum (Ed.), Advances in Cryptology — CRYPTO ’91 (pp. 129–140). Springer Berlin Heidelberg.

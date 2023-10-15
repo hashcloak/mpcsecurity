@@ -11,7 +11,7 @@ For the key generation protocol and the signing protocol, we will present their 
 
 Similar to the previous version of the protocol, we will use multipicative notation for the group $\mathcal{G}$ described by a generator $g$.
 
-### Preliminaries
+## Preliminaries
 
 As in the work of Gennaro & Goldfeder (2019), this work relies on the following preliminaries:
 - Additive homomorphic encryption.
@@ -21,43 +21,43 @@ As in the work of Gennaro & Goldfeder (2019), this work relies on the following 
 
 We will not cover the above elements because they were covered in the previous section of this document. Also, this work focus on proposing a threshold signature protocol for DSA. Given that this signature algorithm was specified with details in the previous section, we refrain from show the details here again.
 
-#### Identifiable abort
+### Identifiable abort
 
 It is well known that in an active security model, it is not possible to guarantee the output delivery of the execution of a MPC protocol. If the adversary is active, a corrupt party may refrain from sending the message supposed to be sent which causes that honest parties will not learn the output of the computation. In this situation, the protocol proposed by Gennaro & Goldfeder reaches *security with abort* which means that the adversary can cause the protocol to abort, but in doing so can not learn anything else other than its outputs.
 
 When an abort is produced by the adversary, the protocol proposed in this work guarantees that the honest parties agree on the identity of a party $P_i$ which is a corrupted party. More technically, if F is a functionality computed by the original protocol, then a protocol for F with identifiable abort either computes F or the identity of a corrupted party $P_i$ in case of an abort.
 
-### Key generation protocol
+## Key generation protocol
 
 The key generation protocol for this work is very similar to the one presented in Gennaro & Goldfeder (2019). We present it here for completeness. At the end of the protocol, each party $P_i$ will obtain $(t, n)$-shares $x_i$ of a secret key $x$ along with a public key $y = g^x$. Also at the end of the protocol the value of $X_i = g^{x_i}$ is made public.
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_722279bd5ffa0f64c451d8e1bf0c9acf.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228877&Signature=5%2FmBQ5EQZSktwIa2MoKYMR5Vq54%3D" >}}
+![Protocol Key Generation](Protocol_Keygeneration.png)
 
-### Signing protocol
+## Signing protocol
 
 Once the key generation protocol has been executied, the signing protocol is run on input $m$ with $m = H(M)$. Let $S \subseteq [n]$ the set of players involved in the signing protocol. By using the correct Lagrange cohefficients, which can be computed locally by each party, each player $P_i$ can compute an additive share of $x$ by letting $w_i = \lambda_{i,S} \cdot x_i$, where $\lambda_{i,S}$ is the Lagrange coefficient. Notice that $x = \sum_{i \in C} w_i$. Also, given that $X_i = g^{x_i}$ is public (which was computed in the key generation protocol), each party can compute $W_i = X_i^{\lambda_{i, S}} = g^{w_i}$. Below, we present the protocol:
 
-{{< figure src= "https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_e737934a1e781e41cb54bae235e9101a.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228930&Signature=p76ToMwQJVGDVRDclaLbpY91ZUY%3D" >}}
+![Protocol Signing](Protocol_Signing.png)
 
-### Zero-knowledge proofs
+## Zero-knowledge proofs
 
 In the middle of the signing protocol, there are two ZK-proofs that need to be done to guarantee the correctness of the computation.
 
 For the first proof required in Phase 3, the party $P$ outputs $T = g^\sigma h^l$ and must provide a proof that he knows $\sigma$ and $l$ satisfying that equalities. A solution for an honest verifier is as follows:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_8eb950ff8b152ad923b5d5cdbb3a5335.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228949&Signature=issnvRMzZZMfKuoThkmxFhjLGIc%3D" >}}
+![Protocol Zero Knowledge](Protocol_ZK_1.png)
 
 Another proof that is required in Phase 5, requires that player $P$ who outputs $\bar{R} = R^k$, has to prove that he knows an exponent $k$ consistent with a Paillier ciphertext previously posted $C = E(k)$. A ZK-proof for this statement can be realized using works like [MacKenzie & Reiter (2004)](https://link.springer.com/article/10.1007/s10207-004-0041-0) and [Gennaro et al. (2016)](https://eprint.iacr.org/2016/013.pdf).
 
 Finally, in Step 6, a player $P$ outputs $S = R^{\sigma}$, and must prove that he knows $\sigma, l$, such that fulfills the previous equality and that $T = g^\sigma h^l$. A ZK-proof for this argument is:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_f876493aaac9b2e63cac826cf112abb1.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228970&Signature=xrkyM%2BWugnZTUc9h%2BnS0aZPzZB0%3D" >}}
+![Protocol Zero Knowledge](Protocol_ZK_2.png)
 
-### Identifying aborts
+## Identifying aborts
 
 As we mentioned before, the protocol presented here have the possibility to identify at least one party responsible for causing an abort in case that the later occurs. In this section, we present the strategies that the present reviewed work takes to make identification possible.
 
-#### Key generation
+### Key generation
 
 In the key generation, there are two points in which the protocol may fail and abort:
 - In Phase 2, a player can complain for receiving an inconsistent Feldman's share.
@@ -67,17 +67,17 @@ If the abort occurs in Phase 3, it is easy to return the identity of the corrupt
 
 To figure out what of the above situations is really happening, the party $P_j$ reveals the share received from $P_i$ to every other party, and every other party can confirm the consistency of the share of $P_i$. If we assume that the shares are signed, $P_i$ cannot be framed by $P_j$. Notice that opening this share does not hurt the security of the overall protocol because the signature has not been established or used.
 
-#### Signing protocol
+### Signing protocol
 
 In the signing protocol, an abort may occur in the following points:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_e5b6ecc2869b42e3e23ff294c0e68b52.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228996&Signature=m4lyK5MubqtGiBckfRKgawf6Q%2Bc%3D" >}}
+![Abort Points](Protocol_Id_Phases.png)
 
 For 1, 2, 3, 4, and 6, the identification of the corrupt party is simple. For the case of item 8, when the signature $(r, s)$ does not verify correctly, it means that at that point $g = \prod \bar{R}_i$ (from Phase 5) and also $y = \prod S_i$ (from Phase 6). At the point of abort, the party $p_i$ can broadcast $s_i$ and check if $R^{s_i} = \bar{R}_i^m \cdot S_i^r$, and the corrupt party would be the party for which this equality does not hold.
 
 It remains to show how to deal with items 5 and 7. According with Gennaro & Goldfeder, the parties ran the protocol correctly if and only if we prove the following:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_9d0e3f483d74c44ba45d4de2fb03ccc3.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697229022&Signature=Sti6UkkgF25inVfBmblmlTdJT3U%3D" >}}
+![Protocol Phases 5 and 7](Protocol_Id_5_7.png)
 
 According with the protocol specifications, Properties 1 and 2 are already enforced because of protocols $\textsf{MtA}$ and $\textsf{MtAwc}$. Thus, to make the protocol identifiable, Gennaro & Goldfeder attend the Properties 3, 4 and 5 separately.
 
@@ -85,9 +85,9 @@ The solution to the remaining properties is based on the fact that $k$ and $\gam
 
 If the protocol aborts in Phase 5 because $g \neq \prod \bar{R}_i$, the identification protocol works as follows:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_e2c843a28eb3686e1fa2e5cf238d312c.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697229046&Signature=W9lt99%2BZjskt5nM6nbV2lDTvuvM%3D" >}}
+![Protocol Phase 5](Protocol_Id_5.png)
 
-For the case of aborts of type 7 in Phase 6, the protocol aborts because $y \neq \prod S_i$. In this case, the parties cannot open the $\textsf{MtAwc} protocol between $k_i$ and $w_i$ given that $w_i$ is a share for the secret key. However, it is safe to reveal $\mu_{ij}$ in the clear to check the correctness of $\sigma_i$ in the exponent. We can identify the corrupt party as follows - **<span style="color:red">we corrected some typos in this section of the protocol</span>**:
+For the case of aborts of type 7 in Phase 6, the protocol aborts because $y \neq \prod S_i$. In this case, the parties cannot open the $\textsf{MtAwc}$ protocol between $k_i$ and $w_i$ given that $w_i$ is a share for the secret key. However, it is safe to reveal $\mu_{ij}$ in the clear to check the correctness of $\sigma_i$ in the exponent. We can identify the corrupt party as follows - **<span style="color:red">we corrected some typos in this section of the protocol</span>**:
 
 - Each player $P_i$ publishes $k_i$ and $\mu_{ij}$ as the decryption of the appropriate cyphertext in the $\textsf{MtAwc}$ protocol.
 - Every other party $P_l$ can now verify that the value sent by $P_i$ to $P_j$ was $k_i$ and the value sent by $P_j$ to $P_i$ was $\mu_{ij}$. Given that $g^{w_j}$ is a public value, every party can compute $g^{\nu_{ij}}$ using the equation $g^{\mu_{ij}} = g^{w_j k_i} g^{-\nu_{ij}}$. Then, they can compute
@@ -98,11 +98,11 @@ For the case of aborts of type 7 in Phase 6, the protocol aborts because $y \neq
 
 The ZK-proof of the last step can be found in [Chaum & Pedersen (1993)](https://link.springer.com/content/pdf/10.1007/3-540-48071-4_7.pdf).
 
-### Simplified ECDSA with anonymous aborts
+## Simplified ECDSA with anonymous aborts
 
 In the case that one is not concerned about identifying aborts, the authors of the revisited work proposes a simpler protocol. The key generation is the same as in the previous protocol, but the signing protocol is slightly different than the previous one. As in the previous protocol, by using the correct Lagrange cohefficients, each player $P_i$ can compute an additive share of $x$ by letting $w_i = \lambda_{i,S} \cdot x_i$, where $\lambda_{i,S}$ is the Lagrange coefficient. Again, notice that $x = \sum_{i \in C} w_i$. Also, given that $X_i = g^{x_i}$ is public (which was computed in the key generation protocol), each party can compute $W_i = X_i^{\lambda_{i, S}} = g^{w_i}$. We present the simplified signature generation protocol next:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_cfd3e38409b71ea75b5573e46c0516d0.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697229068&Signature=oanpJ2%2FxaZGxkSRSuhSDs7jqCyE%3D" >}}
+![Protocol Simplified](Protocol_Simp.png)
 
 ## Security concerns
 
@@ -131,3 +131,10 @@ In the case that one is not concerned about identifying aborts, the authors of t
     $$
 - In the simplified version of the protocol for anonymous aborts, the parties should check in Step 7 that $\Lambda = g^\delta$. If the condition holds, the players $P_i$ broadcasts $s_i$, otherwise, the protocol aborts.
 - **[List all the zero knowledge proofs]**
+
+# References
+
+- Rosario Gennaro, & Steven Goldfeder. (2020). One Round Threshold ECDSA with Identifiable Abort.
+- Chaum, D., & Pedersen, T. P. (1993). Wallet Databases with Observers. In E. F. Brickell (Ed.), Advances in Cryptology — CRYPTO’ 92 (pp. 89–105). Springer Berlin Heidelberg.
+- MacKenzie, P., & Reiter, M. K. (2004). Two-party generation of DSA signatures. International Journal of Information Security, 2(3), 218–239. https://doi.org/10.1007/s10207-004-0041-0.
+- Gennaro, R., Goldfeder, S., & Narayanan, A. (2016). Threshold-Optimal DSA/ECDSA Signatures and an Application to Bitcoin Wallet Security. In M. Manulis, A.-R. Sadeghi, & S. Schneider (Eds.), Applied Cryptography and Network Security (pp. 156–174). Springer International Publishing.

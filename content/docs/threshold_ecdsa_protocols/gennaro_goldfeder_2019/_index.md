@@ -11,13 +11,13 @@ math: true
 
 In this work, Genaro & Goldfeder propose a new method for a $(t, n)$ signature scheme. However, we have to keep in mind that when they say $(t, n)$, they mean that any subset of $t + 1$ parties can jointly sign but any smaller set cannot, which is slightly different to the concept presented in other works reviewed in this document. Also, this work focuses on the DSA signature scheme but the results can be easily applyd to ECDSA as the latter is an elliptic curve variant of the former. Genaro & Goldfeder propose a solution based on Paillier encryption scheme to realize a functionality that transform multiplicative shares into aditive ones, along with non-malleable equivocable commitments to ensure a correct computation against malicious adversaries. Also he uses a Feldman's verifiable secret-sharing scheme (VSS) to ensure the threshold security of the signing process.
 
-### Preliminaries
+## Preliminaries
 
 In this section, we present three definitions to understand the signing protocol by Gennaro & Goldfeder. First, we will explain what is a non-malleable equivocable commitment. Second, we will explain the specification of the DSA signature scheme. And third, we will explain the concept of Feldman's VSS.
 
-#### DSA signature scheme
+### DSA signature scheme
 
-The Digital Signature Algorithm (DSA) is a signature scheme whose security relies on the discrete logarithm problem. The public paramenters of this scheme are a cyclic group $\mathcal{G}$ with order $q$, a generator $g$ for $\mathcal{G}$, a hash function $H: \{0, 1\}^* \rightarrow \mathbb{Z}_q$, and a hash function $H': \mathcal{G} \rightarrow \mathbb{Z}_q$. The specification of the algorithms are presented next:
+The Digital Signature Algorithm (DSA) is a signature scheme whose security relies on the discrete logarithm problem. The public paramenters of this scheme are a cyclic group $\mathcal{G}$ with order $q$, a generator $g$ for $\mathcal{G}$, a hash function $H: \\{0, 1\\}^* \rightarrow \mathbb{Z}_q$, and a hash function $H': \mathcal{G} \rightarrow \mathbb{Z}_q$. The specification of the algorithms are presented next:
 
 - $\textsf{KeyGen}$: on input a security parameter, the algorithm outputs a secret key $x$ choosen at random from $\mathbb{Z}_q$, and also outputs a public key $y = g^x$ in $\mathcal{G}$.
 - $\textsf{Sign}$: On imput a message $M$, do the following:
@@ -34,15 +34,15 @@ The Digital Signature Algorithm (DSA) is a signature scheme whose security relie
 
 We stress that ECDSA is a particular case of DSA where the group $\mathcal{G}$ is an elliptic curve group. For this work, all the results presented also hold for ECDSA.
 
-#### Share conversion protocol
+### Share conversion protocol
 
 The goal with the share conversion protocol is to transform multiplicative into additive shares of a secret. Specifically, suppose that $x = ab \mod q$ where $a, b \in \mathbb{Z}_q$ are the multiplicative shares held by Alice and Bob respectively. Using a share conversion protocol, Alice and Bob will compute $\alpha, \beta \in \mathbb{Z}_q$ such that $\alpha + \beta = x = ab \mod q$. At the end Alice will hold bot $\alpha$ and $a$, while Bob will hold $\beta$ and $b$.
 
 For this version of the protocol, we assume that Alice has distributed a key $A$ for an additively homomorphic scheme $\mathcal{E}$ over an integer $N$. In the protocol, we assume that $B = g^b$ is public to force Bob to provide a correct $b$. This protocol (including the additional check) is denoted as $\textsf{MtAwc}$ ("multiplicative to aditive with chech"). The protocol without this check is denoted by $\textsf{MtA}$. We present the protocol next:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_9f31e75533146f146f3153542bc64556.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697229202&Signature=U30NpAyFCiDKblx%2FJHddOlVb56E%3D" >}}
+![Protocol Share Conversion](Protocol_Share_Conversion.png)
 
-#### Non-malleable equivocable commitments
+### Non-malleable equivocable commitments
 
 A *trapdoor* commitment scheme is a commitment which is information-theoretic hidding and computationally binding, where for the later, the scheme admits a trapdoor such that when known, it reveals the commited message entirely. However, this trapdoor is hard to be computed efficiently.
 
@@ -55,7 +55,7 @@ A trapdoor commitment scheme consists in four algorithms $\textsf{KG}$, $\textsf
 
 In real-world applications, it is common to use a hash function $H$ to instantiate this commitments. For a message $m$, we define the commitment as $h = H(m, r)$ where $r$ is randomly chosen with lenght equal to the security paramenter $\lambda$.
 
-#### Feldman's VSS
+### Feldman's VSS
 
 Feldman's VSS is an extension of the Shamir's secret-sharing scheme. To share a secret $\sigma \in \mathbb{Z}_q$, the dealer generates a random polynomial $p$ such that $p(0) = \sigma$. This means that the polynomial has the following structure:
 
@@ -71,23 +71,23 @@ $$
 
 in $\mathcal{G}$. In the case that some party complains about the check, the protocol must abort.
 
-### Key generation
+## Key generation
 
 The goal of the key generation is to obtain $(t, n)$ shares of the private key that will be used as input in the signing phase. For this specification, we assume that each party $P_i$ has an associated public key for the additively homomorphic encryption scheme $\mathcal{E}$. Below, present the protocol:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_e5bae00beec7d73b596e96e9634f9315.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697229221&Signature=QiWvDlo6IdzZ56X0Ri90hAFSURw%3D" >}}
+![Protocol Key Generation](Protocol_Keygen.png)
 
-### Signing
+## Signing
 
 Now, we present the signing protocol. It receives $m = H(M)$ as input, where $M$ is the message that will be signed. Additionaly, the parties have $(t, n)$ shares of the private key $x$.
 
 Let $S \subseteq [n]$ the set of parties involved in the signing protocol, such that $\vert S \vert = t + 1$. Knowing that the key generation protocol returned Shamir shares of the private key $x$, each party can construct the appropriate Lagrange coefficients $\lambda_{i, S}$ used to interpolate the polinomial used in the secret-sharing scheme. If $x_i$ are the Shamir secret shares of $x$, each party can compute $w_i = \lambda_{i, S} \cdot x_i$. Notice that $w_i$ is a (t, t + 1) share of $x$ held by the party $P_i$, which means that $x = \sum_{i \in S} w_i$. Also, the parties have public values $X_i = g^{x_i}$, therefore, each party can compute $W_i = g^{w_i} = X_i^{\lambda_{i, S}}$.
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_107d87a599c43fc6d5202632be25ad49.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697229263&Signature=QFh6vEmlDEy3M6MsfYRHOik4o8I%3D" >}}
+![Protocol Signing](Protocol_Signing.png)
 
 Notice that in Step (5B) of the previous protocol, the party $P$ broadcasts $V = R^s g^l$ and $A = g^\rho$ and he need to prove that he knows $s$, $l$ and $\rho$ for which the previous equations hold. To prove that he knows $\rho$, it can be used a classic Schnorr proof. To prove that he know $s$ and $l$, they can use the following protocol:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_c66961c621421a4ecf71c5512cdb1129.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697229279&Signature=nRgSABzmhdRFm%2BlRkWukCNlkiw8%3D" >}}
+![Protocol Schnorr](Protocol_Schnorr.png)
 
 ## Security concerns
 
@@ -105,3 +105,8 @@ Notice that in Step (5B) of the previous protocol, the party $P$ broadcasts $V =
 - The paper presents Section 5 as a historical record, however, the simplified protocol presented in that section is not secure.
 - If the implementation uses another additively homomorphic encryption scheme, it requires an assumption analogous to Paillier-EC or a ZK-proof for the statement in the $\textsf{MtAwc}$ protocol. Also, it is needed to guarantee security against "adversarially chosen" public keys.
 - **[List all the ZK-proofs]**
+
+# References
+
+- Gennaro, R., & Goldfeder, S. (2018). Fast Multiparty Threshold ECDSA with Fast Trustless Setup. In Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications Security (pp. 1179–1194). Association for Computing Machinery.
+- Dmytro Tymokhanov, & Omer Shlomovits. (2021). Alpha-Rays: Key Extraction Attacks on Threshold ECDSA Implementations.

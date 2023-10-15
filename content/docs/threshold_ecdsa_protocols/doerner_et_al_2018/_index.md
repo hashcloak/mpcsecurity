@@ -9,22 +9,21 @@ The protocol proposed by Doerner et al. (2018) exposes the a threshold ECDSA pro
 
 First, we start to show the newest version of the protocol. The parties interact with other three ideal functionalities:
 
-- $\mathcal{F}_{\textsf{CP}}^{\mathcal{R}_\textsf{DL}}$: this functionality is the standard commited zero-knowledge functionality which allows to commit to the exponent of a elliptic curve point, and also performs a zero-knowledge proof on the relation $\mathcal{R}_\textsf{DL} = \left\{(A, B, w ) \;\vert\; B = w \cdot A \right\}.$
-- $\mathcal{F}_{\textsf{Mul}}(q)$: in this functionality, two parties provide elements $a, b \in \mathbb{Z}_q$ respectively. and the functionality computes $d = a \cdot b - c$ where $c$ is a random element chosen from $\mathbb{Z}_q$. At the end of the protocol one party learns $d$ and the other party learns $c$. Intuitively, $\mathcal{F}_{\textsf{Mul}}(q)$ returns to each party an additive share of the product of the inputs they provided to the functionality, i.e., $d$ and $c$ are randomly distributed numbers such that $d + c = a \cdot b$.
+- $\mathcal{F}\_{\textsf{CP}}^{\mathcal{R}\_\textsf{DL}}$: this functionality is the standard commited zero-knowledge functionality which allows to commit to the exponent of a elliptic curve point, and also performs a zero-knowledge proof on the relation $\mathcal{R}\_\textsf{DL} = \left\\{(A, B, w ) \\;\vert\\; B = w \cdot A \right\\}.$
+- $\mathcal{F}_{\textsf{Mul}}(q)$: in this functionality, two parties provide elements $a, b \in \mathbb{Z}\_q$ respectively. and the functionality computes $d = a \cdot b - c$ where $c$ is a random element chosen from $\mathbb{Z}_q$. At the end of the protocol one party learns $d$ and the other party learns $c$. Intuitively, $\mathcal{F}\_{\textsf{Mul}}(q)$ returns to each party an additive share of the product of the inputs they provided to the functionality, i.e., $d$ and $c$ are randomly distributed numbers such that $d + c = a \cdot b$.
 - $\mathcal{F}_{\textsf{DLKeyGen}}(\mathcal{G}, n, 2)$: this is a functionality that generates a key pair $(\textsf{sk}, \textsf{pk})$ for the ECDSA signature scheme and distributes Shamir shares of $\textsf{sk}$ with threshold $t$.
 
 We next present the functionalities mentioned above:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_a164676f837e3e5ec903df4294c227e5.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228205&Signature=Zx7Fh1p8aUd%2BvtBd17Ijk7XQzAs%3D" >}}
+![Functionality Commited ZK](F_Commited_ZK.png)
 
+![Functionality Two Party Multiplication](F_Two_Party_Multiplication.png)
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_c6bc4b54319d3934186aba6c5a97c34d.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228256&Signature=qn3UMkiUcYmmao%2BUlsaGFB0Nu%2FA%3D" >}}
-
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_be7fcbf54315ff2362cc810ab0b37503.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228295&Signature=R7MmWabCCR0HydgdnRLImyXy0e0%3D" >}}
+![Functionality Discrete Log Keygen](Discrete_Log_Keygen.png)
 
 Now, we present the protocol that realizes the functionality $\mathcal{F}_\textsf{ECDSA-2P}(\mathcal{G}, n)$ presented in the original paper, which is the main functionality. In this specification, $\textsf{RO}$ is a non-programmable global random oracle.
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_b99ebe6d40c0c21af4531fd47d10a9bc.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228345&Signature=VA%2FWaT0xhRymJrO3kpkUa8LNik4%3D" >}}
+![Protocol Two Party ECDSA](Protocol_Two_Party_ECDSA.png)
 
 We stress that this protocol has multiple versions and people were able to implement an older version of it containing errors or assumptions that are not well studied. We encourage to the reader to refer to the section about concerns below to be informed about possible modifications.
 
@@ -32,15 +31,15 @@ All we have left is a protocol that the realizes the $\mathcal{F}_\textsf{Mult}$
 
 Now, we will present the multiplication protocol. <span style="color:red">This protocol corresponds to the older version of the paper, therefore they use the [KOS OT method](https://eprint.iacr.org/2015/546.pdf) to realize the correlated oblivious transfer extension $\mathcal{F}_\textsf{COTe}^\mathcal{l}$. Remember that the use of the original protocol must be deprecated and replaced by a secure realization of the functionality.</span> The specification of this functionality is shown next:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_9667f236859879624e3be554269f2d2b.jpg?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228383&Signature=JiQzHPXAns2YqvDJtVAgGEOL4uA%3D" >}}
+![Functionality COTe](Functionality_Cote.jpg)
 
 The multiplication protocol is similar to the classic Gilboa OT-multiplication, however, this method is vulnerable to selective failure attacks in the malicious setting. To correct this, Doerner et al. (2018) encode Bob's input with some redundancy in a way such that learning $s$ of the Bob's choice bits via selective failure does not leak any information about the input value. The encoding works as follows:
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_cbb47dc7260918e054ffb8b08e6be6f5.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228422&Signature=1HZUFJUeHPboK0Ir%2FAKkmTEgEaw%3D" >}}
+![Encode](Encode.png)
 
 Here, $\mathbf{g}^\textsf{R} \in \mathbb{Z}_q^{\kappa + 2s}$ is a random vector. Now we present the multiplication protocol: 
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_3ae041223be9fbe162703f8e02c47ae3.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1697228443&Signature=88WxwS0q04P6p0ntuYgXnHz7TR0%3D" >}}
+![Protocol Mul](Protocol_Mul.png)
 
 ## Security concerns
 
@@ -63,3 +62,10 @@ As we have mentioned above, this protocol has multiple versions. So it is of hig
 - In the protocol for multiplication $\pi_\textsf{Mul}$, Bob must need to perform the checking in Step 6.
 - The paper sugests to use SHA-256 to instantiate the random oracle $H$. Also, they use this hash function to instantiate the PRG.
 - **[List all the ZK proofs needed the algorithm]**
+
+# References
+
+- Doerner, J., Kondi, Y., Lee, E., & Shelat, A. (2018). Secure Two-party Threshold ECDSA from ECDSA Assumptions. In 2018 IEEE Symposium on Security and Privacy (SP) (pp. 980-997).
+- Keller, P. (2015). Actively Secure OT Extension with Optimal Overhead. In Advances in Cryptology – CRYPTO 2015 (pp. 724–741). Springer Berlin Heidelberg.
+- Lawrence Roy (2022). SoftSpokenOT: Quieter OT Extension from Small-Field Silent VOLE in the Minicrypt Model. In Advances in Cryptology - CRYPTO 2022 - 42nd Annual International Cryptology Conference, CRYPTO 2022, Santa Barbara, CA, USA, August 15-18, 2022, Proceedings, Part I (pp. 657–687). Springer.
+

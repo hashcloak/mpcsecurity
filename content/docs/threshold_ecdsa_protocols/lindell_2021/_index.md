@@ -59,3 +59,11 @@ Note that in this work, they are mixing the ECDSA signature scheme with the Pail
     - In $P_2$'s second message, it should veryfy that $\gcd(\tilde{r}, N) = 1$.
     - Check that the signature $s = \min\\{s'', q - s''\\}$. Remember that for a signature $(r, s)$, $(r, -s)$ is also a valid signature.
     - To compute the signature correctly, the $N$ choosen for Paillier must hold $N > q^3 + q^2$.
+
+# References
+
+- Lindell, Y. (2021). Fast Secure Two-Party ECDSA Signing. Journal of Cryptology, 34(4), 44. doi:10.1007/s00145-021-09409-9
+- Schnorr, C. P. (1990). Efficient Identification and Signatures for Smart Cards. In G. Brassard (Ed.), Advances in Cryptology --- CRYPTO’ 89 Proceedings (pp. 239–252). New York, NY: Springer New York.
+- Nikolaos Makriyannis, & Oren Yomtov. (2023). Practical Key-Extraction Attacks in Leading MPC Wallets.
+- Hazay, C., Mikkelsen, G. L., Rabin, T., & Toft, T. (2012). Efficient RSA Key Generation and Threshold Paillier in the Two-Party Setting. In O. Dunkelman (Ed.), Topics in Cryptology -- CT-RSA 2012 (pp. 313–331). Berlin, Heidelberg: Springer Berlin Heidelberg.
+    
