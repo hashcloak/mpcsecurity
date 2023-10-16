@@ -1,9 +1,9 @@
 ---
-title: (t, n) case from Lindell et al. (2018)
+title: $(t, n)$ case from Lindell et al. (2018)
 math: true
 ---
 
-# (t, n) case from Lindell et al. (2018)
+# $(t, n)$ case from Lindell et al. (2018)
 
 This paper presents a full-threshold ECDSA signing protocol which is the first to have a practical distributed key generation and fast signing. The protocol can be divided into two phases: in the first phase, they propose a protocol based on [Pedersen commitments](https://link.springer.com/chapter/10.1007/3-540-46766-1_9); in the second phase, they replace the Pedersen commitments for ElGamal-in-the-exponent encryption to improve the performance of the protocol.
 

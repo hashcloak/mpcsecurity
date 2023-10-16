@@ -1,9 +1,9 @@
 ---
-title: (t, n) case from Doerner et al. (2023)
+title: $(t, n)$ case from Doerner et al. (2023)
 math: true
 ---
 
-# (t, n) case from Doerner et al. (2023)
+# $(t, n)$ case from Doerner et al. (2023)
 
 ## Preliminaries
 

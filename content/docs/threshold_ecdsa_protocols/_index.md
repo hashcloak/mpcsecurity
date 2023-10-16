@@ -6,6 +6,8 @@ date: 2023-10-13
 
 # Threshold ECDSA protocols
 
+In this series of posts, we will review some of the most relevant works on threshold ECDSA protocols. We present a summary of each work, and after an analysis of the protocols, we include some "security concerns", which are points of the protocol in which auditor and developers need to put special attention during the revision of an implementation. Those security concerns are extracted from each paper itself, which means that the list do not cover all the posible implementation issues that may arise. Also, for some protocols, we correct some typos present in the papers to help developers to avoid confusion and errors during the implementation process. Finally, we also present some [repositories and libraries](#libraries-for-computing-threshold-ecdsa) that implement different threshold ECDSA protocols.
+
 Intuitively, a threshold signature scheme is a cryptographic functionality that allows a set of $n$ parties to somehow distribute a signing key among them in such a way that only a subset of more than or equal to $t$ parties can sign a message but a subset of less than $t$ parties can do nothing. Such cryptographic primitive has been used actively for key protection in blockchain applications to avoid private key theft and secure financial assets. In this document, we present a summary of some $(t, n)$ signature schemes for the case of $(2, 2)$, $(2, n)$, and the more general case $(t, n)$. This document will contain three main elements of interest: a protocol description for each scheme considered in this work, a list of libraries that implement the protocols, and some security concerns that should be considered at the moment of implementing these protocols.
 
 ## The standalone ECDSA signature scheme
@@ -37,7 +39,7 @@ Notice that extracting the first component of a point on the elliptic curve is c
 
 ### Standalone ECDSA security concerns
 
-- Bad generation and manipulation of $k \in \mathbb{Z}_q^*$ in DSA/ECDSA can lead to catastrophic results (see Katz & Lindell, 2014, Section 12.5.2). If the attacker can predict the value of $k$, or if the same $k$ is used twice in two different signature generations, the attacker can obtain the secret key (the later can occur even if $k$ is unpredictable). The later attack was used to extract the master key on PS3 :open_mouth:.
+- Bad generation and manipulation of $k \in \mathbb{Z}_q^*$ in DSA/ECDSA can lead to catastrophic results (see Katz & Lindell, 2014, Section 12.5.2). If the attacker can predict the value of $k$, or if the same $k$ is used twice in two different signature generations, the attacker can obtain the secret key (the later can occur even if $k$ is unpredictable). The later attack was used to extract the master key on PS3.
 - Let $m \in \\{0, 1\\}^*$ the message to be signed. Before all the process start, we should compute $m'$ to be the $\vert q \vert$ leftmost bits of $\textsf{SHA256}(m)$, where $\vert q \vert$ is the bit-length of $q$. This is in fact the message that should be signed, and not $m$ itself (see Lindell, 2021).
 
 ## Libraries for computing threshold ECDSA

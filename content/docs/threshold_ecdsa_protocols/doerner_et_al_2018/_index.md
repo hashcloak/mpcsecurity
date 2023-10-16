@@ -1,9 +1,9 @@
 ---
-title: (2, n) case from Doerner et al. (2018)
+title: $(2, n)$ case from Doerner et al. (2018)
 math: true
 ---
 
-# (2, n) case from Doerner et al. (2018) 
+# $(2, n)$ case from Doerner et al. (2018) 
 
 The protocol proposed by Doerner et al. (2018) exposes the a threshold ECDSA protocol with threshold $2$-out-of-$n$. This means that from a set of $n$ parties, whatever two parties from this set can generate a signature. This protocol has two different versions. The most recent version aims to correct some issues found in the first version which improves the quality of the cryptographic assumptions and correct some errors. Those issues will be covered here as concerns given that it may happen that some organizations have an implementation of the older version which needs corrections in an audit process.
 
