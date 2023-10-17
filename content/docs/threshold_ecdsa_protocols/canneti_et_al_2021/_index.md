@@ -73,6 +73,51 @@ Once the pre-signing phase has been executed, parties have shares $(R, k_i, \chi
 
 ## Six-round presigning with $O(n)$ identification cost
 
+In their paper, Canneti et al. present an alternative to compute the presignin phase that takes six rounds but it has a linear identification cost, contrary to the previous version where the presigning takes three rounds but a quadratic identification cost. The differences of this version with respect to the previous one can be highlighted in two points: (1) the parties publish the values of $\Gamma_i = g^{\gamma_i}$ after the computation of $\delta = k \cdot \gamma$, and (2) the parties commit the share $\chi_i$ using an Elgamal fashion to generate a pseudo-key $S_i = R^{\chi_i}$ to identify the corrupt parties in an abort. Next, we present the protocol specification taken from the paper of Canneti et al.
+
+![Protocol Presigning Rounds 1 to 4](Protocol_Presigning_Six_Rounds_1_4.png)
+
+![Protocol Presigning Rounds 5 and 6](Protocol_Presigning_Six_Rounds_5_6.png)
+
+
+### Identification process
+
+In this version of the protocol, the abort can be produced in two points: (1) when $g^\delta \neq \prod_i \delta_i$ in Round 6, and (2) when $\prod S_i \neq X$ in Round 7. The difficulty here is that if one of those checks does not pass, it is not immediate which of the parties produced the fault. To solve this, depending on the fault point, the parties are instructed to reveal in zero-knowledge the plaintext values of $K_i$ and $\\{ D_{i,j} \\}$ and the power of $\Gamma_i$ for the fault point (1), and the plaintext values of $K_i$ and $\\{ \hat{D}\_{i,j} \\}$ and the secret hidden by $\mathbf{Z}\_i$ for the fault point (2). With these values, the parties now can identify who is the party who produced the fault. For more details, we present the specification of the identification process for both points in the following protocols taken from the paper of Canneti et al.
+
+![Protocol Nonce Reveal Fail](Protocol_Nonce_Reveal_Fail.png)
+
+![Protocol Pseudo Key Reveal Fail](Protocol_Pseudo_Key_Reveal_Fail.png)
+
+### Signing
+
+Once the hash $m$ of the message is known, the parties retrieve a tuple $(l, R, \\{ \bar{R}\_j, S_j \\}\_j, k_i, \chi_i)$ coming from the presignin phase and stored in the local memory. Then, the parties compute a share of the signature by calculating $r = R \vert_{x-\text{axis}}$ and then they set $\sigma_i = k_i \cdot m + r \cdot \chi_i \mod q$. Each party broadcast its share $\sigma_i$, and when the party has the shares of the other parties, the party checks that $R^{\sigma_j} = \bar{R}\_j^m \cdot S_j^r$ for all $j \neq i$. If all checks pass, then the party returns $\left (r, \sum \sigma_i \right )$ as the signature. Next, we present all the details of the signing protocol taken from the paper of Canneti et al.
+
+![Protocol Signing for the 6-round version](Protocol_Signing_Six_Rounds.png)
+
+## $\Sigma$-protocols
+
+In this section, we present some of the underlying $\Sigma$-protocols used to provide security agains malicious adversaries. Similar to the paper of Canneti et al., we exclude the protocols for those NP-relations that are similar to the ones presented here or they are Schnorr based proofs. For more details about the remaining protocols, we refer the reader to Appendix C. in the paper of Canneti et al. Remember that all the relations used in this review are presented in the [list of relations](#np-relations) presented in a previous section.  
+
+### Paillier encryption in range
+
+This protocol is the $\Sigma$-protocol for the relatin $R_{\textsf{enc}}$. In this case, the input of the protocol for tuples of the form $(\mathcal{I}, C; k, r_0)$, where $\mathcal{I} = \\{-2^l, \dots, 0, \dots, 2^l\\}$ (remember that this set is denoted as $\pm 2^l$). The Prover want to convince the Verifier that he knows $k \in \pm 2^l$ , such that $C = (1 + N_0)^k \cdot r_0^{N_0} \mod N_0^2$. Next, we will present the details of the protocol taken from the paper of Canneti et al.
+
+![Paillier Encryption in Range](ZK_Enc.png)
+
+### Paillier operation with group commitment in range
+
+
+
+![Paillier Operation with Group Commitment](ZK_Aff_G.png)
+
+### Paillier-Blum modulus in zero-knowledge
+
+![Paillier-Blum Modulus in ZK](ZK_Mod.png)
+
+### Ring-Pedersen parameters in zero-knowledge
+
+![Ring-Pedersen Parameters in ZK](ZK_Prm.png)
+
 ## Security concerns
 
 ### For the three round version 
