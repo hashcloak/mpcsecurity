@@ -1,9 +1,9 @@
 ---
-title: (2, 2) case from Lindell (2021)
+title: $(2, 2)$ case from Lindell (2021)
 math: true 
 ---
 
-# (2, 2) case from Lindell (2021)
+# $(2, 2)$ case from Lindell (2021)
 
 In this case, we will have two parties $P_1$ and $P_2$. Both parties will have a secret key that is secret-shared among them which means that $P_1$ will hold a value $x_1 \in \mathbb{Z}_q$ and $P_2$ will hold a value $x_2 \in \mathbb{Z}_q$. The idea is to use both pieces of data to compute the signature of a jointly known message. The main difficulty that can be found in this scheme is that for the signature we need the inverse of a random value $k \in \mathbb{Z}_q^\*$ that is secret-shared among the parties. Concretely, for the signing phase, we need to compute $k^{-1}$ for a value $k \in \mathbb{Z}_q^*$ that is shared among the parties ($P_1$ will hold a share $k_1$ and $P_2$ will hold a share $k_2$). This process is very hard considering a additive secret-sharing scheme. For that reason, the work of Lindell (2021) considers a multiplicative secret sharing scheme, which will allow to compute this inverse in a more easy way.
 

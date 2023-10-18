@@ -1,9 +1,9 @@
 ---
-title: (t, n) case from Doerner et al. (2019)
+title: $(t, n)$ case from Doerner et al. (2019)
 math: true
 ---
 
-# (t, n) case from Doerner et al. (2019)
+# $(t, n)$ case from Doerner et al. (2019)
 
 In this work, Doerner et al. continue to improve its previous version of the protocol presented in Doerner et al. (2018) and generalize it to the arbitrary threshold case $(2, n)$. They prove the security of their protocol under CDH assumption in the Global Random Oracle model. At the end of the work, they propose a series of experiments showing that their solution is practical even when using low-power devices.
 

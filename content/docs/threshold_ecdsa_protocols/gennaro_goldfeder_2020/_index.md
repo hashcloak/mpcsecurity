@@ -1,9 +1,9 @@
 ---
-title: (t, n) case from Gennaro & Goldfeder (2020)
+title: $(t, n)$ case from Gennaro & Goldfeder (2020)
 math: true
 ---
 
-# (t, n) case from Gennaro & Goldfeder (2020)
+# $(t, n)$ case from Gennaro & Goldfeder (2020)
 
 This work is an improvement on the work of Genaro & Goldfeder (2019). Here, Genaro and Goldfeder present a $(t, n)$ threshold DSA/ECDSA signature protocol in the dishonest majority security model. The main contribution with respect to the work of Genaro & Goldfeder (2019) is that this work provides mechanisms to identify which player is misbehaving in case of an abort. Also, they design a protocol where all the heavy computation can be performed in an offline phase, that is, before the message to be signed is known. Once the preprocessing is finished, the parties engage in an online phase that requires only one round.
 

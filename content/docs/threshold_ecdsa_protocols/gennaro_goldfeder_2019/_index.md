@@ -1,9 +1,9 @@
 ---
-title: (t, n) case from Gennaro & Goldfeder (2019)
+title: $(t, n)$ case from Gennaro & Goldfeder (2019)
 math: true
 ---
 
-# (t, n) case from Gennaro & Goldfeder (2019)
+# $(t, n)$ case from Gennaro & Goldfeder (2019)
 
 **Important note:** this paper has some corrections addressing errors and wrong conjectures from the first version. Although we will point such errors, it is important to make sure that the implementation meet the updated version of the protocol.
 
