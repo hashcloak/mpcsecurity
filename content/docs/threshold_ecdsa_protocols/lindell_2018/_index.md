@@ -256,7 +256,49 @@ Although the protocol presented here is the main version of the Threshold ECDSA 
 - In both the key generation and the signing protocol, they make calls to the protocol for zero-knowledge functionalities. The parties should verify that the session id and the instance it receives for the zero-knowledge protocol are consistent with the common input of the previous steps of the protocol in which the zero-knowledge is being executed. 
 - In the non-threshold protocol, it is important to consider as public view all the elements that the paper lists in each verification step.
 - Missing an execution of $\mathcal{F}_\textsf{PedMultEqTest}$ in the protocol $\textsf{ManyPartyLeakyMult}$ could end in a wrong multiplication with catastrophic results due to the high possibility of an adversarial behavior.
-- For the key generation and the signing protocol we need to be careful of all the ZK proofs involved in the procedure. **[List all the ZK proofs involved]**.
+
+### ZK-proofs and commitments
+
+#### For the signing protocol
+
+In the signing protocol, Step 3, the parties engage in two $\textsf{CreateSharedVals}$ protocols that creates a Pedersen commitment of a uniformly chosen value.
+
+#### For $\textsf{CreateSharedVals}$
+
+- In Step 1, each party $P_i$ creates a Pedersen commitment of $a_i$.
+- In Step 2, each party $P_i$ sends a ZK-proof on the tuple $(\textsf{sid}, (D, \hat{A}\_i), (a_i, r_i))$ according to the relation $\mathcal{R}\_{\textsf{PedKlwg}}$.
+
+#### For $\textsf{OutSharedVal}$
+
+In Step 2 of the protocol, parties execute a ZK-proof to test that $\hat{A}\_i$ is the pedersen commitment of $a_i$.
+
+#### For $\textsf{OutExpOfSharedVal}$
+
+In Step 2, parties execute a ZK-proof to test that $\hat{A}\_i$ is the commitment of $a_i$ and that $a_i$ is the exponent of $A_i$.
+
+#### For the Key Generation
+
+- In Step 2(c) the party $P_i$ sends Pedersen commitments of $c_{i,j}$ to all parties.
+- In Step 2(e)(i) the party $P_i$ sends Pedersen commitments of $p_i(\alpha)$ to all parties.
+- In Step 2(e)(ii) the party $P_i$ engage in a ZK-proof to proof that $r^Y_{i, \alpha} - \sum_j r^C_{i,j} \cdot \alpha_j$ is the discrete logarithm of $\hat{D}\_{i,\alpha} - \hat{B}\_{i, \alpha}$
+
+#### For $\textsf{ManyPartyLeakyMult}$
+
+- In Step 2, the party $P_i$ prooves knowledge that he has $a_i$ for which $\hat{A}\_i$ is a Pedersen commitment, and that he has $b_i$ for which $\hat{B}\_i$ is a Pedersen commitment.
+- In Step 3(a), the party $P_i$ sends a Pedersen commitment of $c_i$ to all parties.
+- In Step 3(b), the party $P_i$ proves knowledge of $c_i$ for which $\hat{C}\_i$ is its Pedersen commitment.
+- In Step 4, the party $P_i$ verify that $\sum \hat{C}\_l$ is a commitment of $(\sum a_i) \cdot (\sum b_i)$.
+
+#### For $\textsf{PedMultEqTest}$
+
+- In Step 1(a), the party $P_i$ proves in zero-knowledge that he has the discrete logarithm of $E_i$.
+- In Step 2(a), the party $P_i$ computes an ElGamal commitment of $x_i$.
+- In Step 2(b), the party $P_i$ proves in zero-knowledge that he has $x_i$ for which it holds that both $\hat{X}\_i$ is its Pedersen commitment and $\tilde{X}\_i$ is its ElGamal commitment.
+- In Step 3(b), the party $P_i$ rerandomizes the commitment of $a_i \cdot \tilde{B}$
+- In Step 3(c), the party $P_i$ proves in zero-knowledge that $((E, \tilde{B}, \tilde{A}\_i, \tilde{F}\_i), (r^{\tilde{A}}\_i, r_i^F, a_i))$ belongs to the relation $\mathcal{R}_\textsf{EgProdEg}$.
+- In Step 4(b), the party $P_i$ proves in zero-knowledge that he knows a constant $o_i$ such that $\tilde{Z}_i$ is the commitment of the value of commited in $\tilde{Y}$ multiplied by $o_i$.
+- In Step 5(b), the party $P_i$ proves in zero-knowledge that the tuple $((G, \tilde{Z}\_L), (E_i, W_i), e_i)$ belongs to the relation $\mathcal{R}\_\textsf{DH}$.
+
 
 # References
 

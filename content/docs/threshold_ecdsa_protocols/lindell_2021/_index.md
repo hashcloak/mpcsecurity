@@ -60,6 +60,19 @@ Note that in this work, they are mixing the ECDSA signature scheme with the Pail
     - Check that the signature $s = \min\\{s'', q - s''\\}$. Remember that for a signature $(r, s)$, $(r, -s)$ is also a valid signature.
     - To compute the signature correctly, the $N$ choosen for Paillier must hold $N > q^3 + q^2$.
 
+### ZK-proofs
+
+#### In the key generation
+
+- In $P_1$'s first message, Literal (b), the party $P_1$ sends a commitment on $Q_1$ and a proof of knowledge of its discrete logarithm as specified in the relation $R_{\textsf{DL}}$.
+- In $P_2$'s first message, Literal (c), the party $P_2$ sends a proof of knowledge of the discrete logarithm of $Q_2$ as specified in the relation $R_{\textsf{DL}}$.
+- In the step ZK-proofs, $P_1$ proves to $P_2$ in zero knowledge that $N$ belongs to the language $L_P$ (i.e. the Paillier key was generated correctly) and that the tuple $(c_{key}, pk, Q_1)$ belongs to the language $L_{PDL}$.
+
+#### In the signing protocol
+
+- In $P_1$'s first message, Literal (b), the party $P_1$ sends a commitment to $R_1$ and a proof of knowledge of its discrete logarithm to $P_2$ according to the relation $R_{\textsf{DL}}$.
+- In $P_2$'s first message, Literal (c), the party $P_2$ sends a ZK-proof of knowledge of the discrete logarithm of $R_2$. 
+
 # References
 
 - Lindell, Y. (2021). Fast Secure Two-Party ECDSA Signing. Journal of Cryptology, 34(4), 44. doi:10.1007/s00145-021-09409-9
