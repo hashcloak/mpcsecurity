@@ -175,7 +175,7 @@ This protocol multiplies a pair of previously generated and stored values and st
 
 ![MultSharedVals](MultSharedVals.png)
 
-The functionality $\mathcal{F}_\textsf{LeakyMult}$ is a many-party leaky multiplication ideal functionality that multiplies two private values and returns the additive share of the multiplication to each party. Here, they say that it is leaky because the functionality allows to the adversary to know whether a linear relationship of the private shares of each value is equal to some value. Also, the functionality allows the adversary to modify their commitments restricted to the condition of preserving the overall sum. The purpose of giving the adversary this freedom is to obtain more efficient implementations of the protocol. Next, we will show the specification of this functionality. <span style="color:red">**Here we correct some typos present in the paper**</span>:
+The functionality $\mathcal{F}_\textsf{LeakyMult}$ is a many-party leaky multiplication ideal functionality that multiplies two private values and returns the additive share of the multiplication to each party. Here, they say that it is leaky because the functionality allows the adversary to know whether a linear relationship of the private shares of each value is equal to some value. Also, the functionality allows the adversary to modify their commitments restricted to the condition of preserving the overall sum. The purpose of giving the adversary this freedom is to obtain more efficient implementations of the protocol. Next, we will show the specification of this functionality. <span style="color:red">**Here we correct some typos present in the paper**</span>:
 
 **Functionality $\mathcal{F}_\textsf{LeakyMult}$**:
 
@@ -249,17 +249,58 @@ Although the protocol presented here is the main version of the Threshold ECDSA 
 
 ## Security concerns
 
-- In general, the protocol specification in this work has some notation issues and typos. Although a careful reading of the paper may reveal this errors, they may cause also implementation errors by software developers that are not experts in cryptography. We corrected those typos in this document and the corrections were marked in red inside the text.
+- In general, the protocol specification in this work has some notation issues and typos. Although a careful reading of the paper may reveal these errors, they may cause also implementation errors by software developers who are not experts in cryptography. We corrected those typos in this document and the corrections were marked in red inside the text.
 - The protocol assumes an authenticated point-to-point channel between parties. Therefore we must ensure that the channels fulfill this property.
-- The protocol assumes that the environment provides fresh session id on each invocation it makes. To do this the parties need to choose fresh session id which can be computed using a single round coin-flipping protocol. Such protocol consists in the parties sending uniform strings to each other and the session id is set to be the hash of their concatenation.
-- The protocol assumes that all the honest parties agree on the common input. Such agreement can be done by leting the parties send a hash of their common input in the first round of each protocol and its sub-protocols.
-- In both the key generation and the signing protocol, they make calls to the protocol for zero-knowledge functionalities. The parties should verify that the session id and the instance it receives for the zero-knowledge protocol are consistent with the common input of the previous steps of the protocol in which the zero-knowledge is being executed. 
+- The protocol assumes that the environment provides a fresh session ID on each invocation it makes. To do this the parties need to choose a fresh session ID which can be computed using a single round coin-flipping protocol. Such protocol consists of the parties sending uniform strings to each other and the session ID is set to be the hash of their concatenation.
+- The protocol assumes that all the honest parties agree on the common input. Such an agreement can be made by letting the parties send a hash of their common input in the first round of each protocol and its sub-protocols.
+- In both the key generation and the signing protocol, they make calls to the protocol for zero-knowledge functionalities. The parties should verify that the session ID and the instance it receives for the zero-knowledge protocol are consistent with the common input of the previous steps of the protocol in which the zero-knowledge is being executed. 
 - In the non-threshold protocol, it is important to consider as public view all the elements that the paper lists in each verification step.
 - Missing an execution of $\mathcal{F}_\textsf{PedMultEqTest}$ in the protocol $\textsf{ManyPartyLeakyMult}$ could end in a wrong multiplication with catastrophic results due to the high possibility of an adversarial behavior.
-- For the key generation and the signing protocol we need to be careful of all the ZK proofs involved in the procedure. **[List all the ZK proofs involved]**.
+
+### ZK-proofs and commitments
+
+#### For the signing protocol
+
+In the signing protocol, Step 3, the parties engage in two $\textsf{CreateSharedVals}$ protocols that create a Pedersen commitment of a uniformly chosen value.
+
+#### For $\textsf{CreateSharedVals}$
+
+- In Step 1, each party $P_i$ creates a Pedersen commitment of $a_i$.
+- In Step 2, each party $P_i$ sends a ZK-proof on the tuple $(\textsf{sid}, (D, \hat{A}\_i), (a_i, r_i))$ according to the relation $\mathcal{R}\_{\textsf{PedKlwg}}$.
+
+#### For $\textsf{OutSharedVal}$
+
+In Step 2 of the protocol, parties execute a ZK-proof to test that $\hat{A}\_i$ is the Pedersen commitment of $a_i$.
+
+#### For $\textsf{OutExpOfSharedVal}$
+
+In Step 2, parties execute a ZK-proof to test that $\hat{A}\_i$ is the commitment of $a_i$ and that $a_i$ is the exponent of $A_i$.
+
+#### For the Key Generation
+
+- In Step 2(c) the party $P_i$ sends Pedersen commitments of $c_{i,j}$ to all parties.
+- In Step 2(e)(i) the party $P_i$ sends Pedersen commitments of $p_i(\alpha)$ to all parties.
+- In Step 2(e)(ii) the party $P_i$ engage in a ZK-proof to proof that $r^Y_{i, \alpha} - \sum_j r^C_{i,j} \cdot \alpha_j$ is the discrete logarithm of $\hat{D}\_{i,\alpha} - \hat{B}\_{i, \alpha}$
+
+#### For $\textsf{ManyPartyLeakyMult}$
+
+- In Step 2, the party $P_i$ prooves knowledge that he has $a_i$ for which $\hat{A}\_i$ is a Pedersen commitment, and that he has $b_i$ for which $\hat{B}\_i$ is a Pedersen commitment.
+- In Step 3(a), the party $P_i$ sends a Pedersen commitment of $c_i$ to all parties.
+- In Step 3(b), the party $P_i$ proves knowledge of $c_i$ for which $\hat{C}\_i$ is its Pedersen commitment.
+- In Step 4, the party $P_i$ verify that $\sum \hat{C}\_l$ is a commitment of $(\sum a_i) \cdot (\sum b_i)$.
+
+#### For $\textsf{PedMultEqTest}$
+
+- In Step 1(a), the party $P_i$ proves in zero-knowledge that he has the discrete logarithm of $E_i$.
+- In Step 2(a), the party $P_i$ computes an ElGamal commitment of $x_i$.
+- In Step 2(b), the party $P_i$ proves in zero-knowledge that he has $x_i$ for which it holds that both $\hat{X}\_i$ is its Pedersen commitment and $\tilde{X}\_i$ is its ElGamal commitment.
+- In Step 3(b), the party $P_i$ rerandomizes the commitment of $a_i \cdot \tilde{B}$
+- In Step 3(c), the party $P_i$ proves in zero-knowledge that $((E, \tilde{B}, \tilde{A}\_i, \tilde{F}\_i), (r^{\tilde{A}}\_i, r_i^F, a_i))$ belongs to the relation $\mathcal{R}_\textsf{EgProdEg}$.
+- In Step 4(b), the party $P_i$ proves in zero-knowledge that he knows a constant $o_i$ such that $\tilde{Z}_i$ is the commitment of the value of commited in $\tilde{Y}$ multiplied by $o_i$.
+- In Step 5(b), the party $P_i$ proves in zero-knowledge that the tuple $((G, \tilde{Z}\_L), (E_i, W_i), e_i)$ belongs to the relation $\mathcal{R}\_\textsf{DH}$.
 
 # References
 
 - Lindell, Y., & Nof, A. (2018). Fast Secure Multiparty ECDSA with Practical Distributed Key Generation and Applications to Cryptocurrency Custody. Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications Security, 1837–1854. https://doi.org/10.1145/3243734.3243788
 - Haitner, I., Makriyannis, N., Ranellucci, S., & Tsfadia, E. (2022). Highly Efficient OT-Based Multiplication Protocols. In O. Dunkelman & S. Dziembowski (Eds.), Advances in Cryptology – EUROCRYPT 2022 (pp. 180–209). Springer International Publishing.
-- Pedersen, T. P. (1992). Non-Interactive and Information-Theoretic Secure Verifiable Secret Sharing. In J. Feigenbaum (Ed.), Advances in Cryptology — CRYPTO ’91 (pp. 129–140). Springer Berlin Heidelberg.
+- Pedersen, T. P. (1992). Non-interactive and Information-Theoretic Secure Verifiable Secret Sharing. In J. Feigenbaum (Ed.), Advances in Cryptology — CRYPTO ’91 (pp. 129–140). Springer Berlin Heidelberg.
