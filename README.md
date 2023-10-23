@@ -6,4 +6,4 @@ As we are seeing more and more MPC protocols being deployed in practice, we are 
 
 ## Contribute
 
-The space of MPC security is ever changing and as such, we would love to welcome the broader cryptography community to contribute new best practices in [MPCSecurity](https://github.com/hashcloak/mpcsecurity).
+The space of MPC security is ever changing and as such, we would love to welcome the broader cryptography community to contribute new best practices in this repository.
