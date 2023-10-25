@@ -3,5 +3,5 @@ languageCode = 'en-us'
 title = 'MPC Security'
 
 [params]
-  BookLogo = 'hashcloak_logo_colour-logo-text.ong'
+  BookLogo = 'hashcloak_logo_colour-logo-text.png'
   BookIconLogo = 'hashcloak_logo_colour-logo.png'
