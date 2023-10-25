@@ -1,11 +1,11 @@
 ---
-title: $(t, n)$ case from Canneti et al. (2021)
+title: $(t, n)$ case from Canetti et al. (2021)
 math: true
 ---
 
-# $(t, n)$ case from Canneti et al. (2021)
+# $(t, n)$ case from Canetti et al. (2021)
 
-In this work, Canneti et al. present a protocol for Threshold ECDSA signatures with the following characteristics:
+In this work, Canetti et al. present a protocol for Threshold ECDSA signatures with the following characteristics:
 - Only the last round of the protocol needs knowledge of the message to be signed. Therefore, all the previous rounds can be executed in a preprocessing stage.
 - The protocol supports adaptative corruption in the signing phase. In this case, the authors provide a mechanism to refresh the auxiliary information and keys used in the signing phase to provide security against an attacker that corrupts a different set of parties over time.
 - The protocol realizes an ideal threshold signing functionality in the UC framework.
@@ -21,7 +21,7 @@ It is important to mention that this work only focuses on the $n$-out-of-$n$ sig
 
 As in previous works about threshold ECDSA, this work also uses the Paillier encryption scheme extensively. Also, it uses some zero-knowledge proofs to guarantee a correct execution in the presence of malicious adversaries. The ZK-proofs used in this work will be presented in the next section along with a strategy to compile $\Sigma$-protocols into a non-interactive version using a random oracle via the Fiat-Shamir heuristic.
 
-A concept that appears in this protocol different from its predecessor is the *proactive security*. Although threshold signature protocols bring additional security for digital signatures, they may still be vulnerable to an attacker who can corrupt a set of parties that change over time. According to Canneti et al., in a proactive threshold signature scheme, the time is divided into epochs, such that at the end of each epoch, the parties engage in a protocol to refresh all the information needed to generate a signature (i.e. keys, local state, and random values). If the protocol is proactive, it remains secure as long as at most $t - 1$ players are compromised within a single epoch. Therefore, if the set of compromised parties changes from one epoch to the next, the protocol remains secure as long as the number of parties is within the threshold.
+A concept that appears in this protocol different from its predecessor is the *proactive security*. Although threshold signature protocols bring additional security for digital signatures, they may still be vulnerable to an attacker who can corrupt a set of parties that change over time. According to Canetti et al., in a proactive threshold signature scheme, the time is divided into epochs, such that at the end of each epoch, the parties engage in a protocol to refresh all the information needed to generate a signature (i.e. keys, local state, and random values). If the protocol is proactive, it remains secure as long as at most $t - 1$ players are compromised within a single epoch. Therefore, if the set of compromised parties changes from one epoch to the next, the protocol remains secure as long as the number of parties is within the threshold.
 
 ### NP-relations
 
@@ -31,7 +31,7 @@ In this section, we present the NP-relations that will be used in the protocol t
 
 ### ZK-Module
 
-Now, we present the strategy used by Canneti et al. to compile a $\Sigma$-protocol into a non-interactive version using the Fiat-Shamir heuristic. Aside from the standard prove and verify operations. This module contains a commit operation to output the first message $A$ of the ZK-proof, which is useful in security analysis. The ZK-Module is presented next.
+Now, we present the strategy used by Canetti et al. to compile a $\Sigma$-protocol into a non-interactive version using the Fiat-Shamir heuristic. Aside from the standard prove and verify operations. This module contains a commit operation to output the first message $A$ of the ZK-proof, which is useful in security analysis. The ZK-Module is presented next.
 
 ![ZK-Module](ZK_Module.png)
 
@@ -57,19 +57,19 @@ Once each party receives the information sent above, they re-compute the shares 
 
 Throughout the execution of the protocol, the parties use ZK-proofs to guarantee the consistency of the values. For example, the parties use such proofs to check that the Paillier keys and Pedersen parameters are well-formed and to check that the values of $X_i^j$ are consistent with the values of $x_i^j$.
 
-Next, we present a detailed specification of the protocol taken from the paper of Canneti et al.
+Next, we present a detailed specification of the protocol taken from the paper of Canetti et al.
 
 ![Protocol Key Refresh](Protocol_Key_Refresh.png)
 
 ## Three-round presignin with $O(n^2)$ identification cost
 
-Remember that one of the main contributions of the work of Canneti et al. is to propose a non-interactive protocol for signing. This means that all the rounds but the last one do not need the knowledge of the message to be executed. The rounds preceding the construction of the signature are called *pre-signing*. Here, we show a version of the presigning phase that has three rounds, and it can identify the corrupt parties with a cost of $O(n^2)$.
+Remember that one of the main contributions of the work of Canetti et al. is to propose a non-interactive protocol for signing. This means that all the rounds but the last one do not need the knowledge of the message to be executed. The rounds preceding the construction of the signature are called *pre-signing*. Here, we show a version of the presigning phase that has three rounds, and it can identify the corrupt parties with a cost of $O(n^2)$.
 
-The pre-signing protocol of Canneti et al. uses similar techniques presented in [the signing protocol of Gennaro & Goldfeder (2020)](../gennaro_goldfeder_2020/#signing-protocol). Specifically, in both works, they use the concept of transforming multiplicative shares into additive shares using the Paillier encryption scheme. This technique allows the parties to compute additive shares of a masked version of $k$ and also it allows them to find additive shares of $k \cdot x$, where $k$ is the nonce used in the signing process. At the end of the signing protocol, the parties will obtain shares $(R, k_i, \chi_i)$, where $k_i$ is an additive share of the nonce $k$, $\chi_i$ is a share of $k \cdot x$ and $R = g^{k^{-1}}$.
+The pre-signing protocol of Canetti et al. uses similar techniques presented in [the signing protocol of Gennaro & Goldfeder (2020)](../gennaro_goldfeder_2020/#signing-protocol). Specifically, in both works, they use the concept of transforming multiplicative shares into additive shares using the Paillier encryption scheme. This technique allows the parties to compute additive shares of a masked version of $k$ and also it allows them to find additive shares of $k \cdot x$, where $k$ is the nonce used in the signing process. At the end of the signing protocol, the parties will obtain shares $(R, k_i, \chi_i)$, where $k_i$ is an additive share of the nonce $k$, $\chi_i$ is a share of $k \cdot x$ and $R = g^{k^{-1}}$.
 
 One of the advantages of this protocol is that the parties can engage in $L$ concurrent sessions to generate tuples $\left \\{ (l, R_l, k_{i, l}, \chi_{i, l}) \right \\}_{i=1}^L$ as the pre-signing material for $L$ signatures. The parties can store these tuples in the local memory and they extract a fresh tuple once the message to be signed is known. However, it is important to ensure that the parties erase the pre-signing tuples that were already used to avoid security vulnerabilities.
 
-We present a detailed specification of the protocol next, which is taken from the paper of Canneti et al.
+We present a detailed specification of the protocol next, which is taken from the paper of Canetti et al.
 
 ![Presigning in three rounds](Protocol_Presigning_Three_Rounds.png)
 
@@ -81,7 +81,7 @@ Once the pre-signing phase has been executed, parties have shares $(R, k_i, \chi
 
 ## Six-round presigning with $O(n)$ identification cost
 
-In their paper, Canneti et al. present an alternative to compute the presignin phase that takes six rounds but it has a linear identification cost, contrary to the previous version where the presigning takes three rounds but a quadratic identification cost. The differences between this version concerning the previous one can be highlighted in two points: (1) the parties publish the values of $\Gamma_i = g^{\gamma_i}$ after the computation of $\delta = k \cdot \gamma$, and (2) the parties commit the share $\chi_i$ using an Elgamal fashion to generate a pseudo-key $S_i = R^{\chi_i}$ to identify the corrupt parties in an abort. Next, we present the protocol specification taken from the paper of Canneti et al.
+In their paper, Canetti et al. present an alternative to compute the presignin phase that takes six rounds but it has a linear identification cost, contrary to the previous version where the presigning takes three rounds but a quadratic identification cost. The differences between this version concerning the previous one can be highlighted in two points: (1) the parties publish the values of $\Gamma_i = g^{\gamma_i}$ after the computation of $\delta = k \cdot \gamma$, and (2) the parties commit the share $\chi_i$ using an Elgamal fashion to generate a pseudo-key $S_i = R^{\chi_i}$ to identify the corrupt parties in an abort. Next, we present the protocol specification taken from the paper of Canetti et al.
 
 ![Protocol Presigning Rounds 1 to 4](Protocol_Presigning_Six_Rounds_1_4.png)
 
@@ -90,7 +90,7 @@ In their paper, Canneti et al. present an alternative to compute the presignin p
 
 ### Identification process
 
-In this version of the protocol, the abort can be produced in two points: (1) when $g^\delta \neq \prod_i \delta_i$ in Round 6, and (2) when $\prod S_i \neq X$ in Round 7. The difficulty here is that if one of those checks does not pass, it is not immediate which of the parties produced the fault. To solve this, depending on the fault point, the parties are instructed to reveal in zero-knowledge the plaintext values of $K_i$ and $\\{ D_{i,j} \\}$ and the power of $\Gamma_i$ for the fault point (1), and the plaintext values of $K_i$ and $\\{ \hat{D}\_{i,j} \\}$ and the secret hidden by $\mathbf{Z}\_i$ for the fault point (2). With these values, the parties now can identify who is the party that produced the fault. For more details, we present the specification of the identification process for both points in the following protocols taken from the paper of Canneti et al.
+In this version of the protocol, the abort can be produced in two points: (1) when $g^\delta \neq \prod_i \delta_i$ in Round 6, and (2) when $\prod S_i \neq X$ in Round 7. The difficulty here is that if one of those checks does not pass, it is not immediate which of the parties produced the fault. To solve this, depending on the fault point, the parties are instructed to reveal in zero-knowledge the plaintext values of $K_i$ and $\\{ D_{i,j} \\}$ and the power of $\Gamma_i$ for the fault point (1), and the plaintext values of $K_i$ and $\\{ \hat{D}\_{i,j} \\}$ and the secret hidden by $\mathbf{Z}\_i$ for the fault point (2). With these values, the parties now can identify who is the party that produced the fault. For more details, we present the specification of the identification process for both points in the following protocols taken from the paper of Canetti et al.
 
 ![Protocol Nonce Reveal Fail](Protocol_Nonce_Reveal_Fail.png)
 
@@ -98,17 +98,17 @@ In this version of the protocol, the abort can be produced in two points: (1) wh
 
 ### Signing
 
-Once the hash $m$ of the message is known, the parties retrieve a tuple $(l, R, \\{ \bar{R}\_j, S_j \\}\_j, k_i, \chi_i)$ coming from the presignin phase and stored in the local memory. Then, the parties compute a share of the signature by calculating $r = R \vert_{x-\text{axis}}$ and then they set $\sigma_i = k_i \cdot m + r \cdot \chi_i \mod q$. Each party broadcasts its share $\sigma_i$, and when the party has the shares of the other parties, the party checks that $R^{\sigma_j} = \bar{R}\_j^m \cdot S_j^r$ for all $j \neq i$. If all checks pass, then the party returns $\left (r, \sum \sigma_i \right )$ as the signature. Next, we present all the details of the signing protocol taken from the paper of Canneti et al.
+Once the hash $m$ of the message is known, the parties retrieve a tuple $(l, R, \\{ \bar{R}\_j, S_j \\}\_j, k_i, \chi_i)$ coming from the presignin phase and stored in the local memory. Then, the parties compute a share of the signature by calculating $r = R \vert_{x-\text{axis}}$ and then they set $\sigma_i = k_i \cdot m + r \cdot \chi_i \mod q$. Each party broadcasts its share $\sigma_i$, and when the party has the shares of the other parties, the party checks that $R^{\sigma_j} = \bar{R}\_j^m \cdot S_j^r$ for all $j \neq i$. If all checks pass, then the party returns $\left (r, \sum \sigma_i \right )$ as the signature. Next, we present all the details of the signing protocol taken from the paper of Canetti et al.
 
 ![Protocol Signing for the 6-round version](Protocol_Signing_Six_Rounds.png)
 
 ## $\Sigma$-protocols
 
-In this section, we present some of the underlying $\Sigma$-protocols used to provide security against malicious adversaries. Similar to the paper of Canneti et al., we exclude the protocols for those NP-relations that are similar to the ones presented here or they are Schnorr-based proofs. For more details about the remaining protocols, we refer the reader to Appendix C. in the paper of Canneti et al. Remember that all the relations used in this review are presented in the [list of relations](#np-relations) presented in a previous section.  
+In this section, we present some of the underlying $\Sigma$-protocols used to provide security against malicious adversaries. Similar to the paper of Canetti et al., we exclude the protocols for those NP-relations that are similar to the ones presented here or they are Schnorr-based proofs. For more details about the remaining protocols, we refer the reader to Appendix C. in the paper of Canetti et al. Remember that all the relations used in this review are presented in the [list of relations](#np-relations) presented in a previous section.  
 
 ### Paillier encryption in range
 
-This protocol is the $\Sigma$-protocol for the relatin $R_{\textsf{enc}}$. In this case, the input of the protocol for tuples of the form $(\mathcal{I}, C; k, r_0)$, where $\mathcal{I} = \\{-2^l, \dots, 0, \dots, 2^l\\}$ (remember that this set is denoted as $\pm 2^l$). The Prover want to convince the Verifier that he knows $k \in \pm 2^l$ , such that $C = (1 + N_0)^k \cdot r_0^{N_0} \mod N_0^2$. Next, we will present the details of the protocol taken from the paper of Canneti et al.
+This protocol is the $\Sigma$-protocol for the relatin $R_{\textsf{enc}}$. In this case, the input of the protocol for tuples of the form $(\mathcal{I}, C; k, r_0)$, where $\mathcal{I} = \\{-2^l, \dots, 0, \dots, 2^l\\}$ (remember that this set is denoted as $\pm 2^l$). The Prover want to convince the Verifier that he knows $k \in \pm 2^l$ , such that $C = (1 + N_0)^k \cdot r_0^{N_0} \mod N_0^2$. Next, we will present the details of the protocol taken from the paper of Canetti et al.
 
 ![Paillier Encryption in Range](ZK_Enc.png)
 
@@ -126,7 +126,7 @@ Now, we show a $\Sigma$-protocol for tuples of the form $(N; p, q)$ satisfying t
 
 ### Ring-Pedersen parameters in zero-knowledge
 
-Here, we present a $Sigma$ protocol for tuples of the form $(N, s, t; \lambda)$ for the relation $R_\textsf{prm}$. In this proof, the Proover wants to convince the Verifier that he knows a power $\lambda$ for which $s = t^\lambda$, or equivalently, the Proover wants to convince the verifier that $s$ belongs to the multiplicative group generated by $t$. Next, we present the protocol for this proof taken from Canneti et al.
+Here, we present a $Sigma$ protocol for tuples of the form $(N, s, t; \lambda)$ for the relation $R_\textsf{prm}$. In this proof, the Proover wants to convince the Verifier that he knows a power $\lambda$ for which $s = t^\lambda$, or equivalently, the Proover wants to convince the verifier that $s$ belongs to the multiplicative group generated by $t$. Next, we present the protocol for this proof taken from Canetti et al.
 
 ![Ring-Pedersen Parameters in ZK](ZK_Prm.png)
 
