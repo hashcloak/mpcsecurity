@@ -18,8 +18,8 @@ Now, let $H: \\{0, 1\\}^* \rightarrow \mathbb{Z}_q$ be a hash function (in pract
 
 - $\textsf{Gen}$: the key generation algorithm works as follows:
     1. Sample a random element $x \in \mathbb{Z}_q$.
-    2. Compute $R = x \cdot G$.
-    3. Output $x$ as the secret key and $R$ as the public key.
+    2. Compute $X = x \cdot G$.
+    3. Output $x$ as the secret key and $X$ as the public key.
 
 - $\textsf{Sign}$: on input $m \in \\{0, 1\\}^*$ as the message to be signed, and the private key $x \in \mathbb{Z}_q$,
     1. Compute $m'$ as the $|q|$ leftmost bits of $H(m)$, where $|q|$ is the bit-length of $q$.
@@ -33,7 +33,7 @@ Now, let $H: \\{0, 1\\}^* \rightarrow \mathbb{Z}_q$ be a hash function (in pract
     
 - $\textsf{Verify}$: On input $(r, s)$ to be the signature and $m \in \\{0, 1\\}^*$ to be the signed message,
     1. Compute $m'$ as the $|q|$ leftmost bits of $H(m)$.
-    2. Compute $s^{-1}\left(H(m') \cdot G + r \cdot R\right)$ and accept if the first component is equal to $r$.
+    2. Compute $s^{-1}\left(H(m') \cdot G + r \cdot X\right)$ and accept if the first component is equal to $r$.
 
 Notice that extracting the first component of a point on the elliptic curve is commonly used here. That can be represented as a function $F: \mathbb{G} \rightarrow \mathbb{Z}_q$, and in the case of ECDSA, it can be defined as $F(x, y) = x \mod q$. It is important to highlight that when we consider a generic abstract cyclic group, a generic function $H: \\{0, 1\\}^* \rightarrow \mathbb{Z}_q$, and a generic function $F: \mathbb{G} \rightarrow \mathbb{Z}_q$, assuming that the discrete logarithm problem and modeling $H$ and $F$ as random oracles, one can prove that such abstract version of the signature scheme is secure. When the ECDSA is instantiated as described in the algorithms $(\textsf{Gen}, \textsf{Sign}, \textsf{Verify})$, is reasonable to model $H$ as a random oracle, but modeling $F$ as a random oracle in this case is not a correct model because $F$ is far from behave as a random function. Despite this, ECDSA has been used and studied and the scrutiny process so far has revealed no significant attack.
 
