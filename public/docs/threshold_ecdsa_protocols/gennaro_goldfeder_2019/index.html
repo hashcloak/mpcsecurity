@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="$(t, n)$ case from Gennaro &amp; Goldfeder (2019) #  Important note: This paper has some corrections addressing errors and wrong conjectures from the first version. Although we will point out such errors, it is important to make sure that the implementation meets the updated version of the protocol.
+Note on notation: Different from the previous works presented in this document, this work uses multiplicative notation for groups.
+In this work, Genaro &amp; Goldfeder propose a new method for a $(t, n)$ signature scheme.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script><meta property="og:title" content="$(t, n)$ case from Gennaro &amp; Goldfeder (2019)" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" />
+
+<title>$(t, n)$ case from Gennaro &amp; Goldfeder (2019) | MPC Security</title>
+<link rel="manifest" href="/hashcloak.com/mpcsecurity/manifest.json">
+<link rel="icon" href="/hashcloak.com/mpcsecurity/favicon.png" >
+<link rel="stylesheet" href="/hashcloak.com/mpcsecurity/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" >
+  <script defer src="/hashcloak.com/mpcsecurity/flexsearch.min.js"></script>
+  <script defer src="/hashcloak.com/mpcsecurity/en.search.min.800f510cb1ef744253add5e2eba2d6fe970e0277bb805a8aa70d8e9f46d7a494.js" ></script>
+<link rel="alternate" type="application/rss+xml" href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/index.xml" title="MPC Security" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="hashcloak.com/mpcsecurity/"><img src="/hashcloak.com/mpcsecurity/hashcloak_logo_colour-logo.png" alt="Logo" /><span>MPC Security</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/" class="">Threshold ECDSA protocols</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="">$(2, 2)$ case from Lindell (2021)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="">$(2, n)$ case from Doerner et al. (2018)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="">$(t, n)$ case from Canetti et al. (2021)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="">$(t, n)$ case from Doerner et al. (2019)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="active">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="">$(t, n)$ case from Lindell et al. (2018)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>Primitives</span>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/hashcloak.com/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</strong>
+
+  <label for="toc-control">
+    
+    <img src="/hashcloak.com/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#preliminaries">Preliminaries</a>
+      <ul>
+        <li><a href="#dsa-signature-scheme">DSA signature scheme</a></li>
+        <li><a href="#share-conversion-protocol">Share conversion protocol</a></li>
+        <li><a href="#non-malleable-equivocable-commitments">Non-malleable equivocable commitments</a></li>
+        <li><a href="#feldmans-vss">Feldman&rsquo;s VSS</a></li>
+      </ul>
+    </li>
+    <li><a href="#key-generation">Key generation</a></li>
+    <li><a href="#signing">Signing</a></li>
+    <li><a href="#security-concerns">Security concerns</a>
+      <ul>
+        <li><a href="#zk-proofs">ZK-proofs</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="t-n-case-from-gennaro--goldfeder-2019">
+  $(t, n)$ case from Gennaro &amp; Goldfeder (2019)
+  <a class="anchor" href="#t-n-case-from-gennaro--goldfeder-2019">#</a>
+</h1>
+<p><strong>Important note:</strong> This paper has some corrections addressing errors and wrong conjectures from the first version. Although we will point out such errors, it is important to make sure that the implementation meets the updated version of the protocol.</p>
+<p><strong>Note on notation:</strong> Different from the previous works presented in this document, this work uses multiplicative notation for groups.</p>
+<p>In this work, Genaro &amp; Goldfeder propose a new method for a $(t, n)$ signature scheme. However, we have to keep in mind that when they say $(t, n)$, they mean that any subset of $t + 1$ parties can jointly sign but any smaller set cannot, which is slightly different from the concept presented in other works reviewed in this document. Also, this work focuses on the DSA signature scheme but the results can be easily applied to ECDSA as the latter is an elliptic curve variant of the former. Genaro &amp; Goldfeder propose a solution based on the Paillier encryption scheme to realize a functionality that transforms multiplicative shares into additive ones, along with non-malleable equivocable commitments to ensure a correct computation against malicious adversaries. Also, he uses Feldman&rsquo;s verifiable secret-sharing scheme (VSS) to ensure the threshold security of the signing process.</p>
+<h2 id="preliminaries">
+  Preliminaries
+  <a class="anchor" href="#preliminaries">#</a>
+</h2>
+<p>In this section, we present three definitions to understand the signing protocol by Gennaro &amp; Goldfeder. First, we will explain what is a non-malleable equivocable commitment. Second, we will explain the specification of the DSA signature scheme. And third, we will explain the concept of Feldman&rsquo;s VSS.</p>
+<h3 id="dsa-signature-scheme">
+  DSA signature scheme
+  <a class="anchor" href="#dsa-signature-scheme">#</a>
+</h3>
+<p>The Digital Signature Algorithm (DSA) is a signature scheme whose security relies on the discrete logarithm problem. The public paramenters of this scheme are a cyclic group $\mathcal{G}$ with order $q$, a generator $g$ for $\mathcal{G}$, a hash function $H: \{0, 1\}^* \rightarrow \mathbb{Z}_q$, and a hash function $H&rsquo;: \mathcal{G} \rightarrow \mathbb{Z}_q$. The specifications of the algorithms are presented next:</p>
+<ul>
+<li>$\textsf{KeyGen}$: on input a security parameter, the algorithm outputs a secret key $x$ chosen at random from $\mathbb{Z}_q$, and also outputs a public key $y = g^x$ in $\mathcal{G}$.</li>
+<li>$\textsf{Sign}$: On input a message $M$, do the following:
+<ul>
+<li>Compute $m = H(M)$.</li>
+<li>Choose $k \in \mathbb{Z}_q$ at random.</li>
+<li>Compute $R = g^{k^{-1}}$ in $\mathcal{G}$ and $r = H&rsquo;(R)$ in $\mathbb{Z}_q$.</li>
+<li>Compute $s = k(m + x \cdot r) \mod q$.</li>
+<li>Output $\sigma = (r, s)$.</li>
+</ul>
+</li>
+<li>$\textsf{Ver}$: on input $M$, $\sigma$ and $y$, do:
+<ul>
+<li>Compute $m = H(M)$.</li>
+<li>Check that $r, s \in \mathbb{Z}_q$.</li>
+<li>Compute $R&rsquo; = g^{(ms^{-1} \mod q)}y^{(rs^{-1} \mod q)}$</li>
+<li>Accept if $H&rsquo;(R&rsquo;) = r$.</li>
+</ul>
+</li>
+</ul>
+<p>We stress that ECDSA is a particular case of DSA where the group $\mathcal{G}$ is an elliptic curve group. For this work, all the results presented also hold for ECDSA.</p>
+<h3 id="share-conversion-protocol">
+  Share conversion protocol
+  <a class="anchor" href="#share-conversion-protocol">#</a>
+</h3>
+<p>The goal of the share conversion protocol is to transform multiplicative into additive shares of a secret. Specifically, suppose that $x = ab \mod q$ where $a, b \in \mathbb{Z}_q$ are the multiplicative shares held by Alice and Bob respectively. Using a share conversion protocol, Alice and Bob will compute $\alpha, \beta \in \mathbb{Z}_q$ such that $\alpha + \beta = x = ab \mod q$. In the end, Alice will hold bot $\alpha$ and $a$, while Bob will hold $\beta$ and $b$.</p>
+<p>For this version of the protocol, we assume that Alice has distributed a key $A$ for an additively homomorphic scheme $\mathcal{E}$ over an integer $N$. In the protocol, we assume that $B = g^b$ is public to force Bob to provide a correct $b$. This protocol (including the additional check) is denoted as $\textsf{MtAwc}$ (&ldquo;multiplicative to additive with check&rdquo;). The protocol without this check is denoted by $\textsf{MtA}$. We present the protocol next:</p>
+<p><img src="Protocol_Share_Conversion.png" alt="Protocol Share Conversion" /></p>
+<h3 id="non-malleable-equivocable-commitments">
+  Non-malleable equivocable commitments
+  <a class="anchor" href="#non-malleable-equivocable-commitments">#</a>
+</h3>
+<p>A <em>trapdoor</em> commitment scheme is a commitment that is information-theoretic hiding and computationally binding, whereas, for the latter, the scheme admits a trapdoor such that when known, it reveals the commited message entirely. However, this trapdoor is hard to compute efficiently.</p>
+<p>A trapdoor commitment scheme consists in four algorithms $\textsf{KG}$, $\textsf{Com}$, $\textsf{Ver}$, $\textsf{Equiv}$ such that:</p>
+<ul>
+<li>$\textsf{KG}$ is the algorithm for key generation which outputs a pair $(\textsf{pk}, \textsf{tk})$, where $\textsf{pk}$ is the public-key associated with the commitment scheme and $\textsf{tk}$ is the trapdoor key.</li>
+<li>$\textsf{Com}$ is the commitment algorithm. On input $\textsf{pk}$ and a message $M$, it outputs $[C(M), D(M)] = \textsf{Com}(\textsf{pk}, M, R)$ where $R$ are the coin toses. $C(M)$ is the commitment string, while $D(M)$ is the decommitment string. The latter is kept secret until the opening time.</li>
+<li>$\textsf{Ver}$ is the verification algorithm. On input $C$, $D$ and $\textsf{pk}$, it either outputs a message $M$ or $\bot$.</li>
+<li>$\textsf{Equiv}$ is the algorithm that opens a commitment in every possible way given the trapdoor string. On input $\textsf{pk}$, stringgs $M$, $R$ such that $[C(M), D(M)] = \textsf{Com}(\textsf{pk}, M, R)$, a message $M&rsquo; \neq M$ and a string $T$. if $T = \textsf{tk}$, then $\textsf{Equiv}$ will output $D&rsquo;$ such that $\textsf{Ver}(\textsf{pk}, C(M), D&rsquo;) = M&rsquo;$.</li>
+</ul>
+<p>In real-world applications, it is common to use a hash function $H$ to instantiate these commitments. For a message $m$, we define the commitment as $h = H(m, r)$ where $r$ is randomly chosen with a length equal to the security parameter $\lambda$.</p>
+<h3 id="feldmans-vss">
+  Feldman&rsquo;s VSS
+  <a class="anchor" href="#feldmans-vss">#</a>
+</h3>
+<p>Feldman&rsquo;s VSS is an extension of Shamir&rsquo;s secret-sharing scheme. To share a secret $\sigma \in \mathbb{Z}_q$, the dealer generates a random polynomial $p$ such that $p(0) = \sigma$. This means that the polynomial has the following structure:</p>
+<p>$$
+p(x) = \sigma + a_1 x + a_2 x^2 + \cdots + a_t x^t \mod q.
+$$</p>
+<p>As in Shamir&rsquo;s secret-sharing, each party $P_i$ receives $\sigma_i = p(i) \mod q$ as a share of the secret value $\sigma$. The extension comes in place when the dealer of the secret also publishes $v_i = g^{a_i}$ in the group $\mathcal{G}$ for all $i \in [t]$, and $v_0 = g^\sigma$. With this modification, each party $P_i$ can check the consistency of each share $\sigma_i$ by checking the equality</p>
+<p>$$
+g^{\sigma_i} \stackrel{?}{=} \prod_{j=0}^t v_j^{i^j}
+$$</p>
+<p>in $\mathcal{G}$. In the case that some party complains about the check, the protocol must abort.</p>
+<h2 id="key-generation">
+  Key generation
+  <a class="anchor" href="#key-generation">#</a>
+</h2>
+<p>The goal of the key generation is to obtain $(t, n)$ shares of the private key that will be used as input in the signing phase. For this specification, we assume that each party $P_i$ has an associated public key for the additively homomorphic encryption scheme $\mathcal{E}$. Below, present the protocol:</p>
+<p><img src="Protocol_Keygen.png" alt="Protocol Key Generation" /></p>
+<h2 id="signing">
+  Signing
+  <a class="anchor" href="#signing">#</a>
+</h2>
+<p>Now, we present the signing protocol. It receives $m = H(M)$ as input, where $M$ is the message that will be signed. Additionally, the parties have $(t, n)$ shares of the private key $x$.</p>
+<p>Let $S \subseteq [n]$ be the set of parties involved in the signing protocol, such that $\vert S \vert = t + 1$. Knowing that the key generation protocol returned Shamir shares of the private key $x$, each party can construct the appropriate Lagrange coefficients $\lambda_{i, S}$ used to interpolate the polynomial used in the secret-sharing scheme. If $x_i$ are the Shamir secret shares of $x$, each party can compute $w_i = \lambda_{i, S} \cdot x_i$. Notice that $w_i$ is a (t, t + 1) share of $x$ held by the party $P_i$, which means that $x = \sum_{i \in S} w_i$. Also, the parties have public values $X_i = g^{x_i}$, therefore, each party can compute $W_i = g^{w_i} = X_i^{\lambda_{i, S}}$.</p>
+<p><img src="Protocol_Signing.png" alt="Protocol Signing" /></p>
+<p>Notice that in Step (5B) of the previous protocol, the party $P$ broadcasts $V = R^s g^l$ and $A = g^\rho$ and he needs to prove that he knows $s$, $l$ and $\rho$ for which the previous equations hold. To prove that he knows $\rho$, it can be used a classic Schnorr proof. To prove that he know $s$ and $l$, they can use the following protocol:</p>
+<p><img src="Protocol_Schnorr.png" alt="Protocol Schnorr" /></p>
+<h2 id="security-concerns">
+  Security concerns
+  <a class="anchor" href="#security-concerns">#</a>
+</h2>
+<ul>
+<li>In the paper, Gennaro &amp; Goldfeder say that the last version of the paper has some fixes in the protocol and its proofs of security for which the previous version is not correct. Therefore, it is important to double-check which version of the protocol has been implemented.</li>
+<li>At the end of the signing protocol, the parties need to verify that the produced signature is valid using the standalone version of the verify algorithm in the DSA/ECDSA signature scheme.</li>
+<li>The previous version of the protocol did not check the range of the values encrypted with the Paillier encryption scheme which produces a leak of information about honest parties&rsquo; shares.</li>
+<li>Works like <a href="https://eprint.iacr.org/2021/1621">Tymokhanov &amp; Shlomovits (2021)</a> and <a href="https://info.fireblocks.com/hubfs/A_Note_on_the_Security_of_GG.pdf">Makriyannis &amp; Peled (2021)</a> have shown that removing the ZK-proofs lead into an insecure protocol. Therefore, it is important to check that all the proofs are correctly executed.</li>
+<li>The protocol assumes the existence of a broadcast channel as well as point-to-point channels connecting every pair of players. In this case, we need to check that these conditions are correctly realized.</li>
+<li>There is a small typo in the non-malleable equivocable commitment in the $\textsf{Com}$ algorithm where they say &ldquo;where $r$ is the coin tosses&rdquo;, but the correct version is &ldquo;where $R$ is the coin tosses&rdquo;.</li>
+<li>The authors say that non-malleable commitments that are not &ldquo;concurrently&rdquo; secure are not suitable for the protocol. Instead, an implementation should consider a concurrent secure non-malleable commitment scheme.</li>
+<li>It is necessary to check that whenever Feldman&rsquo;s VSS protocol complains about a bad check-in of the shares, the protocol will abort.</li>
+<li>The authors recommend that, in a typical choice of parameters, $N$ is approximately $q^8$. Also, they stress that the parties should check the size of N to ensure the ZK property in the proofs.</li>
+<li>It is important to remember that the message to be signed is $m = H(M)$ and not $M$ itself.</li>
+<li>In the signing protocol there are a series of checks that need to be computed, specifically, in Steps 5B, 5D, and 5E.</li>
+<li>The paper presents Section 5 as a historical record, however, the simplified protocol presented in that section is not secure.</li>
+<li>If the implementation uses another additively homomorphic encryption scheme, it requires an assumption analogous to Paillier-EC or a ZK-proof for the statement in the $\textsf{MtAwc}$ protocol. Also, it is needed to guarantee security against &ldquo;adversarially chosen&rdquo; public keys.</li>
+<li>In the Signature generation protocol, Phase 5, Step (5C), there is a typo: the player proves in ZK that $A_i = g^{\rho_i}$.</li>
+</ul>
+<h3 id="zk-proofs">
+  ZK-proofs
+  <a class="anchor" href="#zk-proofs">#</a>
+</h3>
+<ul>
+<li>In the $\textsf{MtAwc}$ protocol, Step 1, Alice needs to prove in ZK that she knows $a &lt; q^3$ using a range proof.</li>
+<li>In the $\textsf{MtAwc}$ protocol, Step 2, Bob proofs in ZK that he knows $b &lt; q^3$, $\beta&rsquo; &lt; q^7$ such that the ciphertext $c_B = b \times_E c_A +_E E_A(\beta&rsquo;)$.</li>
+<li>In the Key generation protocol, Phase 1, each player $P_i$ commits to the value $g^{u_i}$.</li>
+<li>In the Key generation protocol, Phase 3, each party $P_i$ proofs in ZK the following statements:
+<ul>
+<li>That he knows $x_i$ such that $X_i = g^{x_i}$ using a Schnorr&rsquo;s protocol.</li>
+<li>That $N_i$ is square-free.</li>
+</ul>
+</li>
+<li>In the Signature generation protocol, Phase 1, each party $P_i$ commits to the value $g^{\gamma_i}$.</li>
+<li>In the Signature generation protocol, Phase 4, each party $P_i$ proves in ZK that he knows $\gamma_i$ such that $\Gamma_i = g^{\gamma_i}$ using a Schnorr&rsquo;s protocol.</li>
+<li>In the Signature generation protocol, Phase 5, each party $P_i$ computes the following commitments and ZK proofs:
+<ul>
+<li>In Step (5A), the player $P_i$ commits to the value of $(V_i, A_i)$.</li>
+<li>In Step (5B), the player $P_i$ proves in ZK that he knows $s_i, l_i, \rho_i$ such that $V_i = R^{s_i} g^{l_i}$ and $A_i = g^{\rho_i}$.</li>
+<li>In Step (5C), the player $P_i$ commits to the value of $(U_i, T_i)$.</li>
+</ul>
+</li>
+</ul>
+<h1 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h1>
+<ul>
+<li>Gennaro, R., &amp; Goldfeder, S. (2018). Fast Multiparty Threshold ECDSA with Fast Trustless Setup. In Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications Security (pp. 1179–1194). Association for Computing Machinery.</li>
+<li>Dmytro Tymokhanov, &amp; Omer Shlomovits. (2021). Alpha-Rays: Key Extraction Attacks on Threshold ECDSA Implementations.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#preliminaries">Preliminaries</a>
+      <ul>
+        <li><a href="#dsa-signature-scheme">DSA signature scheme</a></li>
+        <li><a href="#share-conversion-protocol">Share conversion protocol</a></li>
+        <li><a href="#non-malleable-equivocable-commitments">Non-malleable equivocable commitments</a></li>
+        <li><a href="#feldmans-vss">Feldman&rsquo;s VSS</a></li>
+      </ul>
+    </li>
+    <li><a href="#key-generation">Key generation</a></li>
+    <li><a href="#signing">Signing</a></li>
+    <li><a href="#security-concerns">Security concerns</a>
+      <ul>
+        <li><a href="#zk-proofs">ZK-proofs</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

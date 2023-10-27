@@ -1,6 +1,7 @@
 baseURL = 'hashcloak.com/mpcsecurity'
 languageCode = 'en-us'
 title = 'MPC Security'
+theme = 'hugo-book'
 
 [params]
   BookLogo = 'hashcloak_logo_colour-logo-text.png'

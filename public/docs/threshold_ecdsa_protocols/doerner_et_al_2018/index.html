@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="$(2, n)$ case from Doerner et al. (2018) #  The protocol proposed by Doerner et al. (2018) presents a threshold ECDSA protocol with a threshold of $2$-out-of-$n$. This means that from a set of $n$ parties, whatever two parties from this set can generate a signature. This protocol has two different versions. The most recent version aims to correct some issues found in the first version which improves the quality of the cryptographic assumptions and corrects some errors.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script><meta property="og:title" content="$(2, n)$ case from Doerner et al. (2018)" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" />
+
+<title>$(2, n)$ case from Doerner et al. (2018) | MPC Security</title>
+<link rel="manifest" href="/hashcloak.com/mpcsecurity/manifest.json">
+<link rel="icon" href="/hashcloak.com/mpcsecurity/favicon.png" >
+<link rel="stylesheet" href="/hashcloak.com/mpcsecurity/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" >
+  <script defer src="/hashcloak.com/mpcsecurity/flexsearch.min.js"></script>
+  <script defer src="/hashcloak.com/mpcsecurity/en.search.min.800f510cb1ef744253add5e2eba2d6fe970e0277bb805a8aa70d8e9f46d7a494.js" ></script>
+<link rel="alternate" type="application/rss+xml" href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/index.xml" title="MPC Security" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="hashcloak.com/mpcsecurity/"><img src="/hashcloak.com/mpcsecurity/hashcloak_logo_colour-logo.png" alt="Logo" /><span>MPC Security</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/" class="">Threshold ECDSA protocols</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="">$(2, 2)$ case from Lindell (2021)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="active">$(2, n)$ case from Doerner et al. (2018)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="">$(t, n)$ case from Canetti et al. (2021)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="">$(t, n)$ case from Doerner et al. (2019)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="">$(t, n)$ case from Lindell et al. (2018)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>Primitives</span>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/hashcloak.com/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>$(2, n)$ case from Doerner et al. (2018)</strong>
+
+  <label for="toc-control">
+    
+    <img src="/hashcloak.com/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#security-concerns">Security concerns</a>
+      <ul>
+        <li><a href="#zk-proofs">ZK-proofs</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="2-n-case-from-doerner-et-al-2018">
+  $(2, n)$ case from Doerner et al. (2018)
+  <a class="anchor" href="#2-n-case-from-doerner-et-al-2018">#</a>
+</h1>
+<p>The protocol proposed by Doerner et al. (2018) presents a threshold ECDSA protocol with a threshold of $2$-out-of-$n$. This means that from a set of $n$ parties, whatever two parties from this set can generate a signature. This protocol has two different versions. The most recent version aims to correct some issues found in the first version which improves the quality of the cryptographic assumptions and corrects some errors. Those issues will be covered here as concerns given that it may happen that some organizations have an implementation of the older version which needs corrections in an audit process.</p>
+<p>First, we start to show the newest version of the protocol. The parties interact with other three ideal functionalities:</p>
+<ul>
+<li>$\mathcal{F}_{\textsf{CP}}^{\mathcal{R}_\textsf{DL}}$: this functionality is the standard committed zero-knowledge functionality which allows committing to the exponent of an elliptic curve point, and also performs a zero-knowledge proof on the relation $\mathcal{R}_\textsf{DL} = \left\{(A, B, w ) \;\vert\; B = w \cdot A \right\}.$</li>
+<li>$\mathcal{F}_{\textsf{Mul}}(q)$: in this functionality, two parties provide elements $a, b \in \mathbb{Z}_q$ respectively. and the functionality computes $d = a \cdot b - c$ where $c$ is a random element chosen from $\mathbb{Z}_q$. At the end of the protocol, one party learns $d$ and the other party learns $c$. Intuitively, $\mathcal{F}_{\textsf{Mul}}(q)$ returns to each party an additive share of the product of the inputs they provided to the functionality, i.e., $d$ and $c$ are randomly distributed numbers such that $d + c = a \cdot b$.</li>
+<li>$\mathcal{F}_{\textsf{DLKeyGen}}(\mathcal{G}, n, 2)$: this is a functionality that generates a key pair $(\textsf{sk}, \textsf{pk})$ for the ECDSA signature scheme and distributes Shamir shares of $\textsf{sk}$ with threshold $t$.</li>
+</ul>
+<p>We next present the functionalities mentioned above:</p>
+<p><img src="F_Commited_ZK.png" alt="Functionality Commited ZK" /></p>
+<p><img src="F_Two_Party_Multiplication.png" alt="Functionality Two Party Multiplication" /></p>
+<p><img src="Discrete_Log_Keygen.png" alt="Functionality Discrete Log Keygen" /></p>
+<p>Now, we present the protocol that realizes the functionality $\mathcal{F}_\textsf{ECDSA-2P}(\mathcal{G}, n)$ presented in the original paper, which is the main functionality. In this specification, $\textsf{RO}$ is a non-programmable global random oracle.</p>
+<p><img src="Protocol_Two_Party_ECDSA.png" alt="Protocol Two Party ECDSA" /></p>
+<p>We stress that this protocol has multiple versions and people were able to implement an older version of it containing errors or assumptions that are not well studied. We encourage the reader to refer to the section about concerns below to be informed about possible modifications.</p>
+<p>All we have left is a protocol that realizes the $\mathcal{F}_\textsf{Mult}$ functionality. Remember that this functionality takes two elements $\alpha, \beta \in \mathbb{Z}_q$ and returns additive shares of their product $\alpha \cdot \beta$. This functionality allows one of the parties to introduce a noise to the multiplication which models the capabilities of a malicious adversary. According to the paper, such adversarial behavior is then detected in the signature verification in the broader context of the signature protocol.</p>
+<p>Now, we will present the multiplication protocol. <!-- raw HTML omitted -->This protocol corresponds to the older version of the paper, therefore they use the <a href="https://eprint.iacr.org/2015/546.pdf">KOS OT method</a> to realize the correlated oblivious transfer extension $\mathcal{F}_\textsf{COTe}^\mathcal{l}$. Remember that the use of the original protocol must be deprecated and replaced by a secure realization of the functionality.<!-- raw HTML omitted --> The specification of this functionality is shown next:</p>
+<p><img src="Functionality_Cote.jpg" alt="Functionality COTe" /></p>
+<p>The multiplication protocol is similar to the classic Gilboa OT multiplication, however, this method is vulnerable to selective failure attacks in a malicious setting. To correct this, Doerner et al. (2018) encode Bob&rsquo;s input with some redundancy in a way such that learning $s$ of Bob&rsquo;s choice bits via selective failure does not leak any information about the input value. The encoding works as follows:</p>
+<p><img src="Encode.png" alt="Encode" /></p>
+<p>Here, $\mathbf{g}^\textsf{R} \in \mathbb{Z}_q^{\kappa + 2s}$ is a random vector. Now we present the multiplication protocol:</p>
+<p><img src="Protocol_Mul.png" alt="Protocol Mul" /></p>
+<h2 id="security-concerns">
+  Security concerns
+  <a class="anchor" href="#security-concerns">#</a>
+</h2>
+<p>As we have mentioned above, this protocol has multiple versions. So it is of high importance to check which implementation is going to be audited always suggesting to include the more recent one due to the improvements made. Here, we will present some of such concerns:</p>
+<ul>
+<li>The original paper of this implementation has some errors that were corrected in the current version of the protocol. This older version has been implemented and deployed by some organizations. Therefore, from an audit point of view, it is important to check which version is being implemented.</li>
+<li>The original scheme in this work realizes a non-standard two-party functionality that allows one party to negibly bias the distribution of the instance key. This fact is not a serious concern as the bias is negligible and they gave proof of security, which gives more confidence to realize a standard functionality.</li>
+<li>Deprecate the use of <a href="https://eprint.iacr.org/2015/546">Keller et al. (2015)</a> for OT extension protocols given that <a href="https://eprint.iacr.org/2022/192">Roy (2022)</a> have found some gaps in the proof.</li>
+<li>The older version of the paper has some typos in the reproduction of the OT protocol taken from Keller et al. (2020).</li>
+<li>The original version of the paper left some details about how to deal with aborts when functionality has multiple sub-sessions being executed concurrently. In the case of correlated oblivious transfer extensions (COTe) and multiplication functionalities, one must check that if a sub-session aborts, then the other concurrent sub-subsessions being executed must abort too. This also must be transferred to the ECDSA signing protocol in which multiple multiplication functionalities are executed concurrently: an abort in any instance of the multiplication protocol executed by some pair of parties must cause an abort in all the signing sub-sessions in which the parties are involved and prevent them from signing together again.</li>
+<li>The original proof contains an optimized &ldquo;coalesced triple-multiplication in which no proof of security is presented. The authors strongly recommend not to use such implementation in the future until a proof of security is provided.</li>
+<li>The newest version of the protocol assumes that all of the parties in any protocol are fully connected using authenticated channels.</li>
+<li>The newest version of the protocol does not include a specification of what to do in the first step of the setup when there exists a record $(\textsf{key-pair}, \textsf{sid}, \textsf{pk}, p(i))$.</li>
+<li>In Step 2 of the setup protocol, if the key generation protocol aborts, the parties send an abort signal to the environment.</li>
+<li>We need to check if there is an initialization process in the protocol used to realize the functionality $\mathcal{F}_\textsf{Mul}(q)$. If the initialization is required, Step 3 in the Setup phase is a good place to compute it.</li>
+<li>In the Signing phase, Step 7, we need to check if the conditions imposed on the records do not hold, the signing message from the environment must be ignored.</li>
+<li>In the Signing phase, Step 8, the authors do not introduce what is $\textsf{RO}$. But in the proof you can find that $\textsf{RO}$ is a non-programable global random oracle. We need to check that in the real implementation, there is a proper instantiation of it.</li>
+<li>The newest version of the paper contains additional steps in the $\pi_\textsf{ECDSA-2P}$ protocol, namely, Steps 4-6 which is a commitment to the Alice&rsquo;s share of a random element in the elliptic curve. We should check that the commitment is performed.</li>
+<li>Bob needs to check if the resulting signature $\sigma$ is a valid signature with respect to the message $m$ before outputting it.</li>
+<li>In the protocol for multiplication $\pi_\textsf{Mul}$, Bob must need to perform the checking in Step 6.</li>
+<li>The paper sugests to use SHA-256 to instantiate the random oracle $H$. Also, they use this hash function to instantiate the PRG.</li>
+</ul>
+<h3 id="zk-proofs">
+  ZK-proofs
+  <a class="anchor" href="#zk-proofs">#</a>
+</h3>
+<ul>
+<li>In Step 5 of the Two-Party ECDSA protocol, Alice commits to the value of $r_\textsf{A}$.</li>
+<li>In Step 10, Alice proofs the commitment of $r_\textsf{A}$ and proves in zero-knowledge that she knows $r_\textsf{A}$ such that is the discrete logarithm of $D_\textsf{A}$. Notice that this protocol not only proves the above fact in zero-knowledge but also sends the commitment of $r_\textsf{A}$ to Bob.</li>
+</ul>
+<h1 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h1>
+<ul>
+<li>Doerner, J., Kondi, Y., Lee, E., &amp; Shelat, A. (2018). Secure Two-party Threshold ECDSA from ECDSA Assumptions. In 2018 IEEE Symposium on Security and Privacy (SP) (pp. 980-997).</li>
+<li>Keller, P. (2015). Actively Secure OT Extension with Optimal Overhead. In Advances in Cryptology – CRYPTO 2015 (pp. 724–741). Springer Berlin Heidelberg.</li>
+<li>Lawrence Roy (2022). SoftSpokenOT: Quieter OT Extension from Small-Field Silent VOLE in the Minicrypt Model. In Advances in Cryptology - CRYPTO 2022 - 42nd Annual International Cryptology Conference, CRYPTO 2022, Santa Barbara, CA, USA, August 15-18, 2022, Proceedings, Part I (pp. 657–687). Springer.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#security-concerns">Security concerns</a>
+      <ul>
+        <li><a href="#zk-proofs">ZK-proofs</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
