@@ -1,4 +1,4 @@
-baseURL = 'hashcloak.com/mpcsecurity'
+baseURL = 'hashcloak.github.io/mpcsecurity/'
 languageCode = 'en-us'
 title = 'MPC Security'
 theme = 'hugo-book'
