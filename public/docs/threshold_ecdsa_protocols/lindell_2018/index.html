@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head>
+<head><script src="/mpcsecurity/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=mpcsecurity/livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="$(t, n)$ case from Lindell et al. (2018) #  This paper presents a full-threshold ECDSA signing protocol which is the first to have a practical distributed key generation and fast signing. The protocol can be divided into two phases: in the first phase, they propose a protocol based on Pedersen commitments; in the second phase, they replace the Pedersen commitments for ElGamal-in-the-exponent encryption to improve the performance of the protocol.">
+<meta name="description" content="
+  $(t, n)$ case from Lindell et al. (2018)
+  #
+
+This paper presents a full-threshold ECDSA signing protocol which is the first to have a practical distributed key generation and fast signing. The protocol can be divided into two phases: in the first phase, they propose a protocol based on Pedersen commitments; in the second phase, they replace the Pedersen commitments for ElGamal-in-the-exponent encryption to improve the performance of the protocol.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-          
-          
-          delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-              {left: '\\(', right: '\\)', display: false},
-              {left: '\\[', right: '\\]', display: true}
-          ],
-          
-          throwOnError : false
-        });
-    });
-</script><meta property="og:title" content="$(t, n)$ case from Lindell et al. (2018)" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" />
-
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/">
+  <meta property="og:site_name" content="MPC Security">
+  <meta property="og:title" content="$(t, n)$ case from Lindell et al. (2018)">
+  <meta property="og:description" content="$(t, n)$ case from Lindell et al. (2018) # This paper presents a full-threshold ECDSA signing protocol which is the first to have a practical distributed key generation and fast signing. The protocol can be divided into two phases: in the first phase, they propose a protocol based on Pedersen commitments; in the second phase, they replace the Pedersen commitments for ElGamal-in-the-exponent encryption to improve the performance of the protocol.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
 <title>$(t, n)$ case from Lindell et al. (2018) | MPC Security</title>
-<link rel="manifest" href="/hashcloak.com/mpcsecurity/manifest.json">
-<link rel="icon" href="/hashcloak.com/mpcsecurity/favicon.png" >
-<link rel="stylesheet" href="/hashcloak.com/mpcsecurity/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" >
-  <script defer src="/hashcloak.com/mpcsecurity/flexsearch.min.js"></script>
-  <script defer src="/hashcloak.com/mpcsecurity/en.search.min.800f510cb1ef744253add5e2eba2d6fe970e0277bb805a8aa70d8e9f46d7a494.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/index.xml" title="MPC Security" />
+<link rel="icon" href="/mpcsecurity/favicon.png" >
+<link rel="manifest" href="/mpcsecurity/manifest.json">
+<link rel="canonical" href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/">
+<link rel="stylesheet" href="/mpcsecurity/book.min.a7616cf2799b58bddffce9438e31fdbfc6393687cfc0950a4a17cd1cce7e35f6.css" integrity="sha256-p2Fs8nmbWL3f/OlDjjH9v8Y5NofPwJUKShfNHM5&#43;NfY=" crossorigin="anonymous">
+  <script defer src="/mpcsecurity/fuse.min.js"></script>
+  <script defer src="/mpcsecurity/en.search.min.ce83cbe310910da659cfa1905578c106c8f81ae8c2aff7fc17b79a91de6eceda.js" integrity="sha256-zoPL4xCRDaZZz6GQVXjBBsj4GujCr/f8F7eakd5uzto=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/index.xml" title="MPC Security" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
 -->
+  
+  
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)'], ['$', '$']]     
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+
+
   
 </head>
 <body dir="ltr">
@@ -52,16 +55,17 @@ https://github.com/alex-shpak/hugo-book
         
   <nav>
 <h2 class="book-brand">
-  <a class="flex align-center" href="hashcloak.com/mpcsecurity/"><img src="/hashcloak.com/mpcsecurity/hashcloak_logo_colour-logo.png" alt="Logo" /><span>MPC Security</span>
+  <a class="flex align-center" href="/mpcsecurity/"><img src="/mpcsecurity/hashcloak_logo_colour-logo-text.png" alt="Logo" class="book-icon" /><span>MPC Security</span>
   </a>
 </h2>
 
 
-<div class="book-search">
+<div class="book-search hidden">
   <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
   <div class="book-search-spinner hidden"></div>
   <ul id="book-search-results"></ul>
 </div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
 
 
 
@@ -74,7 +78,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
 
 
 
@@ -88,7 +91,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/" class="">Threshold ECDSA protocols</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/" class="">Threshold ECDSA protocols</a>
   
 
           
@@ -101,25 +104,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="">$(2, 2)$ case from Lindell (2021)</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="">$(2, n)$ case from Doerner et al. (2018)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="">$(2, 2)$ case from Lindell (2021)</a>
   
 
           
@@ -137,7 +122,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="">$(t, n)$ case from Canetti et al. (2021)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="">$(2, n)$ case from Doerner et al. (2018)</a>
   
 
           
@@ -155,7 +140,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="">$(t, n)$ case from Doerner et al. (2019)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="">$(t, n)$ case from Canetti et al. (2021)</a>
   
 
           
@@ -173,7 +158,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="">$(t, n)$ case from Doerner et al. (2019)</a>
   
 
           
@@ -191,7 +176,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
   
 
           
@@ -209,7 +194,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
   
 
           
@@ -227,7 +212,25 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="active">$(t, n)$ case from Lindell et al. (2018)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="active">$(t, n)$ case from Lindell et al. (2018)</a>
   
 
           
@@ -278,7 +281,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-
 </nav>
 
 
@@ -294,16 +296,17 @@ https://github.com/alex-shpak/hugo-book
     <div class="book-page">
       <header class="book-header">
         
-  <div class="flex align-center justify-between">
+  
+<div class="flex align-center justify-between">
   <label for="menu-control">
-    <img src="/hashcloak.com/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
+    <img src="/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>$(t, n)$ case from Lindell et al. (2018)</strong>
+  <h3>$(t, n)$ case from Lindell et al. (2018)</h3>
 
   <label for="toc-control">
     
-    <img src="/hashcloak.com/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    <img src="/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
@@ -320,12 +323,12 @@ https://github.com/alex-shpak/hugo-book
       <ul>
         <li><a href="#key-generation">Key generation</a></li>
         <li><a href="#signing">Signing</a></li>
-        <li><a href="#protocol-textsfcreatesharedval">Protocol $\textsf{CreateSharedVal}$:</a></li>
-        <li><a href="#protocol-textsfadditionofsharedvals">Protocol $\textsf{AdditionOfSharedVals}$</a></li>
-        <li><a href="#protocol-textsfscalarmultofsharevals">Protocol $\textsf{ScalarMultOfShareVals}$</a></li>
-        <li><a href="#protocol-textsfoutsharedval">Protocol $\textsf{OutSharedVal}$</a></li>
-        <li><a href="#protocol-textsfoutexpsharedval">Protocol $\textsf{OutExpSharedVal}$</a></li>
-        <li><a href="#protocol-textsfmultsharedvals">Protocol $\textsf{MultSharedVals}$</a></li>
+        <li><a href="#protocol-textsfcreatesharedval">Protocol :</a></li>
+        <li><a href="#protocol-textsfadditionofsharedvals">Protocol </a></li>
+        <li><a href="#protocol-textsfscalarmultofsharevals">Protocol </a></li>
+        <li><a href="#protocol-textsfoutsharedval">Protocol </a></li>
+        <li><a href="#protocol-textsfoutexpsharedval">Protocol </a></li>
+        <li><a href="#protocol-textsfmultsharedvals">Protocol </a></li>
       </ul>
     </li>
     <li><a href="#threshold-case">Threshold case</a></li>
@@ -346,7 +349,7 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="t-n-case-from-lindell-et-al-2018">
+  <article class="markdown book-article"><h1 id="t-n-case-from-lindell-et-al-2018">
   $(t, n)$ case from Lindell et al. (2018)
   <a class="anchor" href="#t-n-case-from-lindell-et-al-2018">#</a>
 </h1>
@@ -358,101 +361,86 @@ https://github.com/alex-shpak/hugo-book
 </h2>
 <p>Here we denote by $G$ to the generator of an elliptic curve group $\mathbb{G}$ of prime order $q$ using additive notation. Therefore, each element can be described as $a \cdot G$ for $a \in \mathbb{Z}_q$. Also, we denote $\widetilde{\mathbb{G}} = \mathbb{G} \times \mathbb{G}$ as the product group which inherits the natural group operation from $\mathbb{G}$. The elements of $\widetilde{\mathbb{G}}$ will be denoted as $\widetilde{A}$. Also, we fix a security parameter $\kappa \in \mathbb{N}$ for the rest of the section. When describing the protocols, let $\textsf{Store}_k(v)$ be the functionality that stores the value $v$ under the key $k$. Also, let $\textsf{Retrieve}(k)$ be the functionality that returns the value stored under key $k$ or aborts if such key does not exist.</p>
 <p>A Pedersen commitmet of a value $m \in \mathbb{Z}_q$ using a public key parameter $D$ and randomness $r$ is defined by</p>
-<p>$$
+$$
 \textsf{PedCom}_D(m; r) = r \cdot D + m \cdot G
-$$</p>
-<p>When it is clear from the context, the authors omit the random parameter $r$ in the notation. The authors denote a Pedersen commitment by $\widehat{A} = \textsf{PedCom}_D(a; r)$, for some $a \in \mathbb{Z}_q$. An important feature of Pedersen commitments is that they are homomorphic with respect to the addition in $\mathbb{G}$. Therefore, if $\widehat{A}_0 = \textsf{PedCom}_D(m_1; \cdot)$ and $\widehat{A}_2 = \textsf{PedCom}_D(m_2; \cdot)$, then $\widehat{A}_1 + \widehat{A}_2$ is a commitment for $m_1 + m_2$.</p>
+$$<p>When it is clear from the context, the authors omit the random parameter $r$ in the notation. The authors denote a Pedersen commitment by $\widehat{A} = \textsf{PedCom}_D(a; r)$, for some $a \in \mathbb{Z}_q$. An important feature of Pedersen commitments is that they are homomorphic with respect to the addition in $\mathbb{G}$. Therefore, if $\widehat{A}_0 = \textsf{PedCom}_D(m_1; \cdot)$ and $\widehat{A}_2 = \textsf{PedCom}_D(m_2; \cdot)$, then $\widehat{A}_1 + \widehat{A}_2$ is a commitment for $m_1 + m_2$.</p>
 <p>An ElGamal commitment of a message $m \in \mathbb{Z}_q$ with public key $E \in \mathbb{G}$ and randomness $r$ is defined to be</p>
-<p>$$
+$$
 \textsf{EgCom}_E(m; r) = ( r \cdot G, r \cdot E + m \cdot E ),
-$$</p>
-<p>which turns out to be an element of $\widetilde{\mathbb{G}}$. Therefore, we denote the ElGamal commitments as $\widetilde{A} = \textsf{EgCom}_E(a; r)$, for $a \in \mathbb{Z}_q$. Similarly to Pedersen commitments, ElGamal commitments are also homomorphic concerning the group operation in $\widetilde{\mathbb{G}}$.</p>
+$$<p>which turns out to be an element of $\widetilde{\mathbb{G}}$. Therefore, we denote the ElGamal commitments as $\widetilde{A} = \textsf{EgCom}_E(a; r)$, for $a \in \mathbb{Z}_q$. Similarly to Pedersen commitments, ElGamal commitments are also homomorphic concerning the group operation in $\widetilde{\mathbb{G}}$.</p>
 <p>The protocols presented in the work covered here depend on ZK-PoK functionalities denoted as $\mathcal{F}_\textsf{zk}^\mathcal{R}$ for a relation $\mathcal{R}$. The paper also lists the relations that will be presented next, but we also include the relations to present a self-contained material and also correct some typos present in the paper. The relations covered in this work will be the following:</p>
 <ul>
 <li>
 <p>Knowledge of discrete log:</p>
-<p>$$
-\mathcal{R}_\textsf{DL} = \left\{(A, B, w ) \;\vert\; B = w \cdot A \right\}.
-$$</p>
-</li>
+$$
+    \mathcal{R}_\textsf{DL} = \left\{(A, B, w ) \;\vert\; B = w \cdot A \right\}.
+    $$</li>
 <li>
 <p>$\textsf{DH}$ tuple:</p>
-<p>$$
-\mathcal{R}_\textsf{DH} = \left\{ \left(\widetilde{A} = (A_1, A_2), \widetilde{B} = (B_1, B_2), w \right) \;\vert\; \widetilde{B} = w \cdot \widetilde{A} \right\}.
-$$</p>
-<p>We write $\left(A, \widetilde{B}, w\right) \in \mathcal{R}_\textsf{DH}$ as a shorthand for $\left((G, A), \widetilde{B}, w \right) \in \mathcal{R}_\textsf{DH}$.</p>
+$$
+    \mathcal{R}_\textsf{DH} = \left\{ \left(\widetilde{A} = (A_1, A_2), \widetilde{B} = (B_1, B_2), w \right) \;\vert\; \widetilde{B} = w \cdot \widetilde{A} \right\}.
+    $$<p>We write $\left(A, \widetilde{B}, w\right) \in \mathcal{R}_\textsf{DH}$ as a shorthand for $\left((G, A), \widetilde{B}, w \right) \in \mathcal{R}_\textsf{DH}$.</p>
 </li>
 <li>
 <p>Knowledge of Pedersen commitment:</p>
-<p>$$
-\mathcal{R}_\textsf{PedKlwg} = \left\{ \left((D, \widehat{A}), (a, r) \right) \;\vert\; \widehat{A} = \textsf{PedCom}_D(a; r) \right\}.
-$$</p>
-</li>
+$$
+    \mathcal{R}_\textsf{PedKlwg} = \left\{ \left((D, \widehat{A}), (a, r) \right) \;\vert\; \widehat{A} = \textsf{PedCom}_D(a; r) \right\}.
+    $$</li>
 <li>
 <p>Pedersen commitment of a value:</p>
-<p>$$
-\mathcal{R}_\textsf{PedEqVal} = \left\{ \left( (D, \widehat{A}, A), r \right) \;\vert\; \widehat{A} = \textsf{PedCom}_D(a; r) \right\}.
-$$</p>
-</li>
+$$
+    \mathcal{R}_\textsf{PedEqVal} = \left\{ \left( (D, \widehat{A}, A), r \right) \;\vert\; \widehat{A} = \textsf{PedCom}_D(a; r) \right\}.
+    $$</li>
 <li>
 <p>Pedersen commitment of a value in the exponent:</p>
-<p>$$
-\mathcal{R}_\textsf{PedEqVal} = \left\{ \left( (D, \widehat{A}, A), (a, r) \right) \; \vert \; \widehat{A} = \textsf{PedCom}_D(a;r), \; A = a \cdot G \right\}
-$$</p>
-</li>
-<li>
-<p>Knowledge of ElGamal commitment:
 $$
-\mathcal{R}_\textsf{EGKlwg} = \left\{ \left( (E, \widetilde{A}), (a, r) \right) \; \vert \; \widetilde{A} = \textsf{EgCom}_E (a; r) \right\}
-$$</p>
-</li>
+    \mathcal{R}_\textsf{PedEqVal} = \left\{ \left( (D, \widehat{A}, A), (a, r) \right) \; \vert \; \widehat{A} = \textsf{PedCom}_D(a;r), \; A = a \cdot G \right\}
+    $$</li>
 <li>
-<p>ElGamal equals Pedersen:  <!-- raw HTML omitted --><strong>here, we correct a typo present in the paper</strong><!-- raw HTML omitted -->.</p>
-<p>$$
-\mathcal{R}_\textsf{EgEqPed} = \left \{ \left ( (E, \widetilde{A}, D, \widehat{A}), (a, \tilde{r}, \hat{r}) \right ) \; \vert \; \widetilde{A} = \textsf{EgCom}_E(a; \tilde{r}) \; \wedge \; \widehat{A} = \textsf{PedCom}_D(a; \hat{r}) \right \}
-$$</p>
-</li>
+$$
+    \mathcal{R}_\textsf{EGKlwg} = \left\{ \left( (E, \widetilde{A}), (a, r) \right) \; \vert \; \widetilde{A} = \textsf{EgCom}_E (a; r) \right\}
+    $$</li>
+<li>
+<p>ElGamal equals Pedersen:  <span style="color:red"><strong>here, we correct a typo present in the paper</strong></span>.</p>
+$$
+    \mathcal{R}_\textsf{EgEqPed} = \left \{ \left ( (E, \widetilde{A}, D, \widehat{A}), (a, \tilde{r}, \hat{r}) \right ) \; \vert \; \widetilde{A} = \textsf{EgCom}_E(a; \tilde{r}) \; \wedge \; \widehat{A} = \textsf{PedCom}_D(a; \hat{r}) \right \}
+    $$</li>
 <li>
 <p>Knowledge of ElGamal scalar product:</p>
-<p>$$
-\mathcal{R}_\textsf{EgProdScalar} = \left \{ \left( (E, \widetilde{A}, \widetilde{B}), (r, c)) \right) \;\vert\; \widetilde{B} = c \cdot \widetilde{A} + \textsf{EgCom}_E(0; r) \right \}
-$$</p>
-</li>
+$$
+    \mathcal{R}_\textsf{EgProdScalar} = \left \{ \left( (E, \widetilde{A}, \widetilde{B}), (r, c)) \right) \;\vert\; \widetilde{B} = c \cdot \widetilde{A} + \textsf{EgCom}_E(0; r) \right \}
+    $$</li>
 <li>
 <p>Product of ElGamal commitments:</p>
-<p>$$
-\mathcal{R}_\textsf{EgProdEg} = \left\{ \left( (E, \widetilde{A}, \widetilde{B}, \widetilde{C}), (r^b, r^0, b) \right) \; \vert \; \widetilde{B} = \textsf{EgCom}_E(b; r^b) \; \wedge \; \widetilde{C} = b \cdot \widetilde{A} + \textsf{EgCom}_E(0, r^0) \right\}
-$$</p>
-</li>
+$$
+    \mathcal{R}_\textsf{EgProdEg} = \left\{ \left( (E, \widetilde{A}, \widetilde{B}, \widetilde{C}), (r^b, r^0, b) \right) \; \vert \; \widetilde{B} = \textsf{EgCom}_E(b; r^b) \; \wedge \; \widetilde{C} = b \cdot \widetilde{A} + \textsf{EgCom}_E(0, r^0) \right\}
+    $$</li>
 <li>
 <p>ElGamal commitment of a value:</p>
-<p>$$
-\mathcal{R}_\textsf{EgEqVal} = \left\{\left( (E, \widetilde{A}, a), r \right) \;\vert\; \widetilde{A} = \textsf{EgCom}_E(a; r), \; A = a \cdot G \right\}
-$$</p>
-</li>
+$$
+    \mathcal{R}_\textsf{EgEqVal} = \left\{\left( (E, \widetilde{A}, a), r \right) \;\vert\; \widetilde{A} = \textsf{EgCom}_E(a; r), \; A = a \cdot G \right\}
+    $$</li>
 <li>
 <p>ElGamal commitment of a value in the exponent:</p>
-<p>$$
-\mathcal{R}_\textsf{EgEqExp} = \left\{ \left( (E, \widetilde{A}, A), (a, r) \right) \; \vert \; \widetilde{A} = \textsf{EgCom}_E(a; r), \; A = a \cdot G \right\}
-$$</p>
-</li>
+$$
+    \mathcal{R}_\textsf{EgEqExp} = \left\{ \left( (E, \widetilde{A}, A), (a, r) \right) \; \vert \; \widetilde{A} = \textsf{EgCom}_E(a; r), \; A = a \cdot G \right\}
+    $$</li>
 </ul>
 <h2 id="ecdsa-protocol">
   ECDSA protocol
   <a class="anchor" href="#ecdsa-protocol">#</a>
 </h2>
 <p>Now, we present an ECDSA protocol for the non-threshold case. This specification was taken directly from Lindell et al. (2018). The high-level idea of the protocol is the following. The signing protocol is a traditional coin-tossing protocol that outputs a random element in the group $\mathbb{G}$ but each party has an additive share of the private key, which in this case is the discrete logarithm of the public key. The signing protocol applied to a message $m$ works by generating shares of two values $\rho, k \in \mathbb{Z}_q$ and then computing the exponent $R = k \cdot G = (r, \cdot)$. Therefore, parties compute $\beta = \rho \cdot (H(m) + x \cdot r)$, and output $(r, s = \tau^{-1} \cdot \beta)$ as the signature. Notice that</p>
-<p>$$
+$$
 \tau^{-1} \beta = \rho^{-1} \cdot k^{-1} \cdot \rho \cdot (H(m) + x \cdot r) = k^{-1} \cdot (H(m) + x \cdot r),
-$$</p>
-<p>which is precisely the signature shown in the standalone version of ECDSA.</p>
+$$<p>which is precisely the signature shown in the standalone version of ECDSA.</p>
 <h3 id="key-generation">
   Key generation
   <a class="anchor" href="#key-generation">#</a>
 </h3>
 <p>On input $(\textsf{sid}, \textsf{KeyGen})$, party $P_i$ acts as follows:</p>
 <ol>
-<li>Let $\textsf{oid}_x = \textsf{sid} \;\Vert\; &ldquo;x&rdquo;$.</li>
+<li>Let $\textsf{oid}_x = \textsf{sid} \;\Vert\; "x"$.</li>
 <li>The parties engage in $\textsf{CreateSharedVal} \left( \textsf{sid}, D, \textsf{oid}_x \right)$.</li>
 <li>The parties engage in $\textsf{OutExpOfSharedVal} \left( \textsf{sid}, D, \textsf{oid}_x \right)$</li>
 <li>Output $X$.</li>
@@ -472,7 +460,7 @@ $$</p>
 <li>$\textsf{MultSharedVals}(\textsf{sid}, D, \textsf{oid}_\rho, \textsf{oid}_x, \textsf{oid}_{\rho \cdot x})$.</li>
 </ol>
 </li>
-<li>The parties engage in $\textsf{OutExpOfSharedVal}(\textsf{sid}, D, \textsf{oid}_k)$. Let $(r&rsquo;, \cdot)$ be the common output and let $r = r&rsquo; \mod q$.</li>
+<li>The parties engage in $\textsf{OutExpOfSharedVal}(\textsf{sid}, D, \textsf{oid}_k)$. Let $(r', \cdot)$ be the common output and let $r = r' \mod q$.</li>
 <li>Each party invokes:
 <ol>
 <li>$\textsf{ScalarMultOfSharedVal}(D, \textsf{oid}_{\rho \cdot x}, \textsf{oid}_{r \cdot \rho \cdot x}, r)$.</li>
@@ -517,7 +505,7 @@ $$</p>
   Protocol $\textsf{OutExpSharedVal}$
   <a class="anchor" href="#protocol-textsfoutexpsharedval">#</a>
 </h3>
-<p>This protocol outputs the value $A = a \cdot G$ for a previously stored value $a$. <!-- raw HTML omitted --><strong>Here, the functionality is omitting that the party should compute $A_i = a_i \cdot G$ at some point before Step 2.</strong><!-- raw HTML omitted --></p>
+<p>This protocol outputs the value $A = a \cdot G$ for a previously stored value $a$. <span style="color:red"><strong>Here, the functionality is omitting that the party should compute $A_i = a_i \cdot G$ at some point before Step 2.</strong></span></p>
 <p><img src="OutExpSharedVals.png" alt="OutExpSharedVal" /></p>
 <h3 id="protocol-textsfmultsharedvals">
   Protocol $\textsf{MultSharedVals}$
@@ -525,7 +513,7 @@ $$</p>
 </h3>
 <p>This protocol multiplies a pair of previously generated and stored values and stores an additive share of the multiplication.</p>
 <p><img src="MultSharedVals.png" alt="MultSharedVals" /></p>
-<p>The functionality $\mathcal{F}_\textsf{LeakyMult}$ is a many-party leaky multiplication ideal functionality that multiplies two private values and returns the additive share of the multiplication to each party. Here, they say that it is leaky because the functionality allows the adversary to know whether a linear relationship of the private shares of each value is equal to some value. Also, the functionality allows the adversary to modify their commitments restricted to the condition of preserving the overall sum. The purpose of giving the adversary this freedom is to obtain more efficient implementations of the protocol. Next, we will show the specification of this functionality. <!-- raw HTML omitted --><strong>Here we correct some typos present in the paper</strong><!-- raw HTML omitted -->:</p>
+<p>The functionality $\mathcal{F}_\textsf{LeakyMult}$ is a many-party leaky multiplication ideal functionality that multiplies two private values and returns the additive share of the multiplication to each party. Here, they say that it is leaky because the functionality allows the adversary to know whether a linear relationship of the private shares of each value is equal to some value. Also, the functionality allows the adversary to modify their commitments restricted to the condition of preserving the overall sum. The purpose of giving the adversary this freedom is to obtain more efficient implementations of the protocol. Next, we will show the specification of this functionality. <span style="color:red"><strong>Here we correct some typos present in the paper</strong></span>:</p>
 <p><strong>Functionality $\mathcal{F}_\textsf{LeakyMult}$</strong>:</p>
 <p>Parties: $P_1, \dots, P_n$.
 Common input: $\textsf{sid} \in \{0, 1\}^*$, $D \in \mathbb{G}$, $\left\{ \widehat{A}_\mathcal{l}, \widehat{B}_\mathcal{l} \right\}_{l=1}^n$.
@@ -534,15 +522,15 @@ $P_i$&rsquo;s input: $\left(a_i, r_i^A \right), \left(b_i, r_i^B \right) \in \ma
 <li>Abort if for some $\mathcal{l}$ it holds that $\widehat{A}_\mathcal{l} \neq \textsf{PedCom}_D(a_\mathcal{l}, r_\mathcal{l}^A)$ or $\widehat{B}_\mathcal{l} \neq \textsf{PedCom}_D(b_\mathcal{l}, r_\mathcal{l}^B)$</li>
 <li>Sample $r_1, \dots, r_n$ uniformly at random from $\mathbb{Z}_q$. Sample $c_1, \dots, c_n$ uniformly at random from $\mathbb{Z}_q$ conditioned on
 $$
-\sum_{l=1}^n c_l = \left(\sum_{l=1}^n a_l \right) \cdot \left(\sum_{l=1}^n b_l \right).
-$$</li>
+    \sum_{l=1}^n c_l = \left(\sum_{l=1}^n a_l \right) \cdot \left(\sum_{l=1}^n b_l \right).
+    $$</li>
 <li>Output $\left\{C_l = \textsf{PedCom}_D(c_l; r_l)\right\}_{l=1}^n$ as the common output.</li>
 <li>Send $\left( r_l, c_l \right)$ to $P_l$ for each $l = 1, \dots, n$.</li>
 </ol>
 <p>After getting the outputs, the corrupted parties $\mathcal{C}$ can make the following calls (at most one of each type):</p>
 <ul>
 <li><strong>Linear test:</strong> send $\delta \in \mathbb{Z}_q$ and $\left\{(o_l^A, o_l^B) \in \mathbb{Z}_q^2\right\}_{l \in [n] \setminus \mathcal{C}}$ to the functionality. The functionality aborts if $\sum_{l \in [n] \setminus \mathcal{C}} (o_l^A \cdot a_l + o_l^B \cdot b_l) \neq \delta$.</li>
-<li><strong>Commitment replacement:</strong> Send $\{(r&rsquo;_l, c&rsquo;_l )\}_{l \in \mathcal{C}}$. The functionality aborts if $\sum_{l \in \mathcal{C}} c_l \neq \sum_{l \in \mathcal{C}} c&rsquo;_l$. Otherwise the value of $\widehat{C}_l$, for each $l \in \mathcal{C}$, in the common output is updated to $\textsf{PedCom}_D(c&rsquo;_l; r&rsquo;_l)$.</li>
+<li><strong>Commitment replacement:</strong> Send $\{(r'_l, c'_l )\}_{l \in \mathcal{C}}$. The functionality aborts if $\sum_{l \in \mathcal{C}} c_l \neq \sum_{l \in \mathcal{C}} c'_l$. Otherwise the value of $\widehat{C}_l$, for each $l \in \mathcal{C}$, in the common output is updated to $\textsf{PedCom}_D(c'_l; r'_l)$.</li>
 </ul>
 <h2 id="threshold-case">
   Threshold case
@@ -550,38 +538,38 @@ $$</li>
 </h2>
 <p>To this moment, the protocol allows an adversary to corrupt at least $n - 1$ parties. Now, we present an adjustment from Lindell et al. (2018) for adversaries corrupting less than $n - 1$ parties. For this modification, we define the <em>public view of a party</em> to the public information it sends and receives: inputs received from the environment, messages it sends and receives, and outputs of the common output ideal functionalities. Also, we call an <em>outputting round</em> a round in which the honest parties output a value. The adjustment is as follows:</p>
 <ol>
-<li>In each round that proceeds an outputting round, each hones party sends a hash of its public view to all parties. That is, $H&rsquo;(v)$ where $H&rsquo;$ is an arbitrary collision-resistant hash function, and v is its current public view.</li>
+<li>In each round that proceeds an outputting round, each hones party sends a hash of its public view to all parties. That is, $H'(v)$ where $H'$ is an arbitrary collision-resistant hash function, and v is its current public view.</li>
 <li>In each outputting round, an honest party first verifies that the hash of all other parties&rsquo; public view is consistent with its own.</li>
 </ol>
 <p>To achieve threshold signatures (i.e. signatures $t$-out-of-$n$), the approach is as follows. In the key generation, the parties generate additive shares as in the $n$-out-of-$n$ case and transform such shares into $t$-out-of-$n$ shares using Shamir secret-sharing. For the signing phase, the parties take the Shamir $t$-out-of-$n$ shares transform them into $t$-out-of-$t$ shares, and proceed as in the non-threshold case.</p>
-<p>The protocol for key generation is presented next. <!-- raw HTML omitted --><strong>One thing that is missing in the protocol specification is that in Step 2(e)(ii), the parties should execute $\mathcal{F}_{\textsf{zk}}^{\mathcal{R}_\textsf{DL}}$ with respect to $D$ given that, under correct circumstances, this should be a Pedersen commitment of 0. Also, here $p_{i, l}$ is a notation for $p_i(l)$.</strong><!-- raw HTML omitted --></p>
+<p>The protocol for key generation is presented next. <span style="color:red"><strong>One thing that is missing in the protocol specification is that in Step 2(e)(ii), the parties should execute $\mathcal{F}_{\textsf{zk}}^{\mathcal{R}_\textsf{DL}}$ with respect to $D$ given that, under correct circumstances, this should be a Pedersen commitment of 0. Also, here $p_{i, l}$ is a notation for $p_i(l)$.</strong></span></p>
 <p><img src="ThresholdCase.png" alt="Threshold case" /></p>
-<p>The protocol for signing is presented next. <!-- raw HTML omitted --><strong>Here we present a relevant correction to the protocol presented in the original paper.</strong><!-- raw HTML omitted --></p>
+<p>The protocol for signing is presented next. <span style="color:red"><strong>Here we present a relevant correction to the protocol presented in the original paper.</strong></span></p>
 <ol>
 <li>Let $\mathcal{S} \subseteq [n]$ be the set of active parties (i.e. parties involved in the signing protocol). Abort if $\vert \mathcal{S} \vert \neq t$.</li>
 <li>(Locally) Generate additive shares of $x$.
 <ol>
 <li>For $l \in \mathcal{S}$, let
 $$
-o_l = \frac{\prod_{j \in \mathcal{S}\setminus\{l\}} j}{\prod_{j \in \mathcal{S}\setminus\{l\}} (j - l)}.
-$$</li>
+        o_l = \frac{\prod_{j \in \mathcal{S}\setminus\{l\}} j}{\prod_{j \in \mathcal{S}\setminus\{l\}} (j - l)}.
+        $$</li>
 <li>Let $\left( \{ \widehat{A}_l \}_{l=1}^n, a_i, r_i \right) = \textsf{Retrieve}(\textsf{oid}_\textsf{xtsh})$.</li>
-<li>Let $(a&rsquo;_i, r&rsquo;_i) = o_i \cdot (a_i, r_i)$, and for each $l \in \mathcal{S}$, let $\widehat{A}&rsquo;_l = o_l \cdot \widehat{A}_l$.</li>
+<li>Let $(a'_i, r'_i) = o_i \cdot (a_i, r_i)$, and for each $l \in \mathcal{S}$, let $\widehat{A}'_l = o_l \cdot \widehat{A}_l$.</li>
 </ol>
 </li>
 <li>Sign using additive shares:
 <ol>
-<li>$\textsf{Store}_{\textsf{oid}&rsquo; = \textsf{sid} \Vert &ldquo;y&rdquo;} \left( \{ \widehat{A}&rsquo;_l \}_{l=1}^n, a&rsquo;_i, r&rsquo;_i \right)$.</li>
-<li>Interact as in the signing phase of the signing protocol for the non-threshold case, while in the call of $\textsf{MultSharedVals}$ done in Round 4(2), use the object-id $\textsf{oid}&rsquo;$ instead of $\textsf{oid}$.</li>
+<li>$\textsf{Store}_{\textsf{oid}' = \textsf{sid} \Vert "y"} \left( \{ \widehat{A}'_l \}_{l=1}^n, a'_i, r'_i \right)$.</li>
+<li>Interact as in the signing phase of the signing protocol for the non-threshold case, while in the call of $\textsf{MultSharedVals}$ done in Round 4(2), use the object-id $\textsf{oid}'$ instead of $\textsf{oid}$.</li>
 </ol>
 </li>
 </ol>
 <p>We remain to present a UC-realization of $\mathcal{F}_\textsf{LeakyMult}$ which is the protocol $\textsf{ManyPartyLeakyMult}$. Such protocol has access to other two ideal functionalities: a two-party multiplication functionality $\mathcal{F}_\textsf{2PC-Mult}$ and a multiplication equality test functionality $\mathcal{F}_\textsf{PedMultEqTest}$. For this text to be self-contained, we present the functionalities next taken from the original paper:</p>
-<figure><img src="F2PC_mult.png" width="500px"/>
+<figure><img src="/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/F2PC_mult.png" width="500px">
 </figure>
 
 <p><img src="PedMutEqTest.png" alt="Functionality PedMultEqTest" /></p>
-<p>We stress that performing the check using $\mathcal{F}_\textsf{PedMultEqTest}$ is key because the functionality for multiplications does not force the parties to input the correct and committed values, resulting in a wrong output. Then, the functionality for multiplication check will be in charge of testing and avoiding this behavior. The functionality $\mathcal{F}_\textsf{2PC-Mult}$ will be then replaced by a more weak functionality $\mathcal{F}_\textsf{2PC-WeakMult}$. Whose realization can be found in <a href="https://eprint.iacr.org/2021/1373">Haitner et al. (2021)</a>, and such replacement will not affect the security of the overall protocol. For reference, we present next the weak functionality. <!-- raw HTML omitted --><strong>It is important to mention that the version of this functionality in the paper of Lindell et al. has a small typo in the number of elements of $v$. The following functionality has the correct specification.</strong><!-- raw HTML omitted --></p>
+<p>We stress that performing the check using $\mathcal{F}_\textsf{PedMultEqTest}$ is key because the functionality for multiplications does not force the parties to input the correct and committed values, resulting in a wrong output. Then, the functionality for multiplication check will be in charge of testing and avoiding this behavior. The functionality $\mathcal{F}_\textsf{2PC-Mult}$ will be then replaced by a more weak functionality $\mathcal{F}_\textsf{2PC-WeakMult}$. Whose realization can be found in <a href="https://eprint.iacr.org/2021/1373">Haitner et al. (2021)</a>, and such replacement will not affect the security of the overall protocol. For reference, we present next the weak functionality. <span style="color:red"><strong>It is important to mention that the version of this functionality in the paper of Lindell et al. has a small typo in the number of elements of $v$. The following functionality has the correct specification.</strong></span></p>
 <p><img src="WeakMult.png" alt="Weak Multiplication Functionality" /></p>
 <p>Also, we next present the functionality $\mathcal{F}_\textsf{PedMultEqTest}$:</p>
 <p><img src="PedMutEqTest2.png" alt="PedMultEqTest Functionality" /></p>
@@ -717,12 +705,12 @@ $$</li>
       <ul>
         <li><a href="#key-generation">Key generation</a></li>
         <li><a href="#signing">Signing</a></li>
-        <li><a href="#protocol-textsfcreatesharedval">Protocol $\textsf{CreateSharedVal}$:</a></li>
-        <li><a href="#protocol-textsfadditionofsharedvals">Protocol $\textsf{AdditionOfSharedVals}$</a></li>
-        <li><a href="#protocol-textsfscalarmultofsharevals">Protocol $\textsf{ScalarMultOfShareVals}$</a></li>
-        <li><a href="#protocol-textsfoutsharedval">Protocol $\textsf{OutSharedVal}$</a></li>
-        <li><a href="#protocol-textsfoutexpsharedval">Protocol $\textsf{OutExpSharedVal}$</a></li>
-        <li><a href="#protocol-textsfmultsharedvals">Protocol $\textsf{MultSharedVals}$</a></li>
+        <li><a href="#protocol-textsfcreatesharedval">Protocol :</a></li>
+        <li><a href="#protocol-textsfadditionofsharedvals">Protocol </a></li>
+        <li><a href="#protocol-textsfscalarmultofsharevals">Protocol </a></li>
+        <li><a href="#protocol-textsfoutsharedval">Protocol </a></li>
+        <li><a href="#protocol-textsfoutexpsharedval">Protocol </a></li>
+        <li><a href="#protocol-textsfmultsharedvals">Protocol </a></li>
       </ul>
     </li>
     <li><a href="#threshold-case">Threshold case</a></li>

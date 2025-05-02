@@ -1,6 +1,5 @@
 ---
 title: $(t, n)$ case from Gennaro & Goldfeder (2019)
-math: true
 ---
 
 # $(t, n)$ case from Gennaro & Goldfeder (2019)
@@ -17,7 +16,7 @@ In this section, we present three definitions to understand the signing protocol
 
 ### DSA signature scheme
 
-The Digital Signature Algorithm (DSA) is a signature scheme whose security relies on the discrete logarithm problem. The public paramenters of this scheme are a cyclic group $\mathcal{G}$ with order $q$, a generator $g$ for $\mathcal{G}$, a hash function $H: \\{0, 1\\}^* \rightarrow \mathbb{Z}_q$, and a hash function $H': \mathcal{G} \rightarrow \mathbb{Z}_q$. The specifications of the algorithms are presented next:
+The Digital Signature Algorithm (DSA) is a signature scheme whose security relies on the discrete logarithm problem. The public paramenters of this scheme are a cyclic group $\mathcal{G}$ with order $q$, a generator $g$ for $\mathcal{G}$, a hash function $H: \{0, 1\}^* \rightarrow \mathbb{Z}_q$, and a hash function $H': \mathcal{G} \rightarrow \mathbb{Z}_q$. The specifications of the algorithms are presented next:
 
 - $\textsf{KeyGen}$: on input a security parameter, the algorithm outputs a secret key $x$ chosen at random from $\mathbb{Z}_q$, and also outputs a public key $y = g^x$ in $\mathcal{G}$.
 - $\textsf{Sign}$: On input a message $M$, do the following:

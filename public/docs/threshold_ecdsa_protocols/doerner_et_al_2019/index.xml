@@ -2,9 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>$(t, n)$ case from Doerner et al. (2019) on MPC Security</title>
-    <link>hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/</link>
+    <link>//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/</link>
     <description>Recent content in $(t, n)$ case from Doerner et al. (2019) on MPC Security</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

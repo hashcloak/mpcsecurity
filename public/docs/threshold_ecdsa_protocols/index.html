@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head>
+<head><script src="/mpcsecurity/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=mpcsecurity/livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Threshold ECDSA protocols #  In this series of posts, we will review some of the most relevant works on threshold ECDSA protocols. We present a summary of each work, and after an analysis of the protocols, we include some &ldquo;security concerns&rdquo;, which are points of the protocol to which the auditors and developers need to pay special attention during the revision of an implementation. Those security concerns are extracted from each paper itself, which means that the list does not cover all the possible implementation issues that may arise.">
+<meta name="description" content="
+  Threshold ECDSA protocols
+  #
+
+In this series of posts, we will review some of the most relevant works on threshold ECDSA protocols. We present a summary of each work, and after an analysis of the protocols, we include some &ldquo;security concerns&rdquo;, which are points of the protocol to which the auditors and developers need to pay special attention during the revision of an implementation. Those security concerns are extracted from each paper itself, which means that the list does not cover all the possible implementation issues that may arise. Also, for some protocols, we corrected some typos present in the papers to help developers avoid confusion and errors during the implementation process. Finally, we also present some repositories and libraries that implement different threshold ECDSA protocols.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-          
-          
-          delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-              {left: '\\(', right: '\\)', display: false},
-              {left: '\\[', right: '\\]', display: true}
-          ],
-          
-          throwOnError : false
-        });
-    });
-</script><meta property="og:title" content="Threshold ECDSA protocols" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/" />
-
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/">
+  <meta property="og:site_name" content="MPC Security">
+  <meta property="og:title" content="Threshold ECDSA protocols">
+  <meta property="og:description" content="Threshold ECDSA protocols # In this series of posts, we will review some of the most relevant works on threshold ECDSA protocols. We present a summary of each work, and after an analysis of the protocols, we include some “security concerns”, which are points of the protocol to which the auditors and developers need to pay special attention during the revision of an implementation. Those security concerns are extracted from each paper itself, which means that the list does not cover all the possible implementation issues that may arise. Also, for some protocols, we corrected some typos present in the papers to help developers avoid confusion and errors during the implementation process. Finally, we also present some repositories and libraries that implement different threshold ECDSA protocols.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
 <title>Threshold ECDSA protocols | MPC Security</title>
-<link rel="manifest" href="/hashcloak.com/mpcsecurity/manifest.json">
-<link rel="icon" href="/hashcloak.com/mpcsecurity/favicon.png" >
-<link rel="stylesheet" href="/hashcloak.com/mpcsecurity/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" >
-  <script defer src="/hashcloak.com/mpcsecurity/flexsearch.min.js"></script>
-  <script defer src="/hashcloak.com/mpcsecurity/en.search.min.800f510cb1ef744253add5e2eba2d6fe970e0277bb805a8aa70d8e9f46d7a494.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/index.xml" title="MPC Security" />
+<link rel="icon" href="/mpcsecurity/favicon.png" >
+<link rel="manifest" href="/mpcsecurity/manifest.json">
+<link rel="canonical" href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/">
+<link rel="stylesheet" href="/mpcsecurity/book.min.a7616cf2799b58bddffce9438e31fdbfc6393687cfc0950a4a17cd1cce7e35f6.css" integrity="sha256-p2Fs8nmbWL3f/OlDjjH9v8Y5NofPwJUKShfNHM5&#43;NfY=" crossorigin="anonymous">
+  <script defer src="/mpcsecurity/fuse.min.js"></script>
+  <script defer src="/mpcsecurity/en.search.min.ce83cbe310910da659cfa1905578c106c8f81ae8c2aff7fc17b79a91de6eceda.js" integrity="sha256-zoPL4xCRDaZZz6GQVXjBBsj4GujCr/f8F7eakd5uzto=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/index.xml" title="MPC Security" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
 -->
+  
+  
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)'], ['$', '$']]     
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+
+
   
 </head>
 <body dir="ltr">
@@ -52,16 +55,17 @@ https://github.com/alex-shpak/hugo-book
         
   <nav>
 <h2 class="book-brand">
-  <a class="flex align-center" href="hashcloak.com/mpcsecurity/"><img src="/hashcloak.com/mpcsecurity/hashcloak_logo_colour-logo.png" alt="Logo" /><span>MPC Security</span>
+  <a class="flex align-center" href="/mpcsecurity/"><img src="/mpcsecurity/hashcloak_logo_colour-logo-text.png" alt="Logo" class="book-icon" /><span>MPC Security</span>
   </a>
 </h2>
 
 
-<div class="book-search">
+<div class="book-search hidden">
   <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
   <div class="book-search-spinner hidden"></div>
   <ul id="book-search-results"></ul>
 </div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
 
 
 
@@ -74,7 +78,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
 
 
 
@@ -88,7 +91,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/" class="active">Threshold ECDSA protocols</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/" class="active">Threshold ECDSA protocols</a>
   
 
           
@@ -101,25 +104,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="">$(2, 2)$ case from Lindell (2021)</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="">$(2, n)$ case from Doerner et al. (2018)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="">$(2, 2)$ case from Lindell (2021)</a>
   
 
           
@@ -137,7 +122,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="">$(t, n)$ case from Canetti et al. (2021)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="">$(2, n)$ case from Doerner et al. (2018)</a>
   
 
           
@@ -155,7 +140,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="">$(t, n)$ case from Doerner et al. (2019)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="">$(t, n)$ case from Canetti et al. (2021)</a>
   
 
           
@@ -173,7 +158,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="">$(t, n)$ case from Doerner et al. (2019)</a>
   
 
           
@@ -191,7 +176,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
   
 
           
@@ -209,7 +194,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
   
 
           
@@ -227,7 +212,25 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="">$(t, n)$ case from Lindell et al. (2018)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="">$(t, n)$ case from Lindell et al. (2018)</a>
   
 
           
@@ -278,7 +281,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-
 </nav>
 
 
@@ -294,16 +296,17 @@ https://github.com/alex-shpak/hugo-book
     <div class="book-page">
       <header class="book-header">
         
-  <div class="flex align-center justify-between">
+  
+<div class="flex align-center justify-between">
   <label for="menu-control">
-    <img src="/hashcloak.com/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
+    <img src="/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Threshold ECDSA protocols</strong>
+  <h3>Threshold ECDSA protocols</h3>
 
   <label for="toc-control">
     
-    <img src="/hashcloak.com/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    <img src="/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
@@ -333,7 +336,7 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="threshold-ecdsa-protocols">
+  <article class="markdown book-article"><h1 id="threshold-ecdsa-protocols">
   Threshold ECDSA protocols
   <a class="anchor" href="#threshold-ecdsa-protocols">#</a>
 </h1>
@@ -344,7 +347,7 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#the-standalone-ecdsa-signature-scheme">#</a>
 </h2>
 <p>In order to fully understand the threshold ECDSA protocols, we will revisit first the basics of the ECDSA signature scheme without considering multiple parties, just the standalone cryptographic scheme. First, we need to know that the security of the ECDSA signature scheme relies on the discrete logarithm problem. To explain such problem at a high level, let $\mathbb{G}$ be a cyclic group with order $q$ and let $G$ be a generator for the group. The <em>discrete logarithm problem</em> relative to $\mathbb{G}$ and $G$ consist in that, given a random element $R = x \cdot G$, to find $x \in \mathbb{Z}_q$ such that it fulfills the equality. In the literature, the <em>discrete logarithm assumption</em> is that there is a polynomial-time algorithm that generates a group $\mathbb{G}$ with its order $q$ and generator $G$ such that the discrete logarithm problem is computationally hard. In practice, ECDSA signature schemes use the group of points generated by an elliptic curve.</p>
-<p>Now, let $H: \{0, 1\}^* \rightarrow \mathbb{Z}_q$ be a hash function (in practice, SHA256 is used). In what follows, let $\mathbb{G}$ be an elliptic curve group of order $q$ with generator $G$. Let us describe the algorithms for key generation, signing, and verification for the ECDSA signature scheme:</p>
+<p>Now, let $H: \\{0, 1\\}^* \rightarrow \mathbb{Z}_q$ be a hash function (in practice, SHA256 is used). In what follows, let $\mathbb{G}$ be an elliptic curve group of order $q$ with generator $G$. Let us describe the algorithms for key generation, signing, and verification for the ECDSA signature scheme:</p>
 <ul>
 <li>
 <p>$\textsf{Gen}$: the key generation algorithm works as follows:</p>
@@ -355,33 +358,33 @@ https://github.com/alex-shpak/hugo-book
 </ol>
 </li>
 <li>
-<p>$\textsf{Sign}$: on input $m \in \{0, 1\}^*$ as the message to be signed, and the private key $x \in \mathbb{Z}_q$,</p>
+<p>$\textsf{Sign}$: on input $m \in \\{0, 1\\}^*$ as the message to be signed, and the private key $x \in \mathbb{Z}_q$,</p>
 <ol>
-<li>Compute $m&rsquo;$ as the $|q|$ leftmost bits of $H(m)$, where $|q|$ is the bit-length of $q$.</li>
+<li>Compute $m'$ as the $|q|$ leftmost bits of $H(m)$, where $|q|$ is the bit-length of $q$.</li>
 <li>Choose a random element $k \in \mathbb{Z}_q^*$.</li>
 <li>Compute $R = k \cdot G$ and let $R = (r_x, r_y)$. Remember that $R$ is a point over an elliptic curve whose representation is in the cartesian plane. Therefore each point can be represented as a pair.</li>
 <li>$r = r_x \mod q$. If $r = 0$ the process returns to Step 2 to select a fresh random $k \in \mathbb{Z}_q^*$.</li>
-<li>Compute $s = k^{-1} \cdot (m&rsquo; + r \cdot x) \mod q$.</li>
+<li>Compute $s = k^{-1} \cdot (m' + r \cdot x) \mod q$.</li>
 <li>Output the pair $(r, s)$ as the signature.</li>
 </ol>
-<p>It is important to highlight that if $(r, s)$ is a valid signature for a message $m$, then $(r, -s)$ is also a valid signature for this message. Therefore, it is common to choose $\min\{s, -s\}$ in $\mathbb{Z}_q$ to obtain a unique signature.</p>
+<p>It is important to highlight that if $(r, s)$ is a valid signature for a message $m$, then $(r, -s)$ is also a valid signature for this message. Therefore, it is common to choose $\min\\{s, -s\\}$ in $\mathbb{Z}_q$ to obtain a unique signature.</p>
 </li>
 <li>
-<p>$\textsf{Verify}$: On input $(r, s)$ to be the signature and $m \in \{0, 1\}^*$ to be the signed message,</p>
+<p>$\textsf{Verify}$: On input $(r, s)$ to be the signature and $m \in \\{0, 1\\}^*$ to be the signed message,</p>
 <ol>
-<li>Compute $m&rsquo;$ as the $|q|$ leftmost bits of $H(m)$.</li>
-<li>Compute $s^{-1}\left(m&rsquo; \cdot G + r \cdot X\right)$ and accept if the first component is equal to $r$.</li>
+<li>Compute $m'$ as the $|q|$ leftmost bits of $H(m)$.</li>
+<li>Compute $s^{-1}\left(m' \cdot G + r \cdot X\right)$ and accept if the first component is equal to $r$.</li>
 </ol>
 </li>
 </ul>
-<p>Notice that extracting the first component of a point on the elliptic curve is commonly used here. That can be represented as a function $F: \mathbb{G} \rightarrow \mathbb{Z}_q$, and in the case of ECDSA, it can be defined as $F(x, y) = x \mod q$. It is important to highlight that when we consider a generic abstract cyclic group, a generic function $H: \{0, 1\}^* \rightarrow \mathbb{Z}_q$, and a generic function $F: \mathbb{G} \rightarrow \mathbb{Z}_q$, assuming that the discrete logarithm problem and modeling $H$ and $F$ as random oracles, one can prove that such abstract version of the signature scheme is secure. When the ECDSA is instantiated as described in the algorithms $(\textsf{Gen}, \textsf{Sign}, \textsf{Verify})$, is reasonable to model $H$ as a random oracle, but modeling $F$ as a random oracle in this case is not a correct model because $F$ is far from behave as a random function. Despite this, ECDSA has been used and studied and the scrutiny process so far has revealed no significant attack.</p>
+<p>Notice that extracting the first component of a point on the elliptic curve is commonly used here. That can be represented as a function $F: \mathbb{G} \rightarrow \mathbb{Z}_q$, and in the case of ECDSA, it can be defined as $F(x, y) = x \mod q$. It is important to highlight that when we consider a generic abstract cyclic group, a generic function $H: \\{0, 1\\}^* \rightarrow \mathbb{Z}_q$, and a generic function $F: \mathbb{G} \rightarrow \mathbb{Z}_q$, assuming that the discrete logarithm problem and modeling $H$ and $F$ as random oracles, one can prove that such abstract version of the signature scheme is secure. When the ECDSA is instantiated as described in the algorithms $(\textsf{Gen}, \textsf{Sign}, \textsf{Verify})$, is reasonable to model $H$ as a random oracle, but modeling $F$ as a random oracle in this case is not a correct model because $F$ is far from behave as a random function. Despite this, ECDSA has been used and studied and the scrutiny process so far has revealed no significant attack.</p>
 <h3 id="standalone-ecdsa-security-concerns">
   Standalone ECDSA security concerns
   <a class="anchor" href="#standalone-ecdsa-security-concerns">#</a>
 </h3>
 <ul>
 <li>Bad generation and manipulation of $k \in \mathbb{Z}_q^*$ in DSA/ECDSA can lead to catastrophic results (see Katz &amp; Lindell, 2014, Section 12.5.2). If the attacker can predict the value of $k$, or if the same $k$ is used twice in two different signature generations, the attacker can obtain the secret key (the latter can occur even if $k$ is unpredictable). The later attack was used to extract the master key on PS3.</li>
-<li>Let $m \in \{0, 1\}^*$ the message to be signed. Before the process starts, we should compute $m&rsquo;$ to be the $\vert q \vert$ leftmost bits of $\textsf{SHA256}(m)$, where $\vert q \vert$ is the bit-length of $q$. This is in fact the message that should be signed, and not $m$ itself (see Lindell, 2021).</li>
+<li>Let $m \in \\{0, 1\\}^*$ the message to be signed. Before the process starts, we should compute $m'$ to be the $\vert q \vert$ leftmost bits of $\textsf{SHA256}(m)$, where $\vert q \vert$ is the bit-length of $q$. This is in fact the message that should be signed, and not $m$ itself (see Lindell, 2021).</li>
 </ul>
 <h2 id="libraries-for-computing-threshold-ecdsa">
   Libraries for computing threshold ECDSA

@@ -1,6 +1,5 @@
 ---
 title: $(t, n)$ case from Canetti et al. (2021)
-math: true
 ---
 
 # $(t, n)$ case from Canetti et al. (2021)
@@ -45,7 +44,7 @@ In this section, we present the threshold ECDSA signing into two versions: the f
 
 ## Key generation
 
-Briefly speaking about the key generation protocol, each party $P_i$ samples a random element $x_i \stackrel{R}{\leftarrow} \mathbb{F}\_q$ which will be an additive share of the secret key $x = \sum_{i=1}^n x_i$ and then reveals the value of $X_i = g^{x_i}$. Notice that $X = \prod_{i=1}^n X_i = g^x$ is the public key associated to $x$. By using ZK-proofs and commitments, the parties guarantee the consistency of $X_i$.
+Briefly speaking about the key generation protocol, each party $P_i$ samples a random element $x_i \stackrel{R}{\leftarrow} \mathbb{F}_q$ which will be an additive share of the secret key $x = \sum_{i=1}^n x_i$ and then reveals the value of $X_i = g^{x_i}$. Notice that $X = \prod_{i=1}^n X_i = g^x$ is the public key associated to $x$. By using ZK-proofs and commitments, the parties guarantee the consistency of $X_i$.
 
 ![Protocol Key Generation](Protocol_Key_Generation.png)
 
@@ -67,7 +66,7 @@ Remember that one of the main contributions of the work of Canetti et al. is to 
 
 The pre-signing protocol of Canetti et al. uses similar techniques presented in [the signing protocol of Gennaro & Goldfeder (2020)](../gennaro_goldfeder_2020/#signing-protocol). Specifically, in both works, they use the concept of transforming multiplicative shares into additive shares using the Paillier encryption scheme. This technique allows the parties to compute additive shares of a masked version of $k$ and also it allows them to find additive shares of $k \cdot x$, where $k$ is the nonce used in the signing process. At the end of the signing protocol, the parties will obtain shares $(R, k_i, \chi_i)$, where $k_i$ is an additive share of the nonce $k$, $\chi_i$ is a share of $k \cdot x$ and $R = g^{k^{-1}}$.
 
-One of the advantages of this protocol is that the parties can engage in $L$ concurrent sessions to generate tuples $\left \\{ (l, R_l, k_{i, l}, \chi_{i, l}) \right \\}_{i=1}^L$ as the pre-signing material for $L$ signatures. The parties can store these tuples in the local memory and they extract a fresh tuple once the message to be signed is known. However, it is important to ensure that the parties erase the pre-signing tuples that were already used to avoid security vulnerabilities.
+One of the advantages of this protocol is that the parties can engage in $L$ concurrent sessions to generate tuples $\left \{ (l, R_l, k_{i, l}, \chi_{i, l}) \right \}_{i=1}^L$ as the pre-signing material for $L$ signatures. The parties can store these tuples in the local memory and they extract a fresh tuple once the message to be signed is known. However, it is important to ensure that the parties erase the pre-signing tuples that were already used to avoid security vulnerabilities.
 
 We present a detailed specification of the protocol next, which is taken from the paper of Canetti et al.
 
@@ -90,7 +89,7 @@ In their paper, Canetti et al. present an alternative to compute the presignin p
 
 ### Identification process
 
-In this version of the protocol, the abort can be produced in two points: (1) when $g^\delta \neq \prod_i \delta_i$ in Round 6, and (2) when $\prod S_i \neq X$ in Round 7. The difficulty here is that if one of those checks does not pass, it is not immediate which of the parties produced the fault. To solve this, depending on the fault point, the parties are instructed to reveal in zero-knowledge the plaintext values of $K_i$ and $\\{ D_{i,j} \\}$ and the power of $\Gamma_i$ for the fault point (1), and the plaintext values of $K_i$ and $\\{ \hat{D}\_{i,j} \\}$ and the secret hidden by $\mathbf{Z}\_i$ for the fault point (2). With these values, the parties now can identify who is the party that produced the fault. For more details, we present the specification of the identification process for both points in the following protocols taken from the paper of Canetti et al.
+In this version of the protocol, the abort can be produced in two points: (1) when $g^\delta \neq \prod_i \delta_i$ in Round 6, and (2) when $\prod S_i \neq X$ in Round 7. The difficulty here is that if one of those checks does not pass, it is not immediate which of the parties produced the fault. To solve this, depending on the fault point, the parties are instructed to reveal in zero-knowledge the plaintext values of $K_i$ and $\{ D_{i,j} \}$ and the power of $\Gamma_i$ for the fault point (1), and the plaintext values of $K_i$ and $\{ \hat{D}_{i,j} \}$ and the secret hidden by $\mathbf{Z}_i$ for the fault point (2). With these values, the parties now can identify who is the party that produced the fault. For more details, we present the specification of the identification process for both points in the following protocols taken from the paper of Canetti et al.
 
 ![Protocol Nonce Reveal Fail](Protocol_Nonce_Reveal_Fail.png)
 
@@ -98,7 +97,7 @@ In this version of the protocol, the abort can be produced in two points: (1) wh
 
 ### Signing
 
-Once the hash $m$ of the message is known, the parties retrieve a tuple $(l, R, \\{ \bar{R}\_j, S_j \\}\_j, k_i, \chi_i)$ coming from the presignin phase and stored in the local memory. Then, the parties compute a share of the signature by calculating $r = R \vert_{x-\text{axis}}$ and then they set $\sigma_i = k_i \cdot m + r \cdot \chi_i \mod q$. Each party broadcasts its share $\sigma_i$, and when the party has the shares of the other parties, the party checks that $R^{\sigma_j} = \bar{R}\_j^m \cdot S_j^r$ for all $j \neq i$. If all checks pass, then the party returns $\left (r, \sum \sigma_i \right )$ as the signature. Next, we present all the details of the signing protocol taken from the paper of Canetti et al.
+Once the hash $m$ of the message is known, the parties retrieve a tuple $(l, R, \{ \bar{R}_j, S_j \}_j, k_i, \chi_i)$ coming from the presignin phase and stored in the local memory. Then, the parties compute a share of the signature by calculating $r = R \vert_{x-\text{axis}}$ and then they set $\sigma_i = k_i \cdot m + r \cdot \chi_i \mod q$. Each party broadcasts its share $\sigma_i$, and when the party has the shares of the other parties, the party checks that $R^{\sigma_j} = \bar{R}_j^m \cdot S_j^r$ for all $j \neq i$. If all checks pass, then the party returns $\left (r, \sum \sigma_i \right )$ as the signature. Next, we present all the details of the signing protocol taken from the paper of Canetti et al.
 
 ![Protocol Signing for the 6-round version](Protocol_Signing_Six_Rounds.png)
 
@@ -108,13 +107,13 @@ In this section, we present some of the underlying $\Sigma$-protocols used to pr
 
 ### Paillier encryption in range
 
-This protocol is the $\Sigma$-protocol for the relatin $R_{\textsf{enc}}$. In this case, the input of the protocol for tuples of the form $(\mathcal{I}, C; k, r_0)$, where $\mathcal{I} = \\{-2^l, \dots, 0, \dots, 2^l\\}$ (remember that this set is denoted as $\pm 2^l$). The Prover want to convince the Verifier that he knows $k \in \pm 2^l$ , such that $C = (1 + N_0)^k \cdot r_0^{N_0} \mod N_0^2$. Next, we will present the details of the protocol taken from the paper of Canetti et al.
+This protocol is the $\Sigma$-protocol for the relatin $R_{\textsf{enc}}$. In this case, the input of the protocol for tuples of the form $(\mathcal{I}, C; k, r_0)$, where $\mathcal{I} = \{-2^l, \dots, 0, \dots, 2^l\}$ (remember that this set is denoted as $\pm 2^l$). The Prover want to convince the Verifier that he knows $k \in \pm 2^l$ , such that $C = (1 + N_0)^k \cdot r_0^{N_0} \mod N_0^2$. Next, we will present the details of the protocol taken from the paper of Canetti et al.
 
 ![Paillier Encryption in Range](ZK_Enc.png)
 
 ### Paillier operation with group commitment in range
 
-This $\Sigma$-protocol executes on tuples of the form $(\mathcal{I}, \mathcal{J}, C, Y, X; x, y, k, r_0)$ where $\mathcal{I} = \pm 2^l$ and $\mathcal{J} = \pm 2^{l'}$ satisfying the relation $R_{\textsf{aff-g}}$. In this proof, the Prover tries to convince the Verifier that he knows $x \in \pm 2^{l}$ and $y \in \pm 2^{l'}$ such that $X = g^x$ and $Y = \textsf{enc}\_{N_1}(y) \in \mathbb{Z}\_{N_1^2}$ under the Paillier encryption scheme, and $C, D \in \mathbb{Z}\_{N_0^2}$ such that $D = C^x (1 + N_0)^y \cdot \rho^{N_0} \mod N_0^2$, for some $\rho \in \mathbb{Z}\_{N_0}^*$.
+This $\Sigma$-protocol executes on tuples of the form $(\mathcal{I}, \mathcal{J}, C, Y, X; x, y, k, r_0)$ where $\mathcal{I} = \pm 2^l$ and $\mathcal{J} = \pm 2^{l'}$ satisfying the relation $R_{\textsf{aff-g}}$. In this proof, the Prover tries to convince the Verifier that he knows $x \in \pm 2^{l}$ and $y \in \pm 2^{l'}$ such that $X = g^x$ and $Y = \textsf{enc}_{N_1}(y) \in \mathbb{Z}_{N_1^2}$ under the Paillier encryption scheme, and $C, D \in \mathbb{Z}_{N_0^2}$ such that $D = C^x (1 + N_0)^y \cdot \rho^{N_0} \mod N_0^2$, for some $\rho \in \mathbb{Z}_{N_0}^*$.
 
 ![Paillier Operation with Group Commitment](ZK_Aff_G.png)
 
@@ -151,7 +150,7 @@ Here, we present a $Sigma$ protocol for tuples of the form $(N, s, t; \lambda)$ 
 
 ### For the key refresh and auxiliary information
 
-- In Round 3, Step 1, each party $P_i$ needs to verify that the $N_j$ received from party $P_j$ fulfills the condition $N_j \geq 2^{8\kappa}$ and that $\prod_k X_j^k = \textsf{id}\_{\mathbb{G}}$ (the identity of the group $\mathbb{G})$.
+- In Round 3, Step 1, each party $P_i$ needs to verify that the $N_j$ received from party $P_j$ fulfills the condition $N_j \geq 2^{8\kappa}$ and that $\prod_k X_j^k = \textsf{id}_{\mathbb{G}}$ (the identity of the group $\mathbb{G})$.
 - In Round 3, Step 1, each party $P_i$ needs to verify that the information received from Round 2 when evaluated into the random oracle matches with the commitment constructed and sent in Round 1 ($V_j$) for each other party $P_j$.
 - In the Output phase, the party $P_i$ needs to compute the following checks:
     - Verify that $g^{x_j^i} = X_j^i$. If this equality does not hold, $P_i$ computes $\mu = (C_j^i \cdot (1 + N_i)^{x_j^i})^{1/N}$. Then, the party broadcasts $(P_j, C_j^i, x^i_j, \mu)$ and halts.
@@ -187,8 +186,8 @@ Here, we present a $Sigma$ protocol for tuples of the form $(N, s, t; \lambda)$ 
 
 In the Output phase, we need to check the following equalities:
 
-- Check that $K_j = (1 + N_j)^{k_j} \tilde{\rho}\_j \mod N_j^2$.
-- Check that $D_{j,k} = (1 + N_j)^{\alpha_{j, k}} \tilde{\mu}\_{j,k} \mod N_j^2$, for $k \neq j$.
+- Check that $K_j = (1 + N_j)^{k_j} \tilde{\rho}_j \mod N_j^2$.
+- Check that $D_{j,k} = (1 + N_j)^{\alpha_{j, k}} \tilde{\mu}_{j,k} \mod N_j^2$, for $k \neq j$.
 - Check that $g^{\gamma_j} = \Gamma_j$ and $\delta_j = k_j \gamma_j + \sum_{l \neq j} (\alpha_{j, l} + k_l \gamma_j - \alpha_{l, j}) \mod q$.
 
 If any of the previous checks fails, the party detecting the failure reports the corrupt party according to the check computed.
@@ -199,16 +198,16 @@ In this protocol, there are two typos in Round 1:
 
 ##### For red alert #2
 
-- Check that $K_j = (1 + N_j)^{k_j} \tilde{\rho}\_j \mod N_j^2$.
-- Check that $D_{j,k} = (1 + N_j)^{\alpha_{j, k}} \tilde{\mu}\_{j,k} \mod N_j^2$, for $k \neq j$.
-- check that $\tilde{Y}\_j^{-1} M_j = X_j^{k_j} \cdot \prod_{l \neq j} (g^{\hat{\alpha}\_{j,l}} \cdot X^{k_l}\_j \cdot g^{-\hat{\alpha}\_{l,j}})$.
+- Check that $K_j = (1 + N_j)^{k_j} \tilde{\rho}_j \mod N_j^2$.
+- Check that $D_{j,k} = (1 + N_j)^{\alpha_{j, k}} \tilde{\mu}_{j,k} \mod N_j^2$, for $k \neq j$.
+- check that $\tilde{Y}_j^{-1} M_j = X_j^{k_j} \cdot \prod_{l \neq j} (g^{\hat{\alpha}_{j,l}} \cdot X^{k_l}_j \cdot g^{-\hat{\alpha}_{l,j}})$.
 
 If any of the previous checks fails, the party detecting the failure reports the corrupt party according to the check computed.
 
 In this protocol, there are the following typos in Round 1:
-- In the first proof, the correct instruction would be $\psi'\_i = \mathcal{M}(\texttt{prove}, \Pi^{\textsf{log}}, (ssid, i), (g^{b_i}, Y_i, \tilde{Y}\_i; b_i)$.
+- In the first proof, the correct instruction would be $\psi'_i = \mathcal{M}(\texttt{prove}, \Pi^{\textsf{log}}, (ssid, i), (g^{b_i}, Y_i, \tilde{Y}_i; b_i)$.
 - In the second proof, the correct instruction would be $\psi_{i} = \mathcal{M}(\texttt{prove}, \Pi^{\textsf{Nth}}, (ssid, i), (N_i, \rho_{i}^{N_i}), \rho_{i})$.
-- In the third proof, the correct instruction would be $\psi_{i, j} = \mathcal{M}(\texttt{prove}, \Pi^{\textsf{Nth}}, (ssid, i), (N_i, \hat{\mu}\_{i,j}^{N_i}), \hat{\mu}\_{i, j})$, for $j \neq i$.
+- In the third proof, the correct instruction would be $\psi_{i, j} = \mathcal{M}(\texttt{prove}, \Pi^{\textsf{Nth}}, (ssid, i), (N_i, \hat{\mu}_{i,j}^{N_i}), \hat{\mu}_{i, j})$, for $j \neq i$.
 
 #### Signing
 
@@ -226,7 +225,7 @@ In this protocol, there are the following typos in Round 1:
     - In Round 1, the party commits to the first message $B_i$ of the $\Pi^\textsf{sch}$ protocol.
     - In Round 1, the party proves that he knows $\lambda$ such that $s_i = t_i^\lambda \mod N_i$.
     - In Round 1, the party commits to the first message $A_i^j$ of the $\Pi^\textsf{sch}$ protocol.
-    - In Round 3, the party proves in zero-knowledge that the tuple $(N_i; p_i, q_i)$ belongs to the $R\_\textsf{mod}$ relation.
+    - In Round 3, the party proves in zero-knowledge that the tuple $(N_i; p_i, q_i)$ belongs to the $R_\textsf{mod}$ relation.
     - In Round 3, the party proves in zero-knowledge that he knows $p_i, q_i > 2^\kappa$, such that $N_i = p_i q_i$.
     - In Round 3, the party proves in zero-knowledge that he knows the discrete logarithm of $X_i^j.$
     - In Round 3, the party proves in zero-knowledge that he knows the discrete logarithm of $Y_i$.
@@ -234,35 +233,35 @@ In this protocol, there are the following typos in Round 1:
 #### For the three-round version
 
 - In the Pre-signing protocol, the party $P_i$ executes the following ZK-proofs and commitments:
-    - In Round 1, the party proves that the plaintext value of the ciphertext $K_i$ is in the range $\mathcal{I}\_\epsilon$.
-    - In Round 2, the party proves in zero-knowledge that the tuple $(\mathcal{I}\_\epsilon, \mathcal{J}\_\epsilon, D_{j, i}, K_j, F_{j,i}, \Gamma_i; \gamma_i, \beta_{i,j}, s_{i,j}, r_{i,j})$ belongs to the relation $R_\textsf{aff-g}$.
-    - In Round 2, the party proves in zero-knowledge that the tuple $(\mathcal{I}\_\epsilon, \mathcal{J}\_\epsilon, \hat{D}\_{j, i}, K_j, \hat{F}\_{j,i}, X_i; x_i, \hat{\beta}\_{i,j}, \hat{s}\_{i,j}, \hat{r}\_{i,j})$ belongs to the relation $R_\textsf{aff-g}$.
-    - In Round 2, the party proves in zero-knowledge that the tuple $(\mathcal{I}\_{\epsilon}, G_i, \Gamma_i, g; \gamma_i, \nu_i)$ belongs to the relation $R_{\textsf{log} \ast}$.
-    - In Round 3, Step 2, the party proves in zero-knowledge that $(\mathcal{I}\_{\epsilon}, K_i, \Delta_i, \Gamma; k_i, \rho_i)$ belongs to the relation $R_{\textsf{log} \ast}$.
-    - In the Output phase, Step 2(a), the party reproves that $\\{ D_{j, i} \\}$ are well-formed according to the relation $R_\textsf{aff-p}$.
+    - In Round 1, the party proves that the plaintext value of the ciphertext $K_i$ is in the range $\mathcal{I}_\epsilon$.
+    - In Round 2, the party proves in zero-knowledge that the tuple $(\mathcal{I}_\epsilon, \mathcal{J}_\epsilon, D_{j, i}, K_j, F_{j,i}, \Gamma_i; \gamma_i, \beta_{i,j}, s_{i,j}, r_{i,j})$ belongs to the relation $R_\textsf{aff-g}$.
+    - In Round 2, the party proves in zero-knowledge that the tuple $(\mathcal{I}_\epsilon, \mathcal{J}_\epsilon, \hat{D}_{j, i}, K_j, \hat{F}_{j,i}, X_i; x_i, \hat{\beta}_{i,j}, \hat{s}_{i,j}, \hat{r}_{i,j})$ belongs to the relation $R_\textsf{aff-g}$.
+    - In Round 2, the party proves in zero-knowledge that the tuple $(\mathcal{I}_{\epsilon}, G_i, \Gamma_i, g; \gamma_i, \nu_i)$ belongs to the relation $R_{\textsf{log} \ast}$.
+    - In Round 3, Step 2, the party proves in zero-knowledge that $(\mathcal{I}_{\epsilon}, K_i, \Delta_i, \Gamma; k_i, \rho_i)$ belongs to the relation $R_{\textsf{log} \ast}$.
+    - In the Output phase, Step 2(a), the party reproves that $\{ D_{j, i} \}$ are well-formed according to the relation $R_\textsf{aff-p}$.
     - In the Output phase, Step 2(b), the party proves in ZK that $H_i$ is well formed with respect to $K_i$ and $G_i$ according to the relation $R_\textsf{mul}$.
     - In the Ouptut phase, Step 2(c), the party proves in ZK that $\delta_i$ is the plaintext value mod $q$ obtained from the equation $H_i \cdot \prod_{j \neq i} D_{i,j} \cdot F_{i,j}$.
 - In the Signing protocol, the party $P_i$ executes the following ZK-proofs and commitments:
-    - In the Output phase, Step 2(a), the party reproves that $\\{ \hat{D}\_{j, i} \\}$ are well-formed according to the relation $R_\textsf{aff-p}$.
-    - In the Output phase, Step 2(b), the party proves in ZK that $\hat{H}\_i$ is well formed with respect to $K_i$ and $X_i$ according to the relation $R_\textsf{mul}$.
-    - In the Ouptut phase, Step 2(c), the party proves in ZK that $\delta_i$ is the plaintext value mod $q$ obtained from the equation $K_i^m \cdot \left ( \hat{H}\_i \cdot \prod_{j \neq i} \hat{D}\_{i,j} \cdot \hat{F}\_{i,j} \right )^r$.
+    - In the Output phase, Step 2(a), the party reproves that $\{ \hat{D}_{j, i} \}$ are well-formed according to the relation $R_\textsf{aff-p}$.
+    - In the Output phase, Step 2(b), the party proves in ZK that $\hat{H}_i$ is well formed with respect to $K_i$ and $X_i$ according to the relation $R_\textsf{mul}$.
+    - In the Ouptut phase, Step 2(c), the party proves in ZK that $\delta_i$ is the plaintext value mod $q$ obtained from the equation $K_i^m \cdot \left ( \hat{H}_i \cdot \prod_{j \neq i} \hat{D}_{i,j} \cdot \hat{F}_{i,j} \right )^r$.
 
 #### For the six-round version
 
 - In the Pre-signing phase the party $P_i$ executes the following proofs:
-    - The party proves that the tuple $(\mathcal{I}\_\epsilon, K_i, Y_i, \mathbb{Z}; k_i, \rho_i, b_i)$ belong to the relation $R_\textsf{enc-elg}$, for all $j \neq i$.
-    - In Round 2, the party proves in zero-knowledge that the tuple $(\mathcal{I}\_\epsilon, \mathcal{J}\_\epsilon, D_{j, i}, K_j, F_{j,i}, G_i; \gamma_i, \beta_{i,j}, s_{i,j}, r_{i,j}, \nu_i)$ belongs to the relation $R_\textsf{aff-p}$.
-    - In Round 2, the party proves in zero-knowledge that the tuple $(\mathcal{I}\_\epsilon, \mathcal{J}\_\epsilon, \hat{D}\_{j, i}, K_j, \hat{F}\_{j,i}, X_i; x_i, \hat{\beta}\_{i,j}, \hat{s}\_{i,j}, \hat{r}\_{i,j})$ belongs to the relation $R_\textsf{aff-g}$.
-    - In Round 4, the party proves that the tuple $(\mathcal{I}\_\epsilon, G_i, \Gamma_i, g; \gamma_i, \nu_i)$ belongs to the relation $R_{\textsf{log} \ast}$.
-    - In Round 5, Step 2, the party proves that the tuple $(Y_i, \mathbb{Z}\_i, \Delta_i, \Gamma; k_i, b_i)$ belongs to the relation $R_\textsf{elog}$.
-    - In Round 6, Step 2, the party proves that the tuple $(Y_i, \hat{\mathbf{Z}}\_i, S_i, R; \chi_i, \lambda_i)$ belongs to the relation $R_\textsf{elog}$.
+    - The party proves that the tuple $(\mathcal{I}_\epsilon, K_i, Y_i, \mathbb{Z}; k_i, \rho_i, b_i)$ belong to the relation $R_\textsf{enc-elg}$, for all $j \neq i$.
+    - In Round 2, the party proves in zero-knowledge that the tuple $(\mathcal{I}_\epsilon, \mathcal{J}_\epsilon, D_{j, i}, K_j, F_{j,i}, G_i; \gamma_i, \beta_{i,j}, s_{i,j}, r_{i,j}, \nu_i)$ belongs to the relation $R_\textsf{aff-p}$.
+    - In Round 2, the party proves in zero-knowledge that the tuple $(\mathcal{I}_\epsilon, \mathcal{J}_\epsilon, \hat{D}_{j, i}, K_j, \hat{F}_{j,i}, X_i; x_i, \hat{\beta}_{i,j}, \hat{s}_{i,j}, \hat{r}_{i,j})$ belongs to the relation $R_\textsf{aff-g}$.
+    - In Round 4, the party proves that the tuple $(\mathcal{I}_\epsilon, G_i, \Gamma_i, g; \gamma_i, \nu_i)$ belongs to the relation $R_{\textsf{log} \ast}$.
+    - In Round 5, Step 2, the party proves that the tuple $(Y_i, \mathbb{Z}_i, \Delta_i, \Gamma; k_i, b_i)$ belongs to the relation $R_\textsf{elog}$.
+    - In Round 6, Step 2, the party proves that the tuple $(Y_i, \hat{\mathbf{Z}}_i, S_i, R; \chi_i, \lambda_i)$ belongs to the relation $R_\textsf{elog}$.
 - In the Nonce-Reveal Fail, the party $P_i$ executes the following ZK-proofs:
     - In Round 1, the party proves that the tuple $(N_i, \rho_i^{N_i}; \rho_i)$ belongs to the relation $R_\textsf{Nth}$.
     - In Round 1, the party proves that the tuple $(N_i, \mu_{i,j}^{N_i}; \mu_{i, j})$ belongs to the relation $R_\textsf{Nth}$.
 - In the Pseudo-Key Reveal Fail, the party $P_i$ executes the following ZK-proofs:
-    - In Round 1, the party proves that the tuple $(g^{b_i}, Y_i, \tilde{Y}\_i; b_i)$ belongs to the relation $R_\textsf{log}$.
+    - In Round 1, the party proves that the tuple $(g^{b_i}, Y_i, \tilde{Y}_i; b_i)$ belongs to the relation $R_\textsf{log}$.
     - In Round 1, the party proves that the tuple $(N_i, \rho_i^{N_i}; \rho_i)$ is in the relation $R_\textsf{Nth}$.
-    - In Round 1, the party proves that the tuple $(N_i, \hat{\mu}\_{i,j}^{N_i}; \hat{\mu}\_{i,j})$, for $j \neq i$.
+    - In Round 1, the party proves that the tuple $(N_i, \hat{\mu}_{i,j}^{N_i}; \hat{\mu}_{i,j})$, for $j \neq i$.
 
 # References
 

@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>hashcloak.com/mpcsecurity/</loc>
+    <loc>//localhost:1313/mpcsecurity/</loc>
     <lastmod>2023-10-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/</loc>
     <lastmod>2023-10-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/</loc>
     <lastmod>2023-10-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/notation/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/notation/</loc>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/primitives/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/primitives/</loc>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/</loc>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/</loc>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/</loc>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/</loc>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/</loc>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/</loc>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/</loc>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/</loc>
+    <loc>//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/</loc>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/categories/</loc>
+    <loc>//localhost:1313/mpcsecurity/categories/</loc>
   </url><url>
-    <loc>hashcloak.com/mpcsecurity/tags/</loc>
+    <loc>//localhost:1313/mpcsecurity/tags/</loc>
   </url>
 </urlset>

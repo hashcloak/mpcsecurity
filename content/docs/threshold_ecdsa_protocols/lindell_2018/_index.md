@@ -1,6 +1,5 @@
 ---
 title: $(t, n)$ case from Lindell et al. (2018)
-math: true
 ---
 
 # $(t, n)$ case from Lindell et al. (2018)
@@ -34,68 +33,68 @@ The protocols presented in the work covered here depend on ZK-PoK functionalitie
 - Knowledge of discrete log: 
 
     $$
-    \mathcal{R}_\textsf{DL} = \left\\\{(A, B, w ) \\;\vert\\; B = w \cdot A \right\\\}.
+    \mathcal{R}_\textsf{DL} = \left\{(A, B, w ) \;\vert\; B = w \cdot A \right\}.
     $$
 
 - $\textsf{DH}$ tuple: 
 
     $$
-    \mathcal{R}_\textsf{DH} = \left\\\{ \left(\widetilde{A} = (A_1, A_2), \widetilde{B} = (B_1, B_2), w \right) \\;\vert\\; \widetilde{B} = w \cdot \widetilde{A} \right\\\}.
+    \mathcal{R}_\textsf{DH} = \left\{ \left(\widetilde{A} = (A_1, A_2), \widetilde{B} = (B_1, B_2), w \right) \;\vert\; \widetilde{B} = w \cdot \widetilde{A} \right\}.
     $$ 
 
-    We write $\left(A, \widetilde{B}, w\right) \in \mathcal{R}\_\textsf{DH}$ as a shorthand for $\left((G, A), \widetilde{B}, w \right) \in \mathcal{R}_\textsf{DH}$.
+    We write $\left(A, \widetilde{B}, w\right) \in \mathcal{R}_\textsf{DH}$ as a shorthand for $\left((G, A), \widetilde{B}, w \right) \in \mathcal{R}_\textsf{DH}$.
 
 - Knowledge of Pedersen commitment:
 
     $$
-    \mathcal{R}_\textsf{PedKlwg} = \left\\\{ \left((D, \widehat{A}), (a, r) \right) \\;\vert\\; \widehat{A} = \textsf{PedCom}_D(a; r) \right\\\}.
+    \mathcal{R}_\textsf{PedKlwg} = \left\{ \left((D, \widehat{A}), (a, r) \right) \;\vert\; \widehat{A} = \textsf{PedCom}_D(a; r) \right\}.
     $$
 
 - Pedersen commitment of a value:
 
     $$
-    \mathcal{R}_\textsf{PedEqVal} = \left\\\{ \left( (D, \widehat{A}, A), r \right) \\;\vert\\; \widehat{A} = \textsf{PedCom}_D(a; r) \right\\\}.
+    \mathcal{R}_\textsf{PedEqVal} = \left\{ \left( (D, \widehat{A}, A), r \right) \;\vert\; \widehat{A} = \textsf{PedCom}_D(a; r) \right\}.
     $$
     
 - Pedersen commitment of a value in the exponent: 
 
     $$
-    \mathcal{R}_\textsf{PedEqVal} = \left\\\{ \left( (D, \widehat{A}, A), (a, r) \right) \\; \vert \\; \widehat{A} = \textsf{PedCom}_D(a;r), \\; A = a \cdot G \right\\\}
+    \mathcal{R}_\textsf{PedEqVal} = \left\{ \left( (D, \widehat{A}, A), (a, r) \right) \; \vert \; \widehat{A} = \textsf{PedCom}_D(a;r), \; A = a \cdot G \right\}
     $$
     
 - Knowledge of ElGamal commitment:
     $$
-    \mathcal{R}_\textsf{EGKlwg} = \left\\\{ \left( (E, \widetilde{A}), (a, r) \right) \\; \vert \\; \widetilde{A} = \textsf{EgCom}_E (a; r) \right\\\}
+    \mathcal{R}_\textsf{EGKlwg} = \left\{ \left( (E, \widetilde{A}), (a, r) \right) \; \vert \; \widetilde{A} = \textsf{EgCom}_E (a; r) \right\}
     $$
     
 - ElGamal equals Pedersen:  <span style="color:red">**here, we correct a typo present in the paper**</span>.
 
     $$
-    \mathcal{R}_\textsf{EgEqPed} = \left \\\{ \left ( (E, \widetilde{A}, D, \widehat{A}), (a, \tilde{r}, \hat{r}) \right ) \\; \vert \\; \widetilde{A} = \textsf{EgCom}_E(a; \tilde{r}) \\; \wedge \\; \widehat{A} = \textsf{PedCom}_D(a; \hat{r}) \right \\\}
+    \mathcal{R}_\textsf{EgEqPed} = \left \{ \left ( (E, \widetilde{A}, D, \widehat{A}), (a, \tilde{r}, \hat{r}) \right ) \; \vert \; \widetilde{A} = \textsf{EgCom}_E(a; \tilde{r}) \; \wedge \; \widehat{A} = \textsf{PedCom}_D(a; \hat{r}) \right \}
     $$
     
 - Knowledge of ElGamal scalar product:
 
     $$
-    \mathcal{R}_\textsf{EgProdScalar} = \left \\{ \left( (E, \widetilde{A}, \widetilde{B}), (r, c)) \right) \\;\vert\\; \widetilde{B} = c \cdot \widetilde{A} + \textsf{EgCom}_E(0; r) \right \\}
+    \mathcal{R}_\textsf{EgProdScalar} = \left \{ \left( (E, \widetilde{A}, \widetilde{B}), (r, c)) \right) \;\vert\; \widetilde{B} = c \cdot \widetilde{A} + \textsf{EgCom}_E(0; r) \right \}
     $$
 
 - Product of ElGamal commitments:
  
     $$
-    \mathcal{R}_\textsf{EgProdEg} = \left\\{ \left( (E, \widetilde{A}, \widetilde{B}, \widetilde{C}), (r^b, r^0, b) \right) \\; \vert \\; \widetilde{B} = \textsf{EgCom}_E(b; r^b) \\; \wedge \\; \widetilde{C} = b \cdot \widetilde{A} + \textsf{EgCom}_E(0, r^0) \right\\}
+    \mathcal{R}_\textsf{EgProdEg} = \left\{ \left( (E, \widetilde{A}, \widetilde{B}, \widetilde{C}), (r^b, r^0, b) \right) \; \vert \; \widetilde{B} = \textsf{EgCom}_E(b; r^b) \; \wedge \; \widetilde{C} = b \cdot \widetilde{A} + \textsf{EgCom}_E(0, r^0) \right\}
     $$
     
 - ElGamal commitment of a value:
     
     $$
-    \mathcal{R}_\textsf{EgEqVal} = \left\\{\left( (E, \widetilde{A}, a), r \right) \\;\vert\\; \widetilde{A} = \textsf{EgCom}_E(a; r), \\; A = a \cdot G \right\\}
+    \mathcal{R}_\textsf{EgEqVal} = \left\{\left( (E, \widetilde{A}, a), r \right) \;\vert\; \widetilde{A} = \textsf{EgCom}_E(a; r), \; A = a \cdot G \right\}
     $$
     
 - ElGamal commitment of a value in the exponent:
 
     $$
-    \mathcal{R}_\textsf{EgEqExp} = \left\\{ \left( (E, \widetilde{A}, A), (a, r) \right) \\; \vert \\; \widetilde{A} = \textsf{EgCom}_E(a; r), \\; A = a \cdot G \right\\}
+    \mathcal{R}_\textsf{EgEqExp} = \left\{ \left( (E, \widetilde{A}, A), (a, r) \right) \; \vert \; \widetilde{A} = \textsf{EgCom}_E(a; r), \; A = a \cdot G \right\}
     $$
 
 ## ECDSA protocol
@@ -112,7 +111,7 @@ which is precisely the signature shown in the standalone version of ECDSA.
 
 On input $(\textsf{sid}, \textsf{KeyGen})$, party $P_i$ acts as follows:
 
-1. Let $\textsf{oid}_x = \textsf{sid} \\;\Vert\\; "x"$.
+1. Let $\textsf{oid}_x = \textsf{sid} \;\Vert\; "x"$.
 2. The parties engage in $\textsf{CreateSharedVal} \left( \textsf{sid}, D, \textsf{oid}_x \right)$.
 3. The parties engage in $\textsf{OutExpOfSharedVal} \left( \textsf{sid}, D, \textsf{oid}_x \right)$
 4. Output $X$.
@@ -122,19 +121,19 @@ On input $(\textsf{sid}, \textsf{KeyGen})$, party $P_i$ acts as follows:
 On input $(\textsf{sid}, \textsf{Sign}, \textsf{oid}_x, m)$, party $P_i$ acts as follows:
 
 1. Abort if $\textsf{oid}_x$ was not stored.
-2. Let $\textsf{oid}\_k = \textsf{sid} \Vert 1$, $\textsf{oid}\_\rho = \textsf{sid} \Vert 2$, $\textsf{oid}\_{\rho \cdot k} = \textsf{sid} \Vert 3$, $\textsf{oid}\_{\rho \cdot x} = \textsf{sid} \Vert 4$, $\textsf{oid}\_{r \cdot \rho \cdot x} = \textsf{sid} \Vert 5$, $\textsf{oid}\_{\rho \cdot m} = \textsf{sid} \Vert 6$, $\textsf{oid}\_\beta = \textsf{sid} \Vert 7$.
+2. Let $\textsf{oid}_k = \textsf{sid} \Vert 1$, $\textsf{oid}_\rho = \textsf{sid} \Vert 2$, $\textsf{oid}_{\rho \cdot k} = \textsf{sid} \Vert 3$, $\textsf{oid}_{\rho \cdot x} = \textsf{sid} \Vert 4$, $\textsf{oid}_{r \cdot \rho \cdot x} = \textsf{sid} \Vert 5$, $\textsf{oid}_{\rho \cdot m} = \textsf{sid} \Vert 6$, $\textsf{oid}_\beta = \textsf{sid} \Vert 7$.
 3. In parallel, the parties engage in: $\textsf{CreateSharedVal} \left( \textsf{sid}, D, \textsf{oid}_\rho \right)$ and $\textsf{CreateSharedVal} \left( \textsf{sid}, D, \textsf{oid}_k \right)$. Here $\rho$ and $k$ denote the generated values.
 4. In parallel, the parties engage in:
-    1. $\textsf{MultSharedVals}(\textsf{sid}, D, \textsf{oid}\_\rho, \textsf{oid}_k, \textsf{oid}\_{\rho \cdot k})$.
-    2. $\textsf{MultSharedVals}(\textsf{sid}, D, \textsf{oid}\_\rho, \textsf{oid}_x, \textsf{oid}\_{\rho \cdot x})$.
+    1. $\textsf{MultSharedVals}(\textsf{sid}, D, \textsf{oid}_\rho, \textsf{oid}_k, \textsf{oid}_{\rho \cdot k})$.
+    2. $\textsf{MultSharedVals}(\textsf{sid}, D, \textsf{oid}_\rho, \textsf{oid}_x, \textsf{oid}_{\rho \cdot x})$.
 5. The parties engage in $\textsf{OutExpOfSharedVal}(\textsf{sid}, D, \textsf{oid}_k)$. Let $(r', \cdot)$ be the common output and let $r = r' \mod q$.
 6. Each party invokes:
-    1. $\textsf{ScalarMultOfSharedVal}(D, \textsf{oid}\_{\rho \cdot x}, \textsf{oid}_{r \cdot \rho \cdot x}, r)$.
-    2. $\textsf{ScalarMultOfSharedVal}(D, \textsf{oid}\_{\rho}, \textsf{oid}_{r \cdot m}, H(m))$.
-    3. $\textsf{AdditionOfSharedVals}(D, \textsf{oid}\_{r \cdot \rho \cdot x}, \textsf{oid}\_{r \cdot m}, \textsf{oid}\_{\beta})$.
+    1. $\textsf{ScalarMultOfSharedVal}(D, \textsf{oid}_{\rho \cdot x}, \textsf{oid}_{r \cdot \rho \cdot x}, r)$.
+    2. $\textsf{ScalarMultOfSharedVal}(D, \textsf{oid}_{\rho}, \textsf{oid}_{r \cdot m}, H(m))$.
+    3. $\textsf{AdditionOfSharedVals}(D, \textsf{oid}_{r \cdot \rho \cdot x}, \textsf{oid}_{r \cdot m}, \textsf{oid}_{\beta})$.
 7. In parallel, parties engage in:
-    1. $\textsf{OutSharedVal}(D, \textsf{sid}, \textsf{oid}\_{\rho \cdot k})$; let $\tau$ be the common output.
-    2. $\textsf{OutSharedVal}(D, \textsf{sid}, \textsf{oid}\_{\beta})$; let $\beta$ be the common output.
+    1. $\textsf{OutSharedVal}(D, \textsf{sid}, \textsf{oid}_{\rho \cdot k})$; let $\tau$ be the common output.
+    2. $\textsf{OutSharedVal}(D, \textsf{sid}, \textsf{oid}_{\beta})$; let $\beta$ be the common output.
 8. Output $\left( r, s = \tau^{-1} \cdot \beta \right)$.
 
 Next, we describe the protocols $\textsf{CreateSharedVal}$, $\textsf{AdditionOfSharedVals}$, $\textsf{ScalarMultOfSharedVal}$, $\textsf{OutSharedVal}$, $\textsf{OutExpOfSharedVal}$, and $\textsf{MultSharedVals}$
@@ -180,21 +179,21 @@ The functionality $\mathcal{F}_\textsf{LeakyMult}$ is a many-party leaky multipl
 **Functionality $\mathcal{F}_\textsf{LeakyMult}$**:
 
 Parties: $P_1, \dots, P_n$.
-Common input: $\textsf{sid} \in \\{0, 1\\}^*$, $D \in \mathbb{G}$, $\left\\{ \widehat{A}\_\mathcal{l}, \widehat{B}\_\mathcal{l} \right\\}_{l=1}^n$.
+Common input: $\textsf{sid} \in \{0, 1\}^*$, $D \in \mathbb{G}$, $\left\{ \widehat{A}_\mathcal{l}, \widehat{B}_\mathcal{l} \right\}_{l=1}^n$.
 $P_i$'s input: $\left(a_i, r_i^A \right), \left(b_i, r_i^B \right) \in \mathbb{Z}_q^2$.
 
-1. Abort if for some $\mathcal{l}$ it holds that $\widehat{A}\_\mathcal{l} \neq \textsf{PedCom}\_D(a_\mathcal{l}, r_\mathcal{l}^A)$ or $\widehat{B}\_\mathcal{l} \neq \textsf{PedCom}\_D(b_\mathcal{l}, r\_\mathcal{l}^B)$
-2. Sample $r_1, \dots, r_n$ uniformly at random from $\mathbb{Z}\_q$. Sample $c_1, \dots, c_n$ uniformly at random from $\mathbb{Z}\_q$ conditioned on
+1. Abort if for some $\mathcal{l}$ it holds that $\widehat{A}_\mathcal{l} \neq \textsf{PedCom}_D(a_\mathcal{l}, r_\mathcal{l}^A)$ or $\widehat{B}_\mathcal{l} \neq \textsf{PedCom}_D(b_\mathcal{l}, r_\mathcal{l}^B)$
+2. Sample $r_1, \dots, r_n$ uniformly at random from $\mathbb{Z}_q$. Sample $c_1, \dots, c_n$ uniformly at random from $\mathbb{Z}_q$ conditioned on
     $$
     \sum_{l=1}^n c_l = \left(\sum_{l=1}^n a_l \right) \cdot \left(\sum_{l=1}^n b_l \right).
     $$
-3. Output $\left\\{C_l = \textsf{PedCom}\_D(c_l; r_l)\right\\}_{l=1}^n$ as the common output.
+3. Output $\left\{C_l = \textsf{PedCom}_D(c_l; r_l)\right\}_{l=1}^n$ as the common output.
 4. Send $\left( r_l, c_l \right)$ to $P_l$ for each $l = 1, \dots, n$.
 
 After getting the outputs, the corrupted parties $\mathcal{C}$ can make the following calls (at most one of each type):
 
-- **Linear test:** send $\delta \in \mathbb{Z}\_q$ and $\left\\{(o_l^A, o_l^B) \in \mathbb{Z}\_q^2\right\\}\_{l \in [n] \setminus \mathcal{C}}$ to the functionality. The functionality aborts if $\sum_{l \in [n] \setminus \mathcal{C}} (o_l^A \cdot a_l + o_l^B \cdot b_l) \neq \delta$.
-- **Commitment replacement:** Send $\\{(r'\_l, c'\_l )\\}\_{l \in \mathcal{C}}$. The functionality aborts if $\sum_{l \in \mathcal{C}} c_l \neq \sum_{l \in \mathcal{C}} c'_l$. Otherwise the value of $\widehat{C}_l$, for each $l \in \mathcal{C}$, in the common output is updated to $\textsf{PedCom}_D(c'_l; r'_l)$.
+- **Linear test:** send $\delta \in \mathbb{Z}_q$ and $\left\{(o_l^A, o_l^B) \in \mathbb{Z}_q^2\right\}_{l \in [n] \setminus \mathcal{C}}$ to the functionality. The functionality aborts if $\sum_{l \in [n] \setminus \mathcal{C}} (o_l^A \cdot a_l + o_l^B \cdot b_l) \neq \delta$.
+- **Commitment replacement:** Send $\{(r'_l, c'_l )\}_{l \in \mathcal{C}}$. The functionality aborts if $\sum_{l \in \mathcal{C}} c_l \neq \sum_{l \in \mathcal{C}} c'_l$. Otherwise the value of $\widehat{C}_l$, for each $l \in \mathcal{C}$, in the common output is updated to $\textsf{PedCom}_D(c'_l; r'_l)$.
 
 ## Threshold case
 
@@ -205,7 +204,7 @@ To this moment, the protocol allows an adversary to corrupt at least $n - 1$ par
 
 To achieve threshold signatures (i.e. signatures $t$-out-of-$n$), the approach is as follows. In the key generation, the parties generate additive shares as in the $n$-out-of-$n$ case and transform such shares into $t$-out-of-$n$ shares using Shamir secret-sharing. For the signing phase, the parties take the Shamir $t$-out-of-$n$ shares transform them into $t$-out-of-$t$ shares, and proceed as in the non-threshold case.
 
-The protocol for key generation is presented next. <span style="color:red">**One thing that is missing in the protocol specification is that in Step 2(e)(ii), the parties should execute $\mathcal{F}\_{\textsf{zk}}^{\mathcal{R}\_\textsf{DL}}$ with respect to $D$ given that, under correct circumstances, this should be a Pedersen commitment of 0. Also, here $p_{i, l}$ is a notation for $p_i(l)$.**</span>
+The protocol for key generation is presented next. <span style="color:red">**One thing that is missing in the protocol specification is that in Step 2(e)(ii), the parties should execute $\mathcal{F}_{\textsf{zk}}^{\mathcal{R}_\textsf{DL}}$ with respect to $D$ given that, under correct circumstances, this should be a Pedersen commitment of 0. Also, here $p_{i, l}$ is a notation for $p_i(l)$.**</span>
 
 ![Threshold case](ThresholdCase.png)
 
@@ -215,21 +214,21 @@ The protocol for signing is presented next. <span style="color:red">**Here we pr
 2. (Locally) Generate additive shares of $x$.
     1. For $l \in \mathcal{S}$, let 
         $$
-        o_l = \frac{\prod_{j \in \mathcal{S}\setminus\\{l\\}} j}{\prod_{j \in \mathcal{S}\setminus\\{l\\}} (j - l)}.
+        o_l = \frac{\prod_{j \in \mathcal{S}\setminus\{l\}} j}{\prod_{j \in \mathcal{S}\setminus\{l\}} (j - l)}.
         $$
-    2. Let $\left( \\{ \widehat{A}\_l \\}\_{l=1}^n, a_i, r_i \right) = \textsf{Retrieve}(\textsf{oid}\_\textsf{xtsh})$.
-    3. Let $(a'_i, r'_i) = o_i \cdot (a_i, r_i)$, and for each $l \in \mathcal{S}$, let $\widehat{A}'\_l = o_l \cdot \widehat{A}\_l$.
+    2. Let $\left( \{ \widehat{A}_l \}_{l=1}^n, a_i, r_i \right) = \textsf{Retrieve}(\textsf{oid}_\textsf{xtsh})$.
+    3. Let $(a'_i, r'_i) = o_i \cdot (a_i, r_i)$, and for each $l \in \mathcal{S}$, let $\widehat{A}'_l = o_l \cdot \widehat{A}_l$.
 3. Sign using additive shares:
-    1. $\textsf{Store}\_{\textsf{oid}' = \textsf{sid} \Vert "y"} \left( \\{ \widehat{A}'\_l \\}_{l=1}^n, a'_i, r'_i \right)$.
+    1. $\textsf{Store}_{\textsf{oid}' = \textsf{sid} \Vert "y"} \left( \{ \widehat{A}'_l \}_{l=1}^n, a'_i, r'_i \right)$.
     2. Interact as in the signing phase of the signing protocol for the non-threshold case, while in the call of $\textsf{MultSharedVals}$ done in Round 4(2), use the object-id $\textsf{oid}'$ instead of $\textsf{oid}$.
 
-We remain to present a UC-realization of $\mathcal{F}\_\textsf{LeakyMult}$ which is the protocol $\textsf{ManyPartyLeakyMult}$. Such protocol has access to other two ideal functionalities: a two-party multiplication functionality $\mathcal{F}_\textsf{2PC-Mult}$ and a multiplication equality test functionality $\mathcal{F}\_\textsf{PedMultEqTest}$. For this text to be self-contained, we present the functionalities next taken from the original paper:
+We remain to present a UC-realization of $\mathcal{F}_\textsf{LeakyMult}$ which is the protocol $\textsf{ManyPartyLeakyMult}$. Such protocol has access to other two ideal functionalities: a two-party multiplication functionality $\mathcal{F}_\textsf{2PC-Mult}$ and a multiplication equality test functionality $\mathcal{F}_\textsf{PedMultEqTest}$. For this text to be self-contained, we present the functionalities next taken from the original paper:
 
 {{< figure src="F2PC_mult.png" width="500px" >}}
 
 ![Functionality PedMultEqTest](PedMutEqTest.png)
 
-We stress that performing the check using $\mathcal{F}\_\textsf{PedMultEqTest}$ is key because the functionality for multiplications does not force the parties to input the correct and committed values, resulting in a wrong output. Then, the functionality for multiplication check will be in charge of testing and avoiding this behavior. The functionality $\mathcal{F}\_\textsf{2PC-Mult}$ will be then replaced by a more weak functionality $\mathcal{F}\_\textsf{2PC-WeakMult}$. Whose realization can be found in [Haitner et al. (2021)](https://eprint.iacr.org/2021/1373), and such replacement will not affect the security of the overall protocol. For reference, we present next the weak functionality. <span style="color:red">**It is important to mention that the version of this functionality in the paper of Lindell et al. has a small typo in the number of elements of $v$. The following functionality has the correct specification.**</span>
+We stress that performing the check using $\mathcal{F}_\textsf{PedMultEqTest}$ is key because the functionality for multiplications does not force the parties to input the correct and committed values, resulting in a wrong output. Then, the functionality for multiplication check will be in charge of testing and avoiding this behavior. The functionality $\mathcal{F}_\textsf{2PC-Mult}$ will be then replaced by a more weak functionality $\mathcal{F}_\textsf{2PC-WeakMult}$. Whose realization can be found in [Haitner et al. (2021)](https://eprint.iacr.org/2021/1373), and such replacement will not affect the security of the overall protocol. For reference, we present next the weak functionality. <span style="color:red">**It is important to mention that the version of this functionality in the paper of Lindell et al. has a small typo in the number of elements of $v$. The following functionality has the correct specification.**</span>
 
 ![Weak Multiplication Functionality](WeakMult.png)
 
@@ -237,7 +236,7 @@ Also, we next present the functionality $\mathcal{F}_\textsf{PedMultEqTest}$:
 
 ![PedMultEqTest Functionality](PedMutEqTest2.png)
 
-Now, having all the functionalities, we present the protocol $\textsf{ManyPartyLeakyMult}$ that UC-realizes $\mathcal{F}\_\textsf{LeakyMult}$. We are considering the protocol accessing to the functionality $\mathcal{F}\_\textsf{2PC-Mult}$, but replacing it with $\mathcal{F}_\textsf{2PC-WeakMult}$ is done in a natural way.
+Now, having all the functionalities, we present the protocol $\textsf{ManyPartyLeakyMult}$ that UC-realizes $\mathcal{F}_\textsf{LeakyMult}$. We are considering the protocol accessing to the functionality $\mathcal{F}_\textsf{2PC-Mult}$, but replacing it with $\mathcal{F}_\textsf{2PC-WeakMult}$ is done in a natural way.
 
 ![ManyParyLeakyMult protocol](ManyPartyLeakyMult.png)
 
@@ -266,38 +265,38 @@ In the signing protocol, Step 3, the parties engage in two $\textsf{CreateShared
 #### For $\textsf{CreateSharedVals}$
 
 - In Step 1, each party $P_i$ creates a Pedersen commitment of $a_i$.
-- In Step 2, each party $P_i$ sends a ZK-proof on the tuple $(\textsf{sid}, (D, \hat{A}\_i), (a_i, r_i))$ according to the relation $\mathcal{R}\_{\textsf{PedKlwg}}$.
+- In Step 2, each party $P_i$ sends a ZK-proof on the tuple $(\textsf{sid}, (D, \hat{A}_i), (a_i, r_i))$ according to the relation $\mathcal{R}_{\textsf{PedKlwg}}$.
 
 #### For $\textsf{OutSharedVal}$
 
-In Step 2 of the protocol, parties execute a ZK-proof to test that $\hat{A}\_i$ is the Pedersen commitment of $a_i$.
+In Step 2 of the protocol, parties execute a ZK-proof to test that $\hat{A}_i$ is the Pedersen commitment of $a_i$.
 
 #### For $\textsf{OutExpOfSharedVal}$
 
-In Step 2, parties execute a ZK-proof to test that $\hat{A}\_i$ is the commitment of $a_i$ and that $a_i$ is the exponent of $A_i$.
+In Step 2, parties execute a ZK-proof to test that $\hat{A}_i$ is the commitment of $a_i$ and that $a_i$ is the exponent of $A_i$.
 
 #### For the Key Generation
 
 - In Step 2(c) the party $P_i$ sends Pedersen commitments of $c_{i,j}$ to all parties.
 - In Step 2(e)(i) the party $P_i$ sends Pedersen commitments of $p_i(\alpha)$ to all parties.
-- In Step 2(e)(ii) the party $P_i$ engage in a ZK-proof to proof that $r^Y_{i, \alpha} - \sum_j r^C_{i,j} \cdot \alpha_j$ is the discrete logarithm of $\hat{D}\_{i,\alpha} - \hat{B}\_{i, \alpha}$
+- In Step 2(e)(ii) the party $P_i$ engage in a ZK-proof to proof that $r^Y_{i, \alpha} - \sum_j r^C_{i,j} \cdot \alpha_j$ is the discrete logarithm of $\hat{D}_{i,\alpha} - \hat{B}_{i, \alpha}$
 
 #### For $\textsf{ManyPartyLeakyMult}$
 
-- In Step 2, the party $P_i$ prooves knowledge that he has $a_i$ for which $\hat{A}\_i$ is a Pedersen commitment, and that he has $b_i$ for which $\hat{B}\_i$ is a Pedersen commitment.
+- In Step 2, the party $P_i$ prooves knowledge that he has $a_i$ for which $\hat{A}_i$ is a Pedersen commitment, and that he has $b_i$ for which $\hat{B}_i$ is a Pedersen commitment.
 - In Step 3(a), the party $P_i$ sends a Pedersen commitment of $c_i$ to all parties.
-- In Step 3(b), the party $P_i$ proves knowledge of $c_i$ for which $\hat{C}\_i$ is its Pedersen commitment.
-- In Step 4, the party $P_i$ verify that $\sum \hat{C}\_l$ is a commitment of $(\sum a_i) \cdot (\sum b_i)$.
+- In Step 3(b), the party $P_i$ proves knowledge of $c_i$ for which $\hat{C}_i$ is its Pedersen commitment.
+- In Step 4, the party $P_i$ verify that $\sum \hat{C}_l$ is a commitment of $(\sum a_i) \cdot (\sum b_i)$.
 
 #### For $\textsf{PedMultEqTest}$
 
 - In Step 1(a), the party $P_i$ proves in zero-knowledge that he has the discrete logarithm of $E_i$.
 - In Step 2(a), the party $P_i$ computes an ElGamal commitment of $x_i$.
-- In Step 2(b), the party $P_i$ proves in zero-knowledge that he has $x_i$ for which it holds that both $\hat{X}\_i$ is its Pedersen commitment and $\tilde{X}\_i$ is its ElGamal commitment.
+- In Step 2(b), the party $P_i$ proves in zero-knowledge that he has $x_i$ for which it holds that both $\hat{X}_i$ is its Pedersen commitment and $\tilde{X}_i$ is its ElGamal commitment.
 - In Step 3(b), the party $P_i$ rerandomizes the commitment of $a_i \cdot \tilde{B}$
-- In Step 3(c), the party $P_i$ proves in zero-knowledge that $((E, \tilde{B}, \tilde{A}\_i, \tilde{F}\_i), (r^{\tilde{A}}\_i, r_i^F, a_i))$ belongs to the relation $\mathcal{R}_\textsf{EgProdEg}$.
+- In Step 3(c), the party $P_i$ proves in zero-knowledge that $((E, \tilde{B}, \tilde{A}_i, \tilde{F}_i), (r^{\tilde{A}}_i, r_i^F, a_i))$ belongs to the relation $\mathcal{R}_\textsf{EgProdEg}$.
 - In Step 4(b), the party $P_i$ proves in zero-knowledge that he knows a constant $o_i$ such that $\tilde{Z}_i$ is the commitment of the value of commited in $\tilde{Y}$ multiplied by $o_i$.
-- In Step 5(b), the party $P_i$ proves in zero-knowledge that the tuple $((G, \tilde{Z}\_L), (E_i, W_i), e_i)$ belongs to the relation $\mathcal{R}\_\textsf{DH}$.
+- In Step 5(b), the party $P_i$ proves in zero-knowledge that the tuple $((G, \tilde{Z}_L), (E_i, W_i), e_i)$ belongs to the relation $\mathcal{R}_\textsf{DH}$.
 
 # References
 

@@ -1,5 +1,4 @@
 ---
-math: true
 title: "Threshold ECDSA protocols"
 date: 2023-10-13
 ---

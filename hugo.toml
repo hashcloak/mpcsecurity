@@ -1,1 +1,20 @@
+baseURL = 'hashcloak.com/mpcsecurity'
+languageCode = 'en-us'
+title = 'MPC Security'
 theme = 'hugo-book'
+
+[params]
+	BookLogo = 'hashcloak_logo_colour-logo-text.png'
+	BookIconLogo = 'hashcloak_logo_colour-logo.png'
+	math = true
+
+[markup]
+	[markup.goldmark]
+		[markup.goldmark.extensions.passthrough]
+			enable = true
+			[markup.goldmark.extensions.passthrough.delimiters]
+				block = [['\[', '\]'], ['$$', '$$']]
+				inline = [['\(', '\)'], ['$', '$']]
+		[markup.goldmark.renderer]
+			unsafe = true
+

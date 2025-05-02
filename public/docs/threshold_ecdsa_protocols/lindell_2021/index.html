@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head>
+<head><script src="/mpcsecurity/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=mpcsecurity/livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="$(2, 2)$ case from Lindell (2021) #  In this case, we will have two parties $P_1$ and $P_2$. Both parties will have a secret key that is secret-shared among them which means that $P_1$ will hold a value $x_1 \in \mathbb{Z}_q$ and $P_2$ will hold a value $x_2 \in \mathbb{Z}_q$. The idea is to use both pieces of data to compute the signature of a jointly known message. The main difficulty that can be found in this scheme is that for the signature we need the inverse of a random value $k \in \mathbb{Z}_q^*$ that is secret-shared among the parties.">
+<meta name="description" content="
+  $(2, 2)$ case from Lindell (2021)
+  #
+
+In this case, we will have two parties $P_1$ and $P_2$. Both parties will have a secret key that is secret-shared among them which means that $P_1$ will hold a value $x_1 \in \mathbb{Z}_q$ and $P_2$ will hold a value $x_2 \in \mathbb{Z}_q$. The idea is to use both pieces of data to compute the signature of a jointly known message. The main difficulty that can be found in this scheme is that for the signature we need the inverse of a random value $k \in \mathbb{Z}_q^*$ that is secret-shared among the parties. Concretely, for the signing phase, we need to compute $k^{-1}$ for a value $k \in \mathbb{Z}_q^*$ that is shared among the parties ($P_1$ will hold a share $k_1$ and $P_2$ will hold a share $k_2$). This process is very hard considering an additive secret-sharing scheme. For that reason, the work of Lindell (2021) considers a multiplicative secret-sharing scheme, which will allow us to compute this inverse in a more easy way.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-          
-          
-          delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-              {left: '\\(', right: '\\)', display: false},
-              {left: '\\[', right: '\\]', display: true}
-          ],
-          
-          throwOnError : false
-        });
-    });
-</script><meta property="og:title" content="$(2, 2)$ case from Lindell (2021)" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" />
-
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/">
+  <meta property="og:site_name" content="MPC Security">
+  <meta property="og:title" content="$(2, 2)$ case from Lindell (2021)">
+  <meta property="og:description" content="$(2, 2)$ case from Lindell (2021) # In this case, we will have two parties $P_1$ and $P_2$. Both parties will have a secret key that is secret-shared among them which means that $P_1$ will hold a value $x_1 \in \mathbb{Z}_q$ and $P_2$ will hold a value $x_2 \in \mathbb{Z}_q$. The idea is to use both pieces of data to compute the signature of a jointly known message. The main difficulty that can be found in this scheme is that for the signature we need the inverse of a random value $k \in \mathbb{Z}_q^*$ that is secret-shared among the parties. Concretely, for the signing phase, we need to compute $k^{-1}$ for a value $k \in \mathbb{Z}_q^*$ that is shared among the parties ($P_1$ will hold a share $k_1$ and $P_2$ will hold a share $k_2$). This process is very hard considering an additive secret-sharing scheme. For that reason, the work of Lindell (2021) considers a multiplicative secret-sharing scheme, which will allow us to compute this inverse in a more easy way.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
 <title>$(2, 2)$ case from Lindell (2021) | MPC Security</title>
-<link rel="manifest" href="/hashcloak.com/mpcsecurity/manifest.json">
-<link rel="icon" href="/hashcloak.com/mpcsecurity/favicon.png" >
-<link rel="stylesheet" href="/hashcloak.com/mpcsecurity/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" >
-  <script defer src="/hashcloak.com/mpcsecurity/flexsearch.min.js"></script>
-  <script defer src="/hashcloak.com/mpcsecurity/en.search.min.800f510cb1ef744253add5e2eba2d6fe970e0277bb805a8aa70d8e9f46d7a494.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/index.xml" title="MPC Security" />
+<link rel="icon" href="/mpcsecurity/favicon.png" >
+<link rel="manifest" href="/mpcsecurity/manifest.json">
+<link rel="canonical" href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/">
+<link rel="stylesheet" href="/mpcsecurity/book.min.a7616cf2799b58bddffce9438e31fdbfc6393687cfc0950a4a17cd1cce7e35f6.css" integrity="sha256-p2Fs8nmbWL3f/OlDjjH9v8Y5NofPwJUKShfNHM5&#43;NfY=" crossorigin="anonymous">
+  <script defer src="/mpcsecurity/fuse.min.js"></script>
+  <script defer src="/mpcsecurity/en.search.min.ce83cbe310910da659cfa1905578c106c8f81ae8c2aff7fc17b79a91de6eceda.js" integrity="sha256-zoPL4xCRDaZZz6GQVXjBBsj4GujCr/f8F7eakd5uzto=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/index.xml" title="MPC Security" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
 -->
+  
+  
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)'], ['$', '$']]     
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+
+
   
 </head>
 <body dir="ltr">
@@ -52,16 +55,17 @@ https://github.com/alex-shpak/hugo-book
         
   <nav>
 <h2 class="book-brand">
-  <a class="flex align-center" href="hashcloak.com/mpcsecurity/"><img src="/hashcloak.com/mpcsecurity/hashcloak_logo_colour-logo.png" alt="Logo" /><span>MPC Security</span>
+  <a class="flex align-center" href="/mpcsecurity/"><img src="/mpcsecurity/hashcloak_logo_colour-logo-text.png" alt="Logo" class="book-icon" /><span>MPC Security</span>
   </a>
 </h2>
 
 
-<div class="book-search">
+<div class="book-search hidden">
   <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
   <div class="book-search-spinner hidden"></div>
   <ul id="book-search-results"></ul>
 </div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
 
 
 
@@ -74,7 +78,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
 
 
 
@@ -88,7 +91,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/" class="">Threshold ECDSA protocols</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/" class="">Threshold ECDSA protocols</a>
   
 
           
@@ -101,25 +104,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="active">$(2, 2)$ case from Lindell (2021)</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="">$(2, n)$ case from Doerner et al. (2018)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="active">$(2, 2)$ case from Lindell (2021)</a>
   
 
           
@@ -137,7 +122,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="">$(t, n)$ case from Canetti et al. (2021)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="">$(2, n)$ case from Doerner et al. (2018)</a>
   
 
           
@@ -155,7 +140,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="">$(t, n)$ case from Doerner et al. (2019)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="">$(t, n)$ case from Canetti et al. (2021)</a>
   
 
           
@@ -173,7 +158,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="">$(t, n)$ case from Doerner et al. (2019)</a>
   
 
           
@@ -191,7 +176,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
   
 
           
@@ -209,7 +194,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
   
 
           
@@ -227,7 +212,25 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="">$(t, n)$ case from Lindell et al. (2018)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="">$(t, n)$ case from Lindell et al. (2018)</a>
   
 
           
@@ -278,7 +281,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-
 </nav>
 
 
@@ -294,16 +296,17 @@ https://github.com/alex-shpak/hugo-book
     <div class="book-page">
       <header class="book-header">
         
-  <div class="flex align-center justify-between">
+  
+<div class="flex align-center justify-between">
   <label for="menu-control">
-    <img src="/hashcloak.com/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
+    <img src="/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>$(2, 2)$ case from Lindell (2021)</strong>
+  <h3>$(2, 2)$ case from Lindell (2021)</h3>
 
   <label for="toc-control">
     
-    <img src="/hashcloak.com/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    <img src="/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
@@ -334,7 +337,7 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="2-2-case-from-lindell-2021">
+  <article class="markdown book-article"><h1 id="2-2-case-from-lindell-2021">
   $(2, 2)$ case from Lindell (2021)
   <a class="anchor" href="#2-2-case-from-lindell-2021">#</a>
 </h1>
@@ -344,19 +347,19 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>$\mathcal{F}_{\textsf{com-zk}}^{R_{DL}}$: This ideal functionality will be defined for testing in the following relation:
 $$
-R_{DL} = \left\{\left(\mathbb{G}, G, q, P, w \right) \;\vert\; P = w \cdot G\right\}.
-$$
+    R_{DL} = \left\{\left(\mathbb{G}, G, q, P, w \right) \;\vert\; P = w \cdot G\right\}.
+    $$
 Therefore, this zero-knowledge proof will determine if some witness secret value $w$ is the discrete logarithm of a value $P$ relative to a cyclic group $\mathbb{G}$ with order $q$ described by the generator $G$. Additionally, this functionality will allow one party to commit to values $P$ and $w$ and then decommit such value for the other party to receive $P$ if the proof confirms that $(P, w)$ fulfills the relation relative to the group $\mathbb{G}$ specified as above. This proof can be instantiated using classic protocols as presented in <a href="https://link.springer.com/chapter/10.1007/0-387-34805-0_22">Schnorr (1989)</a>.</li>
 <li>$\mathcal{F}_{\textsf{zk}}^{R_{DL}}$: this functionality has the same zero-knowledge properties as the above functionality but without the commitment section. This proof can be instantiated using the implementation of Schnorr (1989) as above.</li>
 <li>Proof for $L_P$: we need a zero-knowledge proof to test that a number $N$ is a valid Paillier public key. This can be done by computing a zero-knowledge proof for the following language:
 $$
-L_P = \left\{N \; \vert \; \gcd(N, \phi(N)) = 1 \right\}
-$$
+    L_P = \left\{N \\; \vert \\; \gcd(N, \phi(N)) = 1 \right\}
+    $$
 This proof can be generated as presented in <a href="https://eprint.iacr.org/2011/494">Hazay et al. (2011)</a>.</li>
 <li>Proof for $L_{PDL}$: we need to prove in zero-knowledge that a ciphertext is the encryption of the discrete logarithm of a specified point under a public key $pk$ using the Paillier homomorphic encryption scheme. Concretely, the language for this zero-knowledge proof can be described as follows:
 $$
-L_{PDL} = \left\{ \left(c, pk, Q_1, \mathbb{G}, G, q \right) \; \vert \; \exists (x_1, r), c = \textsf{Enc}_{pk}(x_1; r) \; \text{and} \; Q_1 = x_1 \cdot G \; \text{and} \; x_1 \in \mathbb{Z}_q \right\}
-$$
+    L_{PDL} = \left\{ \left(c, pk, Q_1, \mathbb{G}, G, q \right) \; \vert \; \exists (x_1, r), c = \textsf{Enc}_{pk}(x_1; r) \; \text{and} \; Q_1 = x_1 \cdot G \; \text{and} \; x_1 \in \mathbb{Z}_q \right\}
+    $$
 An instantiation of this functionality can be found in Lindell (2021), Protocol 6.1.</li>
 </ul>
 <h2 id="key-generation">
@@ -371,8 +374,8 @@ An instantiation of this functionality can be found in Lindell (2021), Protocol 
   <a class="anchor" href="#signing">#</a>
 </h2>
 <p>In this phase, $P_1$ and $P_2$ execute a &ldquo;coin tossing&rdquo; protocol as in the key generation phase to compute a random point $R$ in the elliptic curve in such a way that $P_1$ and $P_2$ hold $k_1$ and $k_2$ respectively, such that $R = k_1 \cdot k_2 \cdot G$. Notice that keeping $k_1$ and $k_2$ is of high importance for security. Notice that if some party learns $k_1 \cdot k_2$, then it could compute the secret key $x$ given a signature of some arbitrary message.</p>
-<p>For the signing phase, notice that $P_2$ has an encryption of $x_1$ under $P_1$&rsquo;s public key generated by the Paillier encryption scheme. This allows $P_2$ to compute an encryption of $s&rsquo; = k_2^{-1} \cdot m&rsquo; + k_2^{-1}\cdot r \cdot x_1 \cdot x_2$ under Paillier using the public key of $P_1$, Then $P_1$ can decrypt this value and multiply it for $k_1^{-1}$ to obtain $s&rsquo;&rsquo;$ which is almost the signature. Then, the party computes the signature as $s = \min\{s&rsquo;&rsquo;, q - s&rsquo;&rsquo;\}$ to ensure that the parties are choosing the smallest value possible for the signature. Something interesting here is that $P_1$ can verify the validity of the signature under public key $Q$ because, as we specified before, the protocol allows each party to individually verify signatures using the public key.</p>
-<p>Note that in this work, they are mixing the ECDSA signature scheme with the Paillier encryption scheme. This mixture needs additional consideration given the difference in the modulus reduction because ECDSA computes reductions modulo $q$ but Paillier computes reductions modulo $N^2$, which do not necessarily match, and such reductions affect the security of each method. Therefore, when we use Paillier, we need to mask the underlying plaintext in such a way that the decryption does not reveal any information. That is the role of $\rho \cdot q$ in $P_2$&rsquo;s second message. The idea is to mask the value of $k_2^{-1} \cdot m&rsquo; + k_2^{-1} \cdot r \cdot x_2 \cdot x_1$ with a random-looking value, namely $\rho \cdot q$, in such a way that when this the masked value is reduced modulo $q$ the mask is removed.</p>
+<p>For the signing phase, notice that $P_2$ has an encryption of $x_1$ under $P_1$&rsquo;s public key generated by the Paillier encryption scheme. This allows $P_2$ to compute an encryption of $s' = k_2^{-1} \cdot m' + k_2^{-1}\cdot r \cdot x_1 \cdot x_2$ under Paillier using the public key of $P_1$, Then $P_1$ can decrypt this value and multiply it for $k_1^{-1}$ to obtain $s''$ which is almost the signature. Then, the party computes the signature as $s = \min\\{s'', q - s''\\}$ to ensure that the parties are choosing the smallest value possible for the signature. Something interesting here is that $P_1$ can verify the validity of the signature under public key $Q$ because, as we specified before, the protocol allows each party to individually verify signatures using the public key.</p>
+<p>Note that in this work, they are mixing the ECDSA signature scheme with the Paillier encryption scheme. This mixture needs additional consideration given the difference in the modulus reduction because ECDSA computes reductions modulo $q$ but Paillier computes reductions modulo $N^2$, which do not necessarily match, and such reductions affect the security of each method. Therefore, when we use Paillier, we need to mask the underlying plaintext in such a way that the decryption does not reveal any information. That is the role of $\rho \cdot q$ in $P_2$&rsquo;s second message. The idea is to mask the value of $k_2^{-1} \cdot m' + k_2^{-1} \cdot r \cdot x_2 \cdot x_1$ with a random-looking value, namely $\rho \cdot q$, in such a way that when this the masked value is reduced modulo $q$ the mask is removed.</p>
 <p><img src="signing.png" alt="Signing protocol" /></p>
 <h2 id="security-concerns">
   Security concerns
@@ -384,8 +387,8 @@ An instantiation of this functionality can be found in Lindell (2021), Protocol 
 <ul>
 <li>Check the length of Paillier keys to be correct (see Protocol 3.1 from Lindel, 2021).</li>
 <li>$P_2$ should verify and execute all the ZK-proofs <strong>[List all the ZK-proofs in detail]</strong>.</li>
-<li>In the distributed signing, $P_2$ can compute a value $s&rsquo; = k_2^{-1} \cdot m&rsquo; + k_2^{-1} \cdot r \cdot x_2 \cdot x_1$ using Pallier homomorphic properties to obtain a ciphertext of it. Then $P_2$ can send this ciphertext to $P_1$ but the decryption of such value can reveal information to $P_1$ because $s&rsquo;$ does not have a reduction modulo $q$. Remember that the modulus in Paillier may be different from the modulus used in ECDSA. To prevent this, $P_2$ must add $\rho \cdot q$ inside the encryption for a $\rho$ taken at random. In Lindell, 2021, they suggest to choose $\rho \stackrel{R}{\leftarrow} \mathbb{Z}_{q^2}$.</li>
-<li>$P_2$ may send a incorrect $s&rsquo;$. Therefore, $P_1$ must check that the signature is correct. However, $P_2$ could adversarially choose $s&rsquo;$ so that $P_1$ accepts or rejects the signature $s = k_1^{-1} \cdot s&rsquo;$ given a condition on $x_1$ known to $P_2$. In that case, $P_2$ can extract information about $x_1$.</li>
+<li>In the distributed signing, $P_2$ can compute a value $s' = k_2^{-1} \cdot m' + k_2^{-1} \cdot r \cdot x_2 \cdot x_1$ using Pallier homomorphic properties to obtain a ciphertext of it. Then $P_2$ can send this ciphertext to $P_1$ but the decryption of such value can reveal information to $P_1$ because $s'$ does not have a reduction modulo $q$. Remember that the modulus in Paillier may be different from the modulus used in ECDSA. To prevent this, $P_2$ must add $\rho \cdot q$ inside the encryption for a $\rho$ taken at random. In Lindell, 2021, they suggest to choose $\rho \stackrel{R}{\leftarrow} \mathbb{Z}_{q^2}$.</li>
+<li>$P_2$ may send a incorrect $s'$. Therefore, $P_1$ must check that the signature is correct. However, $P_2$ could adversarially choose $s'$ so that $P_1$ accepts or rejects the signature $s = k_1^{-1} \cdot s'$ given a condition on $x_1$ known to $P_2$. In that case, $P_2$ can extract information about $x_1$.</li>
 </ul>
 </li>
 <li>In the signing protocol:
@@ -393,8 +396,8 @@ An instantiation of this functionality can be found in Lindell (2021), Protocol 
 <li>$P_1$ and $P_2$ check if the session ID $sid$ has not been used before. If it happens, the protocols shouldn&rsquo;t be executed.</li>
 <li>Execute all the ZK-proofs in the signing protocol <strong>[List all the ZK-proofs in detail]</strong>.</li>
 <li>In $P_2$&rsquo;s second message, it should veryfy that $\gcd(\tilde{r}, N) = 1$.</li>
-<li>Check that the signature $s = \min\{s&rsquo;&rsquo;, q - s&rsquo;&rsquo;\}$. Remember that for a signature $(r, s)$, $(r, -s)$ is also a valid signature.</li>
-<li>To compute the signature correctly, the $N$ choosen for Paillier must hold $N &gt; q^3 + q^2$.</li>
+<li>Check that the signature $s = \min\\{s'', q - s''\\}$. Remember that for a signature $(r, s)$, $(r, -s)$ is also a valid signature.</li>
+<li>To compute the signature correctly, the $N$ choosen for Paillier must hold $N > q^3 + q^2$.</li>
 </ul>
 </li>
 </ul>

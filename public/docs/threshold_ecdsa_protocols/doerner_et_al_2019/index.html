@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head>
+<head><script src="/mpcsecurity/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=mpcsecurity/livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="$(t, n)$ case from Doerner et al. (2019) #  In this work, Doerner et al. continue to improve the previous version of the protocol presented in Doerner et al. (2018) and generalize it to the arbitrary threshold case $(2, n)$. They prove the security of their protocol under CDH assumption in the Global Random Oracle model. At the end of the work, they propose a series of experiments showing that their solution is practical even when using low-power devices.">
+<meta name="description" content="
+  $(t, n)$ case from Doerner et al. (2019)
+  #
+
+In this work, Doerner et al. continue to improve the previous version of the protocol presented in Doerner et al. (2018) and generalize it to the arbitrary threshold case $(2, n)$. They prove the security of their protocol under CDH assumption in the Global Random Oracle model. At the end of the work, they propose a series of experiments showing that their solution is practical even when using low-power devices.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-          
-          
-          delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-              {left: '\\(', right: '\\)', display: false},
-              {left: '\\[', right: '\\]', display: true}
-          ],
-          
-          throwOnError : false
-        });
-    });
-</script><meta property="og:title" content="$(t, n)$ case from Doerner et al. (2019)" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" />
-
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/">
+  <meta property="og:site_name" content="MPC Security">
+  <meta property="og:title" content="$(t, n)$ case from Doerner et al. (2019)">
+  <meta property="og:description" content="$(t, n)$ case from Doerner et al. (2019) # In this work, Doerner et al. continue to improve the previous version of the protocol presented in Doerner et al. (2018) and generalize it to the arbitrary threshold case $(2, n)$. They prove the security of their protocol under CDH assumption in the Global Random Oracle model. At the end of the work, they propose a series of experiments showing that their solution is practical even when using low-power devices.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
 <title>$(t, n)$ case from Doerner et al. (2019) | MPC Security</title>
-<link rel="manifest" href="/hashcloak.com/mpcsecurity/manifest.json">
-<link rel="icon" href="/hashcloak.com/mpcsecurity/favicon.png" >
-<link rel="stylesheet" href="/hashcloak.com/mpcsecurity/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" >
-  <script defer src="/hashcloak.com/mpcsecurity/flexsearch.min.js"></script>
-  <script defer src="/hashcloak.com/mpcsecurity/en.search.min.800f510cb1ef744253add5e2eba2d6fe970e0277bb805a8aa70d8e9f46d7a494.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/index.xml" title="MPC Security" />
+<link rel="icon" href="/mpcsecurity/favicon.png" >
+<link rel="manifest" href="/mpcsecurity/manifest.json">
+<link rel="canonical" href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/">
+<link rel="stylesheet" href="/mpcsecurity/book.min.a7616cf2799b58bddffce9438e31fdbfc6393687cfc0950a4a17cd1cce7e35f6.css" integrity="sha256-p2Fs8nmbWL3f/OlDjjH9v8Y5NofPwJUKShfNHM5&#43;NfY=" crossorigin="anonymous">
+  <script defer src="/mpcsecurity/fuse.min.js"></script>
+  <script defer src="/mpcsecurity/en.search.min.ce83cbe310910da659cfa1905578c106c8f81ae8c2aff7fc17b79a91de6eceda.js" integrity="sha256-zoPL4xCRDaZZz6GQVXjBBsj4GujCr/f8F7eakd5uzto=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/index.xml" title="MPC Security" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
 -->
+  
+  
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)'], ['$', '$']]     
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+
+
   
 </head>
 <body dir="ltr">
@@ -52,16 +55,17 @@ https://github.com/alex-shpak/hugo-book
         
   <nav>
 <h2 class="book-brand">
-  <a class="flex align-center" href="hashcloak.com/mpcsecurity/"><img src="/hashcloak.com/mpcsecurity/hashcloak_logo_colour-logo.png" alt="Logo" /><span>MPC Security</span>
+  <a class="flex align-center" href="/mpcsecurity/"><img src="/mpcsecurity/hashcloak_logo_colour-logo-text.png" alt="Logo" class="book-icon" /><span>MPC Security</span>
   </a>
 </h2>
 
 
-<div class="book-search">
+<div class="book-search hidden">
   <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
   <div class="book-search-spinner hidden"></div>
   <ul id="book-search-results"></ul>
 </div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
 
 
 
@@ -74,7 +78,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
 
 
 
@@ -88,7 +91,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/" class="">Threshold ECDSA protocols</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/" class="">Threshold ECDSA protocols</a>
   
 
           
@@ -101,25 +104,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="">$(2, 2)$ case from Lindell (2021)</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="">$(2, n)$ case from Doerner et al. (2018)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="">$(2, 2)$ case from Lindell (2021)</a>
   
 
           
@@ -137,7 +122,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="">$(t, n)$ case from Canetti et al. (2021)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="">$(2, n)$ case from Doerner et al. (2018)</a>
   
 
           
@@ -155,7 +140,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="active">$(t, n)$ case from Doerner et al. (2019)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="">$(t, n)$ case from Canetti et al. (2021)</a>
   
 
           
@@ -173,7 +158,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="active">$(t, n)$ case from Doerner et al. (2019)</a>
   
 
           
@@ -191,7 +176,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
   
 
           
@@ -209,7 +194,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
   
 
           
@@ -227,7 +212,25 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="">$(t, n)$ case from Lindell et al. (2018)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="">$(t, n)$ case from Lindell et al. (2018)</a>
   
 
           
@@ -278,7 +281,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-
 </nav>
 
 
@@ -294,16 +296,17 @@ https://github.com/alex-shpak/hugo-book
     <div class="book-page">
       <header class="book-header">
         
-  <div class="flex align-center justify-between">
+  
+<div class="flex align-center justify-between">
   <label for="menu-control">
-    <img src="/hashcloak.com/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
+    <img src="/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>$(t, n)$ case from Doerner et al. (2019)</strong>
+  <h3>$(t, n)$ case from Doerner et al. (2019)</h3>
 
   <label for="toc-control">
     
-    <img src="/hashcloak.com/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    <img src="/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
@@ -339,7 +342,7 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="t-n-case-from-doerner-et-al-2019">
+  <article class="markdown book-article"><h1 id="t-n-case-from-doerner-et-al-2019">
   $(t, n)$ case from Doerner et al. (2019)
   <a class="anchor" href="#t-n-case-from-doerner-et-al-2019">#</a>
 </h1>

@@ -1,6 +1,5 @@
 ---
 title: $(t, n)$ case from Doerner et al. (2023)
-math: true
 ---
 
 # $(t, n)$ case from Doerner et al. (2023)
@@ -19,7 +18,7 @@ where $a$ and $b$ are publicly known values. Therefore, if we have secret shares
 
 The work of Doerner et al. (2023) focuses on constructing the ECDSA tuples and checking that such tuple is consistent with the public key $\textsf{pk}$ and the value $R = r \cdot G$ generated in the signing process. This is done by using pairwise statistical consistency checks from Doerner et al. (2019). Also, the generation of ECDSA tuples is done by using pairwise oblivious linear evaluation (VOLE).
 
-The protocol uses the functionality $\mathcal{F}\_\textsf{DLKeyGen}(\mathcal{G}, n, t)$ to generate Shamir shares of keys for discrete logarithm cryptosystems. This functionality was presented in the previous section of this document, and we refer to the reader there. The protocol also relies on a standard commitment functionality $\mathcal{F}_\textsf{Com}$. 
+The protocol uses the functionality $\mathcal{F}_\textsf{DLKeyGen}(\mathcal{G}, n, t)$ to generate Shamir shares of keys for discrete logarithm cryptosystems. This functionality was presented in the previous section of this document, and we refer to the reader there. The protocol also relies on a standard commitment functionality $\mathcal{F}_\textsf{Com}$. 
 
 The protocol uses a functionality to sample uniform secret-shares of zero in a non-interactive way, which can be realized in the $\mathcal{F}_\textsf{Com}$-hybrid random oracle model. Next, we present the functionality for distributing shares of zero.
 
@@ -40,7 +39,7 @@ $$
 and
 
 $$
-\sum_{i \in \mathbf{P}} v_i = \sum_{i \in \mathbf{P}} \textsf{sk}\_i \cdot \sum_{i \in \mathbf{P}} \phi_i.
+\sum_{i \in \mathbf{P}} v_i = \sum_{i \in \mathbf{P}} \textsf{sk}_i \cdot \sum_{i \in \mathbf{P}} \phi_i.
 $$
 
 Having these ingredients, we can compute a valid signature for $m$ under $\textsf{pk} = \textsf{sk} \cdot G$ and $R = r \cdot G$ by doing
@@ -49,7 +48,7 @@ $$
 \frac{\sum_{i \in \mathbf{P}} \left( \textsf{SHA}(m) \cdot \phi_i + r^\textsf{x} \cdot v_i \right)}{\sum_{i \in \mathbf{P}} u_i} = \frac{\textsf{SHA}(m) + r^\textsf{x} \cdot \textsf{sk}}{r}.
 $$
 
-The only thing that we have left is to check that $\textsf{pk} = \textsf{sk} \cdot G$ and $R = r \cdot G$ were consistently generated and that any party added any offset in the middle of the process. The latter concern can be addressed by testing that the final signature is a valid signature for the message $m$ by verifying the signature as in the standalone ECDSA. For the latter, the authors propose an additional check as follows. Suppose that $\mathcal{P}\_i$ has $\mathbf{c}\_{i, j}^\textsf{u}$ and $\mathbf{c}\_{i, j}^\textsf{v}$, and each party $\mathcal{P}\_j$ has $\mathbf{d}\_{j, i}^\textsf{u}$ and $\mathbf{d}\_{j, i}^\textsf{v}$ such that $\mathbf{c}\_{i, j}^\textsf{u} = r_i \cdot \phi_j - \mathbf{d}\_{j, i}^\textsf{u}$ and $\mathbf{c}\_{i, j}^\textsf{v} = \textsf{sk}\_i \cdot \phi_j - \mathbf{d}\_{j, i}^\textsf{v}$. Having this correlations, $\mathcal{P}\_i$ sends $R_i = r_i \cdot G$ and $\textsf{pk}\_i = \textsf{sk}\_i \cdot G$, and then send values $\mathbf{\Gamma}\_{i, j}^\textsf{u} = \mathbf{c}\_{i, j}^\textsf{u} \cdot G$ and $\mathbf{\Gamma}\_{i, j}^\textsf{v} = \mathbf{c}\_{i, j}^\textsf{v} \cdot G$ to authenticate the values of $R_i$ and $\textsf{pk}\_i$ by verifying the equality $\mathbf{\Gamma}\_{i, j}^\textsf{u} = R_i \cdot \phi_j - \mathbf{d}\_{i, j}^\textsf{u} \cdot G$. Notice that the probability that this equality holds when $\mathcal{P}\_i$ sending $R_i \neq r_i \cdot G$ is negligible in $\kappa$. A similar check can be performed by $\mathcal{P}_j$.
+The only thing that we have left is to check that $\textsf{pk} = \textsf{sk} \cdot G$ and $R = r \cdot G$ were consistently generated and that any party added any offset in the middle of the process. The latter concern can be addressed by testing that the final signature is a valid signature for the message $m$ by verifying the signature as in the standalone ECDSA. For the latter, the authors propose an additional check as follows. Suppose that $\mathcal{P}_i$ has $\mathbf{c}_{i, j}^\textsf{u}$ and $\mathbf{c}_{i, j}^\textsf{v}$, and each party $\mathcal{P}_j$ has $\mathbf{d}_{j, i}^\textsf{u}$ and $\mathbf{d}_{j, i}^\textsf{v}$ such that $\mathbf{c}_{i, j}^\textsf{u} = r_i \cdot \phi_j - \mathbf{d}_{j, i}^\textsf{u}$ and $\mathbf{c}_{i, j}^\textsf{v} = \textsf{sk}_i \cdot \phi_j - \mathbf{d}_{j, i}^\textsf{v}$. Having this correlations, $\mathcal{P}_i$ sends $R_i = r_i \cdot G$ and $\textsf{pk}_i = \textsf{sk}_i \cdot G$, and then send values $\mathbf{\Gamma}_{i, j}^\textsf{u} = \mathbf{c}_{i, j}^\textsf{u} \cdot G$ and $\mathbf{\Gamma}_{i, j}^\textsf{v} = \mathbf{c}_{i, j}^\textsf{v} \cdot G$ to authenticate the values of $R_i$ and $\textsf{pk}_i$ by verifying the equality $\mathbf{\Gamma}_{i, j}^\textsf{u} = R_i \cdot \phi_j - \mathbf{d}_{i, j}^\textsf{u} \cdot G$. Notice that the probability that this equality holds when $\mathcal{P}_i$ sending $R_i \neq r_i \cdot G$ is negligible in $\kappa$. A similar check can be performed by $\mathcal{P}_j$.
 
 Next, we present the three-round protocol.
 

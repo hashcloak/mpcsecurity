@@ -1,47 +1,57 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head>
+<head><script src="/mpcsecurity/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=mpcsecurity/livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="$(t, n)$ case from Canetti et al. (2021) #  In this work, Canetti et al. present a protocol for Threshold ECDSA signatures with the following characteristics:
- Only the last round of the protocol needs knowledge of the message to be signed. Therefore, all the previous rounds can be executed in a preprocessing stage. The protocol supports adaptative corruption in the signing phase. In this case, the authors provide a mechanism to refresh the auxiliary information and keys used in the signing phase to provide security against an attacker that corrupts a different set of parties over time.">
+<meta name="description" content="
+  $(t, n)$ case from Canetti et al. (2021)
+  #
+
+In this work, Canetti et al. present a protocol for Threshold ECDSA signatures with the following characteristics:
+
+Only the last round of the protocol needs knowledge of the message to be signed. Therefore, all the previous rounds can be executed in a preprocessing stage.
+The protocol supports adaptative corruption in the signing phase. In this case, the authors provide a mechanism to refresh the auxiliary information and keys used in the signing phase to provide security against an attacker that corrupts a different set of parties over time.
+The protocol realizes an ideal threshold signing functionality in the UC framework.
+The protocol achieves identifiable abort in the signing process.
+
+The above characteristics make this protocol compatible with solutions that use cold wallets in cryptocurrencies given that the protocols are non-interactive (i.e. only the last round requires the knowledge of the message to be signed). To allow a non-interactive signing phase, there is a process of pre-signing which can be computed without any knowledge of the message. The parties engage in a protocol $L$ times in a concurrent way to obtain pre-signing data for $L$ signatures. Once the message is known, the parties retrieve one tuple of the generated pre-signing data and use it to generate a signature. Then, the parties erase the pre-signing information once it is used.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-          
-          
-          delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-              {left: '\\(', right: '\\)', display: false},
-              {left: '\\[', right: '\\]', display: true}
-          ],
-          
-          throwOnError : false
-        });
-    });
-</script><meta property="og:title" content="$(t, n)$ case from Canetti et al. (2021)" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" />
-
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/">
+  <meta property="og:site_name" content="MPC Security">
+  <meta property="og:title" content="$(t, n)$ case from Canetti et al. (2021)">
+  <meta property="og:description" content="$(t, n)$ case from Canetti et al. (2021) # In this work, Canetti et al. present a protocol for Threshold ECDSA signatures with the following characteristics:
+Only the last round of the protocol needs knowledge of the message to be signed. Therefore, all the previous rounds can be executed in a preprocessing stage. The protocol supports adaptative corruption in the signing phase. In this case, the authors provide a mechanism to refresh the auxiliary information and keys used in the signing phase to provide security against an attacker that corrupts a different set of parties over time. The protocol realizes an ideal threshold signing functionality in the UC framework. The protocol achieves identifiable abort in the signing process. The above characteristics make this protocol compatible with solutions that use cold wallets in cryptocurrencies given that the protocols are non-interactive (i.e. only the last round requires the knowledge of the message to be signed). To allow a non-interactive signing phase, there is a process of pre-signing which can be computed without any knowledge of the message. The parties engage in a protocol $L$ times in a concurrent way to obtain pre-signing data for $L$ signatures. Once the message is known, the parties retrieve one tuple of the generated pre-signing data and use it to generate a signature. Then, the parties erase the pre-signing information once it is used.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
 <title>$(t, n)$ case from Canetti et al. (2021) | MPC Security</title>
-<link rel="manifest" href="/hashcloak.com/mpcsecurity/manifest.json">
-<link rel="icon" href="/hashcloak.com/mpcsecurity/favicon.png" >
-<link rel="stylesheet" href="/hashcloak.com/mpcsecurity/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" >
-  <script defer src="/hashcloak.com/mpcsecurity/flexsearch.min.js"></script>
-  <script defer src="/hashcloak.com/mpcsecurity/en.search.min.800f510cb1ef744253add5e2eba2d6fe970e0277bb805a8aa70d8e9f46d7a494.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/index.xml" title="MPC Security" />
+<link rel="icon" href="/mpcsecurity/favicon.png" >
+<link rel="manifest" href="/mpcsecurity/manifest.json">
+<link rel="canonical" href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/">
+<link rel="stylesheet" href="/mpcsecurity/book.min.a7616cf2799b58bddffce9438e31fdbfc6393687cfc0950a4a17cd1cce7e35f6.css" integrity="sha256-p2Fs8nmbWL3f/OlDjjH9v8Y5NofPwJUKShfNHM5&#43;NfY=" crossorigin="anonymous">
+  <script defer src="/mpcsecurity/fuse.min.js"></script>
+  <script defer src="/mpcsecurity/en.search.min.ce83cbe310910da659cfa1905578c106c8f81ae8c2aff7fc17b79a91de6eceda.js" integrity="sha256-zoPL4xCRDaZZz6GQVXjBBsj4GujCr/f8F7eakd5uzto=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/index.xml" title="MPC Security" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
 -->
+  
+  
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['\\(', '\\)'], ['$', '$']]     
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+
+
   
 </head>
 <body dir="ltr">
@@ -53,16 +63,17 @@ https://github.com/alex-shpak/hugo-book
         
   <nav>
 <h2 class="book-brand">
-  <a class="flex align-center" href="hashcloak.com/mpcsecurity/"><img src="/hashcloak.com/mpcsecurity/hashcloak_logo_colour-logo.png" alt="Logo" /><span>MPC Security</span>
+  <a class="flex align-center" href="/mpcsecurity/"><img src="/mpcsecurity/hashcloak_logo_colour-logo-text.png" alt="Logo" class="book-icon" /><span>MPC Security</span>
   </a>
 </h2>
 
 
-<div class="book-search">
+<div class="book-search hidden">
   <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
   <div class="book-search-spinner hidden"></div>
   <ul id="book-search-results"></ul>
 </div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
 
 
 
@@ -75,7 +86,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
 
 
 
@@ -89,7 +99,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/" class="">Threshold ECDSA protocols</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/" class="">Threshold ECDSA protocols</a>
   
 
           
@@ -102,25 +112,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="">$(2, 2)$ case from Lindell (2021)</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="">$(2, n)$ case from Doerner et al. (2018)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2021/" class="">$(2, 2)$ case from Lindell (2021)</a>
   
 
           
@@ -138,7 +130,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="active">$(t, n)$ case from Canetti et al. (2021)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2018/" class="">$(2, n)$ case from Doerner et al. (2018)</a>
   
 
           
@@ -156,7 +148,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="">$(t, n)$ case from Doerner et al. (2019)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/canetti_et_al_2021/" class="active">$(t, n)$ case from Canetti et al. (2021)</a>
   
 
           
@@ -174,7 +166,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2019/" class="">$(t, n)$ case from Doerner et al. (2019)</a>
   
 
           
@@ -192,7 +184,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/doerner_et_al_2023/" class="">$(t, n)$ case from Doerner et al. (2023)</a>
   
 
           
@@ -210,7 +202,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2019/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2019)</a>
   
 
           
@@ -228,7 +220,25 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="">$(t, n)$ case from Lindell et al. (2018)</a>
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/" class="">$(t, n)$ case from Gennaro &amp; Goldfeder (2020)</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/mpcsecurity/docs/threshold_ecdsa_protocols/lindell_2018/" class="">$(t, n)$ case from Lindell et al. (2018)</a>
   
 
           
@@ -279,7 +289,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-
 </nav>
 
 
@@ -295,16 +304,17 @@ https://github.com/alex-shpak/hugo-book
     <div class="book-page">
       <header class="book-header">
         
-  <div class="flex align-center justify-between">
+  
+<div class="flex align-center justify-between">
   <label for="menu-control">
-    <img src="/hashcloak.com/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
+    <img src="/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>$(t, n)$ case from Canetti et al. (2021)</strong>
+  <h3>$(t, n)$ case from Canetti et al. (2021)</h3>
 
   <label for="toc-control">
     
-    <img src="/hashcloak.com/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    <img src="/mpcsecurity/svg/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
@@ -325,18 +335,18 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#protocol-description">Protocol description</a></li>
     <li><a href="#key-generation">Key generation</a></li>
     <li><a href="#key-refresh-and-auxiliary-information">Key refresh and auxiliary information</a></li>
-    <li><a href="#three-round-presignin-with-on2-identification-cost">Three-round presignin with $O(n^2)$ identification cost</a>
+    <li><a href="#three-round-presignin-with-on2-identification-cost">Three-round presignin with  identification cost</a>
       <ul>
         <li><a href="#signing">Signing</a></li>
       </ul>
     </li>
-    <li><a href="#six-round-presigning-with-on-identification-cost">Six-round presigning with $O(n)$ identification cost</a>
+    <li><a href="#six-round-presigning-with-on-identification-cost">Six-round presigning with  identification cost</a>
       <ul>
         <li><a href="#identification-process">Identification process</a></li>
         <li><a href="#signing-1">Signing</a></li>
       </ul>
     </li>
-    <li><a href="#sigma-protocols">$\Sigma$-protocols</a>
+    <li><a href="#sigma-protocols">-protocols</a>
       <ul>
         <li><a href="#paillier-encryption-in-range">Paillier encryption in range</a></li>
         <li><a href="#paillier-operation-with-group-commitment-in-range">Paillier operation with group commitment in range</a></li>
@@ -365,7 +375,7 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="t-n-case-from-canetti-et-al-2021">
+  <article class="markdown book-article"><h1 id="t-n-case-from-canetti-et-al-2021">
   $(t, n)$ case from Canetti et al. (2021)
   <a class="anchor" href="#t-n-case-from-canetti-et-al-2021">#</a>
 </h1>
@@ -469,7 +479,7 @@ https://github.com/alex-shpak/hugo-book
   Paillier operation with group commitment in range
   <a class="anchor" href="#paillier-operation-with-group-commitment-in-range">#</a>
 </h3>
-<p>This $\Sigma$-protocol executes on tuples of the form $(\mathcal{I}, \mathcal{J}, C, Y, X; x, y, k, r_0)$ where $\mathcal{I} = \pm 2^l$ and $\mathcal{J} = \pm 2^{l&rsquo;}$ satisfying the relation $R_{\textsf{aff-g}}$. In this proof, the Prover tries to convince the Verifier that he knows $x \in \pm 2^{l}$ and $y \in \pm 2^{l&rsquo;}$ such that $X = g^x$ and $Y = \textsf{enc}_{N_1}(y) \in \mathbb{Z}_{N_1^2}$ under the Paillier encryption scheme, and $C, D \in \mathbb{Z}_{N_0^2}$ such that $D = C^x (1 + N_0)^y \cdot \rho^{N_0} \mod N_0^2$, for some $\rho \in \mathbb{Z}_{N_0}^*$.</p>
+<p>This $\Sigma$-protocol executes on tuples of the form $(\mathcal{I}, \mathcal{J}, C, Y, X; x, y, k, r_0)$ where $\mathcal{I} = \pm 2^l$ and $\mathcal{J} = \pm 2^{l'}$ satisfying the relation $R_{\textsf{aff-g}}$. In this proof, the Prover tries to convince the Verifier that he knows $x \in \pm 2^{l}$ and $y \in \pm 2^{l'}$ such that $X = g^x$ and $Y = \textsf{enc}_{N_1}(y) \in \mathbb{Z}_{N_1^2}$ under the Paillier encryption scheme, and $C, D \in \mathbb{Z}_{N_0^2}$ such that $D = C^x (1 + N_0)^y \cdot \rho^{N_0} \mod N_0^2$, for some $\rho \in \mathbb{Z}_{N_0}^*$.</p>
 <p><img src="ZK_Aff_G.png" alt="Paillier Operation with Group Commitment" /></p>
 <h3 id="paillier-blum-modulus-in-zero-knowledge">
   Paillier-Blum modulus in zero-knowledge
@@ -590,7 +600,7 @@ https://github.com/alex-shpak/hugo-book
 <p>If any of the previous checks fails, the party detecting the failure reports the corrupt party according to the check computed.</p>
 <p>In this protocol, there are the following typos in Round 1:</p>
 <ul>
-<li>In the first proof, the correct instruction would be $\psi&rsquo;_i = \mathcal{M}(\texttt{prove}, \Pi^{\textsf{log}}, (ssid, i), (g^{b_i}, Y_i, \tilde{Y}_i; b_i)$.</li>
+<li>In the first proof, the correct instruction would be $\psi'_i = \mathcal{M}(\texttt{prove}, \Pi^{\textsf{log}}, (ssid, i), (g^{b_i}, Y_i, \tilde{Y}_i; b_i)$.</li>
 <li>In the second proof, the correct instruction would be $\psi_{i} = \mathcal{M}(\texttt{prove}, \Pi^{\textsf{Nth}}, (ssid, i), (N_i, \rho_{i}^{N_i}), \rho_{i})$.</li>
 <li>In the third proof, the correct instruction would be $\psi_{i, j} = \mathcal{M}(\texttt{prove}, \Pi^{\textsf{Nth}}, (ssid, i), (N_i, \hat{\mu}_{i,j}^{N_i}), \hat{\mu}_{i, j})$, for $j \neq i$.</li>
 </ul>
@@ -620,7 +630,7 @@ https://github.com/alex-shpak/hugo-book
 <li>In Round 1, the party proves that he knows $\lambda$ such that $s_i = t_i^\lambda \mod N_i$.</li>
 <li>In Round 1, the party commits to the first message $A_i^j$ of the $\Pi^\textsf{sch}$ protocol.</li>
 <li>In Round 3, the party proves in zero-knowledge that the tuple $(N_i; p_i, q_i)$ belongs to the $R_\textsf{mod}$ relation.</li>
-<li>In Round 3, the party proves in zero-knowledge that he knows $p_i, q_i &gt; 2^\kappa$, such that $N_i = p_i q_i$.</li>
+<li>In Round 3, the party proves in zero-knowledge that he knows $p_i, q_i > 2^\kappa$, such that $N_i = p_i q_i$.</li>
 <li>In Round 3, the party proves in zero-knowledge that he knows the discrete logarithm of $X_i^j.$</li>
 <li>In Round 3, the party proves in zero-knowledge that he knows the discrete logarithm of $Y_i$.</li>
 </ul>
@@ -738,18 +748,18 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#protocol-description">Protocol description</a></li>
     <li><a href="#key-generation">Key generation</a></li>
     <li><a href="#key-refresh-and-auxiliary-information">Key refresh and auxiliary information</a></li>
-    <li><a href="#three-round-presignin-with-on2-identification-cost">Three-round presignin with $O(n^2)$ identification cost</a>
+    <li><a href="#three-round-presignin-with-on2-identification-cost">Three-round presignin with  identification cost</a>
       <ul>
         <li><a href="#signing">Signing</a></li>
       </ul>
     </li>
-    <li><a href="#six-round-presigning-with-on-identification-cost">Six-round presigning with $O(n)$ identification cost</a>
+    <li><a href="#six-round-presigning-with-on-identification-cost">Six-round presigning with  identification cost</a>
       <ul>
         <li><a href="#identification-process">Identification process</a></li>
         <li><a href="#signing-1">Signing</a></li>
       </ul>
     </li>
-    <li><a href="#sigma-protocols">$\Sigma$-protocols</a>
+    <li><a href="#sigma-protocols">-protocols</a>
       <ul>
         <li><a href="#paillier-encryption-in-range">Paillier encryption in range</a></li>
         <li><a href="#paillier-operation-with-group-commitment-in-range">Paillier operation with group commitment in range</a></li>

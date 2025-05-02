@@ -1,6 +1,5 @@
 ---
 title: $(t, n)$ case from Gennaro & Goldfeder (2020)
-math: true
 ---
 
 # $(t, n)$ case from Gennaro & Goldfeder (2020)

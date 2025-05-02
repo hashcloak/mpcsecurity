@@ -5,25 +5,25 @@ math: true
 
 # $(2, 2)$ case from Lindell (2021)
 
-In this case, we will have two parties $P_1$ and $P_2$. Both parties will have a secret key that is secret-shared among them which means that $P_1$ will hold a value $x_1 \in \mathbb{Z}_q$ and $P_2$ will hold a value $x_2 \in \mathbb{Z}_q$. The idea is to use both pieces of data to compute the signature of a jointly known message. The main difficulty that can be found in this scheme is that for the signature we need the inverse of a random value $k \in \mathbb{Z}_q^\*$ that is secret-shared among the parties. Concretely, for the signing phase, we need to compute $k^{-1}$ for a value $k \in \mathbb{Z}_q^*$ that is shared among the parties ($P_1$ will hold a share $k_1$ and $P_2$ will hold a share $k_2$). This process is very hard considering an additive secret-sharing scheme. For that reason, the work of Lindell (2021) considers a multiplicative secret-sharing scheme, which will allow us to compute this inverse in a more easy way.
+In this case, we will have two parties $P_1$ and $P_2$. Both parties will have a secret key that is secret-shared among them which means that $P_1$ will hold a value $x_1 \in \mathbb{Z}_q$ and $P_2$ will hold a value $x_2 \in \mathbb{Z}_q$. The idea is to use both pieces of data to compute the signature of a jointly known message. The main difficulty that can be found in this scheme is that for the signature we need the inverse of a random value $k \in \mathbb{Z}_q^*$ that is secret-shared among the parties. Concretely, for the signing phase, we need to compute $k^{-1}$ for a value $k \in \mathbb{Z}_q^*$ that is shared among the parties ($P_1$ will hold a share $k_1$ and $P_2$ will hold a share $k_2$). This process is very hard considering an additive secret-sharing scheme. For that reason, the work of Lindell (2021) considers a multiplicative secret-sharing scheme, which will allow us to compute this inverse in a more easy way.
 
 To completely specify the key generation and signing protocols, they significantly use the Paillier public-key homomorphic encryption scheme. Such encryption scheme will be specified using the traditional triple of algorithms $(\textsf{Gen}, \textsf{Enc}, \textsf{Dec})$. Here, we denote by $\oplus$ the operation between ciphertexts that produces the encryption of the sum of the underlying clear messages, and similarly, we denote by $\odot$ the multiplication of ciphertext that obtains the encryption of the product of the underlying messages.
 
 Additionally, we first need to describe ideal functionalities for some zero-knowledge proofs used to compute both protocols. Those ideal functionalities are:
-- $\mathcal{F}\_{\textsf{com-zk}}^{R_{DL}}$: This ideal functionality will be defined for testing in the following relation:
+- $\mathcal{F}_{\textsf{com-zk}}^{R_{DL}}$: This ideal functionality will be defined for testing in the following relation:
     $$
-    R\_{DL} = \left\\\{\left(\mathbb{G}, G, q, P, w \right) \\\;\vert\\\; P = w \cdot G\right\\\}.
+    R_{DL} = \left\{\left(\mathbb{G}, G, q, P, w \right) \;\vert\; P = w \cdot G\right\}.
     $$
     Therefore, this zero-knowledge proof will determine if some witness secret value $w$ is the discrete logarithm of a value $P$ relative to a cyclic group $\mathbb{G}$ with order $q$ described by the generator $G$. Additionally, this functionality will allow one party to commit to values $P$ and $w$ and then decommit such value for the other party to receive $P$ if the proof confirms that $(P, w)$ fulfills the relation relative to the group $\mathbb{G}$ specified as above. This proof can be instantiated using classic protocols as presented in [Schnorr (1989)](https://link.springer.com/chapter/10.1007/0-387-34805-0_22).
-- $\mathcal{F}\_{\textsf{zk}}^{R_{DL}}$: this functionality has the same zero-knowledge properties as the above functionality but without the commitment section. This proof can be instantiated using the implementation of Schnorr (1989) as above.
+- $\mathcal{F}_{\textsf{zk}}^{R_{DL}}$: this functionality has the same zero-knowledge properties as the above functionality but without the commitment section. This proof can be instantiated using the implementation of Schnorr (1989) as above.
 - Proof for $L_P$: we need a zero-knowledge proof to test that a number $N$ is a valid Paillier public key. This can be done by computing a zero-knowledge proof for the following language:
     $$
-    L_P = \left\\\{N \\; \vert \\; \gcd(N, \phi(N)) = 1 \right\\\}
+    L_P = \left\{N \\; \vert \\; \gcd(N, \phi(N)) = 1 \right\}
     $$
     This proof can be generated as presented in [Hazay et al. (2011)](https://eprint.iacr.org/2011/494).
 - Proof for $L_{PDL}$: we need to prove in zero-knowledge that a ciphertext is the encryption of the discrete logarithm of a specified point under a public key $pk$ using the Paillier homomorphic encryption scheme. Concretely, the language for this zero-knowledge proof can be described as follows:
     $$
-    L_{PDL} = \left\\\{ \left(c, pk, Q_1, \mathbb{G}, G, q \right) \\\; \vert \\\; \exists (x_1, r), c = \textsf{Enc}_{pk}(x_1; r) \\\; \text{and} \\\; Q_1 = x_1 \cdot G \\\; \text{and} \\\; x_1 \in \mathbb{Z}_q \right\\\}
+    L_{PDL} = \left\{ \left(c, pk, Q_1, \mathbb{G}, G, q \right) \; \vert \; \exists (x_1, r), c = \textsf{Enc}_{pk}(x_1; r) \; \text{and} \; Q_1 = x_1 \cdot G \; \text{and} \; x_1 \in \mathbb{Z}_q \right\}
     $$
     An instantiation of this functionality can be found in Lindell (2021), Protocol 6.1.
 

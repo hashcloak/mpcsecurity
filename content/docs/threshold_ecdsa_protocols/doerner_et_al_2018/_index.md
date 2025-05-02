@@ -1,6 +1,5 @@
 ---
 title: $(2, n)$ case from Doerner et al. (2018)
-math: true
 ---
 
 # $(2, n)$ case from Doerner et al. (2018) 
@@ -9,8 +8,8 @@ The protocol proposed by Doerner et al. (2018) presents a threshold ECDSA protoc
 
 First, we start to show the newest version of the protocol. The parties interact with other three ideal functionalities:
 
-- $\mathcal{F}\_{\textsf{CP}}^{\mathcal{R}\_\textsf{DL}}$: this functionality is the standard committed zero-knowledge functionality which allows committing to the exponent of an elliptic curve point, and also performs a zero-knowledge proof on the relation $\mathcal{R}\_\textsf{DL} = \left\\{(A, B, w ) \\;\vert\\; B = w \cdot A \right\\}.$
-- $\mathcal{F}_{\textsf{Mul}}(q)$: in this functionality, two parties provide elements $a, b \in \mathbb{Z}\_q$ respectively. and the functionality computes $d = a \cdot b - c$ where $c$ is a random element chosen from $\mathbb{Z}_q$. At the end of the protocol, one party learns $d$ and the other party learns $c$. Intuitively, $\mathcal{F}\_{\textsf{Mul}}(q)$ returns to each party an additive share of the product of the inputs they provided to the functionality, i.e., $d$ and $c$ are randomly distributed numbers such that $d + c = a \cdot b$.
+- $\mathcal{F}_{\textsf{CP}}^{\mathcal{R}_\textsf{DL}}$: this functionality is the standard committed zero-knowledge functionality which allows committing to the exponent of an elliptic curve point, and also performs a zero-knowledge proof on the relation $\mathcal{R}_\textsf{DL} = \left\{(A, B, w ) \;\vert\; B = w \cdot A \right\}.$
+- $\mathcal{F}_{\textsf{Mul}}(q)$: in this functionality, two parties provide elements $a, b \in \mathbb{Z}_q$ respectively. and the functionality computes $d = a \cdot b - c$ where $c$ is a random element chosen from $\mathbb{Z}_q$. At the end of the protocol, one party learns $d$ and the other party learns $c$. Intuitively, $\mathcal{F}_{\textsf{Mul}}(q)$ returns to each party an additive share of the product of the inputs they provided to the functionality, i.e., $d$ and $c$ are randomly distributed numbers such that $d + c = a \cdot b$.
 - $\mathcal{F}_{\textsf{DLKeyGen}}(\mathcal{G}, n, 2)$: this is a functionality that generates a key pair $(\textsf{sk}, \textsf{pk})$ for the ECDSA signature scheme and distributes Shamir shares of $\textsf{sk}$ with threshold $t$.
 
 We next present the functionalities mentioned above:

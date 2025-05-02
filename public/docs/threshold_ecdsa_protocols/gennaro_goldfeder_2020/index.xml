@@ -2,9 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>$(t, n)$ case from Gennaro &amp; Goldfeder (2020) on MPC Security</title>
-    <link>hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/</link>
+    <link>//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/</link>
     <description>Recent content in $(t, n)$ case from Gennaro &amp; Goldfeder (2020) on MPC Security</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="hashcloak.com/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="//localhost:1313/mpcsecurity/docs/threshold_ecdsa_protocols/gennaro_goldfeder_2020/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
