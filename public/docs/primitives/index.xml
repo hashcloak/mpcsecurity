@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>MPC Security</title>
+    <title>Cryptographic primitives on MPC Security</title>
     <link>//localhost:1313/mpcsecurity/docs/primitives/</link>
-    <description>Recent content on MPC Security</description>
+    <description>Recent content in Cryptographic primitives on MPC Security</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <atom:link href="//localhost:1313/mpcsecurity/docs/primitives/index.xml" rel="self" type="application/rss+xml" />

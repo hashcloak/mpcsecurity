@@ -33,6 +33,8 @@
   </url><url>
     <loc>//localhost:1313/mpcsecurity/categories/</loc>
   </url><url>
+    <loc>//localhost:1313/mpcsecurity/docs/cb-mpc/</loc>
+  </url><url>
     <loc>//localhost:1313/mpcsecurity/tags/</loc>
   </url>
 </urlset>

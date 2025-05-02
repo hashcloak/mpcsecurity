@@ -3,22 +3,27 @@
 <head><script src="/mpcsecurity/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=mpcsecurity/livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="
+  Notes on Coinbase CB-MPC cryptography audit by Cure53
+  #
+
+Around March 27th, 2025, Coinbase released its Coinbase Open Source MPC Library (CB-MPC). This library provides implementations of primitive and protocols that are commonly used in the Secure Multi-party Computation (MPC) community. At the time of the release, Coinbase also disclosed an audit conducted on CB-MPC by Cure53. This blogpost is a set of notes, explaination and extension of the findings in the mentioned audit based on the video &ldquo;005 Guarding the Gates: Lessons from the Coinbase CB-MPC Cryptography Audit with Nadim Kobeissi&rdquo;.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="//localhost:1313/mpcsecurity/categories/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="//localhost:1313/mpcsecurity/docs/cb-mpc/">
   <meta property="og:site_name" content="MPC Security">
-  <meta property="og:title" content="Categories">
+  <meta property="og:title" content="Notes on Coinbase CB-MPC Cryptography audit">
+  <meta property="og:description" content="Notes on Coinbase CB-MPC cryptography audit by Cure53 # Around March 27th, 2025, Coinbase released its Coinbase Open Source MPC Library (CB-MPC). This library provides implementations of primitive and protocols that are commonly used in the Secure Multi-party Computation (MPC) community. At the time of the release, Coinbase also disclosed an audit conducted on CB-MPC by Cure53. This blogpost is a set of notes, explaination and extension of the findings in the mentioned audit based on the video “005 Guarding the Gates: Lessons from the Coinbase CB-MPC Cryptography Audit with Nadim Kobeissi”.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="website">
-<title>Categories | MPC Security</title>
+<title>Notes on Coinbase CB-MPC Cryptography audit | MPC Security</title>
 <link rel="icon" href="/mpcsecurity/favicon.png" >
 <link rel="manifest" href="/mpcsecurity/manifest.json">
-<link rel="canonical" href="//localhost:1313/mpcsecurity/categories/">
+<link rel="canonical" href="//localhost:1313/mpcsecurity/docs/cb-mpc/">
 <link rel="stylesheet" href="/mpcsecurity/book.min.a7616cf2799b58bddffce9438e31fdbfc6393687cfc0950a4a17cd1cce7e35f6.css" integrity="sha256-p2Fs8nmbWL3f/OlDjjH9v8Y5NofPwJUKShfNHM5&#43;NfY=" crossorigin="anonymous">
   <script defer src="/mpcsecurity/fuse.min.js"></script>
   <script defer src="/mpcsecurity/en.search.min.e384028c9f7a4b61f7558ec9186a379bdbd96c0debaa0768fa0c8cf7e85d5502.js" integrity="sha256-44QCjJ96S2H3VY7JGGo3m9vZbA3rqgdo&#43;gyM9&#43;hdVQI=" crossorigin="anonymous"></script>
-<link rel="alternate" type="application/rss+xml" href="//localhost:1313/mpcsecurity/categories/index.xml" title="MPC Security" />
+<link rel="alternate" type="application/rss+xml" href="//localhost:1313/mpcsecurity/docs/cb-mpc/index.xml" title="MPC Security" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -251,25 +256,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <span>Primitives</span>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/mpcsecurity/docs/cb-mpc/" class="">Notes on Coinbase CB-MPC Cryptography audit</a>
+    <a href="/mpcsecurity/docs/cb-mpc/" class="active">Notes on Coinbase CB-MPC Cryptography audit</a>
   
 
           
@@ -315,7 +302,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/mpcsecurity/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Categories</h3>
+  <h3>Notes on Coinbase CB-MPC Cryptography audit</h3>
 
   <label for="toc-control">
     
@@ -328,29 +315,13 @@ https://github.com/alex-shpak/hugo-book
   
   <aside class="hidden clearfix">
     
-  <nav>
+  
+<nav id="TableOfContents">
   <ul>
-  
-    
-    <li class="book-section-flat">
-      <strong>Categories</strong>
-      <ul>
-      
-      </ul>
-    </li>
-    
-  
-    
-    <li class="book-section-flat">
-      <strong>Tags</strong>
-      <ul>
-      
-      </ul>
-    </li>
-    
-  
+    <li><a href="#cb-mpc">CB-MPC</a></li>
   </ul>
 </nav>
+
 
 
   </aside>
@@ -360,9 +331,56 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  
-
-  
+  <article class="markdown book-article"><h1 id="notes-on-coinbase-cb-mpc-cryptography-audit-by-cure53">
+  Notes on Coinbase CB-MPC cryptography audit by Cure53
+  <a class="anchor" href="#notes-on-coinbase-cb-mpc-cryptography-audit-by-cure53">#</a>
+</h1>
+<p>Around March 27th, 2025, <a href="https://www.coinbase.com">Coinbase</a> released its <a href="https://github.com/coinbase/cb-mpc">Coinbase Open Source MPC Library</a> (CB-MPC). This library provides implementations of primitive and protocols that are commonly used in the Secure Multi-party Computation (MPC) community. At the time of the release, Coinbase also disclosed an <a href="https://github.com/coinbase/cb-mpc/blob/master/docs/cure53-audit.pdf">audit</a> conducted on CB-MPC by <a href="https://cure53.de/">Cure53</a>. This blogpost is a set of notes, explaination and extension of the findings in the mentioned audit based on the video <a href="https://youtu.be/2wR25jFgPSo">&ldquo;005 Guarding the Gates: Lessons from the Coinbase CB-MPC Cryptography Audit with Nadim Kobeissi&rdquo;</a>.</p>
+<h2 id="cb-mpc">
+  CB-MPC
+  <a class="anchor" href="#cb-mpc">#</a>
+</h2>
+<p>The Coinbase Open Source MPC Library is a C++ implementation of a set of MPC protocols and cryptographic primitives. The aim of these implementations is to secure key assets in blockchain applications in a decentralized manner. This library focuses on the following principles: safety, network architecture adaptability, general-purpose usage, and a very comprehensive documentation including both practical and theoretical aspects. The CBC-MPC library includes the following implementations:</p>
+<ul>
+<li>Basic cryptographic primitives:
+<ul>
+<li>Hashing and random oracles.</li>
+<li>Key derivation.</li>
+<li>Pseudorandom generators (PRG) and sampling.</li>
+<li>Signcryption.</li>
+<li>Commitment schemes.</li>
+<li>Broadcast protocols.</li>
+<li>Coin tossing protocols.</li>
+<li>ElGamal commitments.</li>
+<li>Paillier encryption.</li>
+<li>Secret-sharing schemes.</li>
+</ul>
+</li>
+<li>Zero knowledge proofs.
+<ul>
+<li>Elliptic curve $\Sigma$-protocols.</li>
+<li>Paillier proofs.</li>
+<li>Encryption proofs.</li>
+</ul>
+</li>
+<li>Elliptic curve distributed key generation (EC-DKG):
+<ul>
+<li>With additive sharing.</li>
+<li>With threshold sharing.</li>
+</ul>
+</li>
+<li>Threshold ECDSA signature protocols:
+<ul>
+<li>For two-party computation.</li>
+<li>For multi-party computation.</li>
+</ul>
+</li>
+<li>Oblivious transfer (OT) protocols.</li>
+<li>Publicly verifiable encryption.</li>
+<li>Theshold Schnorr signature protocols.</li>
+<li>Threshold encryption protocols.</li>
+</ul>
+</article>
  
       
 
@@ -387,6 +405,10 @@ https://github.com/alex-shpak/hugo-book
 
       
   
+  <div class="book-comments">
+
+</div>
+  
  
 
       <label for="menu-control" class="hidden book-menu-overlay"></label>
@@ -396,29 +418,13 @@ https://github.com/alex-shpak/hugo-book
     <aside class="book-toc">
       <div class="book-toc-content">
         
-  <nav>
+  
+<nav id="TableOfContents">
   <ul>
-  
-    
-    <li class="book-section-flat">
-      <strong>Categories</strong>
-      <ul>
-      
-      </ul>
-    </li>
-    
-  
-    
-    <li class="book-section-flat">
-      <strong>Tags</strong>
-      <ul>
-      
-      </ul>
-    </li>
-    
-  
+    <li><a href="#cb-mpc">CB-MPC</a></li>
   </ul>
 </nav>
+
 
  
       </div>
