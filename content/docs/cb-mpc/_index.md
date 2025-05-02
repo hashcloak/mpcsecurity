@@ -37,5 +37,8 @@ The Coinbase Open Source MPC Library is a C++ implementation of a set of MPC pro
 - Theshold Schnorr signature protocols.
 - Threshold encryption protocols.
 
+The library can be used to implement mechanisms that allow blockchain users to execute functionalities without reconstructing the secret key in a single host. For example, for a customer to send an asset, it needs to sign the transaction with its private key. The problem is that, if an attacker compromises the customer computer, it can stole the private key and move assets without the customer's authorization. Using MPC techniques and distributed key management, the customer can split the key in fragments so that compromising a certain subset of those fragments does not reveal information about the whole secret key. Once the customer wants to sign a transaction, it can run an MPC protocol between the holders of the secret key fragments to obtain the signature. The signature generation protocol is executed in such a way that the secret key is not held by any participant of the protocol at any time during its execution. These techniques reduces theattack surface given that the attacker need to compromise not only one computer but many of them.
+
+## Cure53 audit
 
 
