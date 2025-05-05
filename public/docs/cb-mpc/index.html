@@ -7,13 +7,13 @@
   Notes on Coinbase CB-MPC cryptography audit by Cure53
   #
 
-Around March 27th, 2025, Coinbase released its Coinbase Open Source MPC Library (CB-MPC). This library provides implementations of primitive and protocols that are commonly used in the Secure Multi-party Computation (MPC) community. At the time of the release, Coinbase also disclosed an audit conducted on CB-MPC by Cure53. This blogpost is a set of notes, explaination and extension of the findings in the mentioned audit based on the video &ldquo;005 Guarding the Gates: Lessons from the Coinbase CB-MPC Cryptography Audit with Nadim Kobeissi&rdquo;.">
+Around March 27th, 2025, Coinbase released its Coinbase Open Source MPC Library (CB-MPC). This library provides implementations of primitives and protocols that are commonly used in the Secure Multi-party Computation (MPC) community. At the time of the release, Coinbase also disclosed an audit conducted on CB-MPC by Cure53. This blog post is a set of notes about the findings in the mentioned audit based on the video &ldquo;005 Guarding the Gates: Lessons from the Coinbase CB-MPC Cryptography Audit with Nadim Kobeissi&rdquo;.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="//localhost:1313/mpcsecurity/docs/cb-mpc/">
   <meta property="og:site_name" content="MPC Security">
   <meta property="og:title" content="Notes on Coinbase CB-MPC Cryptography audit">
-  <meta property="og:description" content="Notes on Coinbase CB-MPC cryptography audit by Cure53 # Around March 27th, 2025, Coinbase released its Coinbase Open Source MPC Library (CB-MPC). This library provides implementations of primitive and protocols that are commonly used in the Secure Multi-party Computation (MPC) community. At the time of the release, Coinbase also disclosed an audit conducted on CB-MPC by Cure53. This blogpost is a set of notes, explaination and extension of the findings in the mentioned audit based on the video “005 Guarding the Gates: Lessons from the Coinbase CB-MPC Cryptography Audit with Nadim Kobeissi”.">
+  <meta property="og:description" content="Notes on Coinbase CB-MPC cryptography audit by Cure53 # Around March 27th, 2025, Coinbase released its Coinbase Open Source MPC Library (CB-MPC). This library provides implementations of primitives and protocols that are commonly used in the Secure Multi-party Computation (MPC) community. At the time of the release, Coinbase also disclosed an audit conducted on CB-MPC by Cure53. This blog post is a set of notes about the findings in the mentioned audit based on the video “005 Guarding the Gates: Lessons from the Coinbase CB-MPC Cryptography Audit with Nadim Kobeissi”.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="website">
 <title>Notes on Coinbase CB-MPC Cryptography audit | MPC Security</title>
@@ -22,7 +22,7 @@ Around March 27th, 2025, Coinbase released its Coinbase Open Source MPC Library 
 <link rel="canonical" href="//localhost:1313/mpcsecurity/docs/cb-mpc/">
 <link rel="stylesheet" href="/mpcsecurity/book.min.a7616cf2799b58bddffce9438e31fdbfc6393687cfc0950a4a17cd1cce7e35f6.css" integrity="sha256-p2Fs8nmbWL3f/OlDjjH9v8Y5NofPwJUKShfNHM5&#43;NfY=" crossorigin="anonymous">
   <script defer src="/mpcsecurity/fuse.min.js"></script>
-  <script defer src="/mpcsecurity/en.search.min.e384028c9f7a4b61f7558ec9186a379bdbd96c0debaa0768fa0c8cf7e85d5502.js" integrity="sha256-44QCjJ96S2H3VY7JGGo3m9vZbA3rqgdo&#43;gyM9&#43;hdVQI=" crossorigin="anonymous"></script>
+  <script defer src="/mpcsecurity/en.search.min.78cd6dafe88f33fa7167f06d28068fc0bc65d981eedb1b22b86ac37bd116e96a.js" integrity="sha256-eM1tr&#43;iPM/pxZ/BtKAaPwLxl2YHu2xsiuGrDe9EW6Wo=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="//localhost:1313/mpcsecurity/docs/cb-mpc/index.xml" title="MPC Security" />
 <!--
 Made with Book Theme
@@ -319,6 +319,13 @@ https://github.com/alex-shpak/hugo-book
 <nav id="TableOfContents">
   <ul>
     <li><a href="#cb-mpc">CB-MPC</a></li>
+    <li><a href="#cure53-audit">Cure53 audit</a>
+      <ul>
+        <li><a href="#key-findings">Key findings</a></li>
+        <li><a href="#miscellaneous-findings">Miscellaneous findings</a></li>
+      </ul>
+    </li>
+    <li><a href="#lessons-learned-and-conclusions">Lessons learned and conclusions</a></li>
   </ul>
 </nav>
 
@@ -335,12 +342,12 @@ https://github.com/alex-shpak/hugo-book
   Notes on Coinbase CB-MPC cryptography audit by Cure53
   <a class="anchor" href="#notes-on-coinbase-cb-mpc-cryptography-audit-by-cure53">#</a>
 </h1>
-<p>Around March 27th, 2025, <a href="https://www.coinbase.com">Coinbase</a> released its <a href="https://github.com/coinbase/cb-mpc">Coinbase Open Source MPC Library</a> (CB-MPC). This library provides implementations of primitive and protocols that are commonly used in the Secure Multi-party Computation (MPC) community. At the time of the release, Coinbase also disclosed an <a href="https://github.com/coinbase/cb-mpc/blob/master/docs/cure53-audit.pdf">audit</a> conducted on CB-MPC by <a href="https://cure53.de/">Cure53</a>. This blogpost is a set of notes, explaination and extension of the findings in the mentioned audit based on the video <a href="https://youtu.be/2wR25jFgPSo">&ldquo;005 Guarding the Gates: Lessons from the Coinbase CB-MPC Cryptography Audit with Nadim Kobeissi&rdquo;</a>.</p>
+<p>Around March 27th, 2025, <a href="https://www.coinbase.com">Coinbase</a> released its <a href="https://github.com/coinbase/cb-mpc">Coinbase Open Source MPC Library</a> (CB-MPC). This library provides implementations of primitives and protocols that are commonly used in the Secure Multi-party Computation (MPC) community. At the time of the release, Coinbase also disclosed an <a href="https://github.com/coinbase/cb-mpc/blob/master/docs/cure53-audit.pdf">audit</a> conducted on CB-MPC by <a href="https://cure53.de/">Cure53</a>. This blog post is a set of notes about the findings in the mentioned audit based on the video <a href="https://youtu.be/2wR25jFgPSo">&ldquo;005 Guarding the Gates: Lessons from the Coinbase CB-MPC Cryptography Audit with Nadim Kobeissi&rdquo;</a>.</p>
 <h2 id="cb-mpc">
   CB-MPC
   <a class="anchor" href="#cb-mpc">#</a>
 </h2>
-<p>The Coinbase Open Source MPC Library is a C++ implementation of a set of MPC protocols and cryptographic primitives. The aim of these implementations is to secure key assets in blockchain applications in a decentralized manner. This library focuses on the following principles: safety, network architecture adaptability, general-purpose usage, and a very comprehensive documentation including both practical and theoretical aspects. The CBC-MPC library includes the following implementations:</p>
+<p>The Coinbase Open Source MPC Library is a C++ implementation of MPC protocols and cryptographic primitives. These implementations aim to secure key assets in blockchain applications in a decentralized manner. This library focuses on the following principles: safety, network architecture adaptability, general-purpose usage, and very comprehensive documentation, including both practical and theoretical aspects. The CB-MPC library includes the following implementations:</p>
 <ul>
 <li>Basic cryptographic primitives:
 <ul>
@@ -356,7 +363,7 @@ https://github.com/alex-shpak/hugo-book
 <li>Secret-sharing schemes.</li>
 </ul>
 </li>
-<li>Zero knowledge proofs.
+<li>Zero-knowledge proofs.
 <ul>
 <li>Elliptic curve $\Sigma$-protocols.</li>
 <li>Paillier proofs.</li>
@@ -377,9 +384,54 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>Oblivious transfer (OT) protocols.</li>
 <li>Publicly verifiable encryption.</li>
-<li>Theshold Schnorr signature protocols.</li>
+<li>Threshold Schnorr signature protocols.</li>
 <li>Threshold encryption protocols.</li>
 </ul>
+<p>The library can be used to implement mechanisms that allow blockchain users to execute functionalities without reconstructing the secret key in a single host. For example, for a customer to send an asset, it must sign the transaction with its private key. The problem is that if an attacker compromises the customer&rsquo;s computer, it can steal the private key and move assets without authorization. Using MPC techniques and distributed key management, the customer can split the key into fragments so that compromising a subset of those fragments does not reveal information about the whole secret key. Once the customer wants to sign a transaction, it can run an MPC protocol between the holders of the secret key fragments to obtain the signature. The signature generation protocol is executed so that the secret key is not held by any protocol participant at any time during its execution. These techniques reduce the attack surface, given that the attacker must compromise not only one computer but many of them.</p>
+<h2 id="cure53-audit">
+  Cure53 audit
+  <a class="anchor" href="#cure53-audit">#</a>
+</h2>
+<h3 id="key-findings">
+  Key findings
+  <a class="anchor" href="#key-findings">#</a>
+</h3>
+<h4 id="cbs-02-003-wp1-missing-check-stipulated-by-ecc-refresh-mp-security-proof">
+  CBS-02-003 WP1: Missing check stipulated by <code>ECC-Refresh-MP</code> security proof
+  <a class="anchor" href="#cbs-02-003-wp1-missing-check-stipulated-by-ecc-refresh-mp-security-proof">#</a>
+</h4>
+<p>The <code>ECC-Refresh-MP</code> function refreshes secret key shares for multi-party elliptic curve cryptographic schemes (ECC). During the execution of an MPC protocol, the parties must agree on some public parameters, such as the session identifiers (SID), the public key matching the shared secret key, and the shares of the public key. During the audit, the Cure53 team found that the function <code>ECC-Refresh-MP</code> did not check that these public values match for all the participants in the protocol. The lack of these checks may affect the security and the correctness of the protocol implementation. Also, checking absence may allow attackers to execute replay attacks or state injection attacks.</p>
+<p>During audits conducted at HashCloak, we have found this issue multiple times. This raises an opportunity to remind software engineers and cryptographers implementing MPC protocols to be aware of checking the consistency of public parameters. We think that sometimes this may happen given that the mentioned consensus is not the key part on the protocol and it may remain inadvertent during the implementation process as engineer tend to focus on more complex or protocol-specific features. Sometimes, these are routine checks in MPC protocols that may be assumed but not considered in the implementation process. However, the lack of this consensus may produce equally damaging consequences to security as the more complex and protocol-specific features. Also, we encourage researchers to write these checks explicitly in the theoretical protocols so that engineers consider this. The Cure53 team pointed out this issue in their audit process because the Coinbase team highlighted this check in their theoretical specification clearly and explicitly, which is a good practice that engineers and auditors value a lot.</p>
+<h4 id="cbs-02-00-wp1-ecc-refresh-mp-vulnerable-to-small-subgroup-attacks">
+  CBS-02-00 WP1: <code>ECC-Refresh-MP</code> vulnerable to small subgroup attacks
+  <a class="anchor" href="#cbs-02-00-wp1-ecc-refresh-mp-vulnerable-to-small-subgroup-attacks">#</a>
+</h4>
+<p>In ECC implementations, we often deal with sending, receiving, and manipulating EC points. These points must lie in the correct group so that the computation is correct and secure. If the implementation does not consider this fact, an adversary can take advantage by sending elements belonging to the wrong group so that it can execute so-called small subgroup attacks.</p>
+<p>Considering the context of ECC, in a small subgroup attack, an adversary can send an invalid public key belonging to a small group to the honest parties. Then, the honest parties compute the shared secret for this key, but given that it belongs to a small group, the adversary can search for the shared key or at least learn some information about the shared key. In the reference video, Nadim Kobeissi recommends the paper <a href="https://eprint.iacr.org/2019/526">&ldquo;Prime, Order Please! Revisiting Small Subgroup and Invalid Curve Attacks on Protocols using Diffie-Hellman&rdquo;</a> by Cas Cremers and Dennis Jackson. In the mentioned paper, the authors develop an extension of the symbolic model of Diffie-Hellman groups. This model captures additional behaviors that allow the detection of attacks using small subgroups or invalid point usage. In this paper, the authors also propose practical applications finding attacks on Scuttlebutt gossip protocol and Tendermint&rsquo;s secure handshake.</p>
+<p>In the audit, the Cure53 team found that the source code does not validate whether the set of EC points $\{R_{j, \ell}\}_{\ell, j}$ are valid elements belonging to the prime-order subgroup as it is specified in the reference specification provided by Coinbase&rsquo;s team.</p>
+<h3 id="miscellaneous-findings">
+  Miscellaneous findings
+  <a class="anchor" href="#miscellaneous-findings">#</a>
+</h3>
+<p>There are other miscellaneous findings pointed out by Cure53&rsquo;s team involving the following topics:</p>
+<ul>
+<li>The implementation of the Ed25519 signing deviates from the standard specification that was worth documenting.</li>
+<li>Variable time branching and recalculation in modular inversion are important for achieving constant time execution.</li>
+<li>Missing parameter checks in internal functions.</li>
+<li>A proposal to execute batch exponentiation faster.</li>
+<li>Typographical errors in the documentation.</li>
+</ul>
+<p>One issue that has significant relevance is <strong>&ldquo;CBS-02-006 WP1: Absent checks in Paillier Key generation&rdquo;</strong>. In the Paillier cryptosystem, we set a value $N = p \cdot q$ where $p, q$ are large primes. It must hold that:</p>
+<ul>
+<li>$p \neq q$, and</li>
+<li>$\gcd(N, (p-1)(q-1)) = 1$.</li>
+</ul>
+<p>Although those properties should hold a high probability for randomly chosen prime numbers, these checks were missing in the implementation. However, these checks are considered mandatory for Paillier&rsquo;s security proofs.</p>
+<h2 id="lessons-learned-and-conclusions">
+  Lessons learned and conclusions
+  <a class="anchor" href="#lessons-learned-and-conclusions">#</a>
+</h2>
+<p>The Cure53 team considers that &ldquo;CB-MPC library is the <em>gold standard</em> for how cryptographic libraries - or various cryptographic implementations - can be documented.&rdquo; At HashCloak, we have found that this is a common issue in the interaction between auditors and clients. As auditors, we do not commonly know all the quirks, modifications, assumptions, and misconceptions that the client may have. This hidden information may damage the audit process in two ways: (1) the auditor may have personal assumptions that do not align with the client&rsquo;s vision of the implementation, or (2) the audit process can become highly inefficient given that the auditor must constantly confirm and extract this hidden information to achieve a reasonable coverage and understanding of the implementation. Strong and rigorous documentation can increase the coverage of the code and achieve &ldquo;the maximum value out of the audit&rdquo; (as mentioned by Nadim Kobeissi). As Kobeissi also mentions, good documentation does not help only in an audit process but also in case you need to transfer the implementation rationale to other people in an efficient, structured, and organized way (for example, when a new employee arrives at the client&rsquo;s company and need to start working on the implementation).</p>
 </article>
  
       
@@ -422,6 +474,13 @@ https://github.com/alex-shpak/hugo-book
 <nav id="TableOfContents">
   <ul>
     <li><a href="#cb-mpc">CB-MPC</a></li>
+    <li><a href="#cure53-audit">Cure53 audit</a>
+      <ul>
+        <li><a href="#key-findings">Key findings</a></li>
+        <li><a href="#miscellaneous-findings">Miscellaneous findings</a></li>
+      </ul>
+    </li>
+    <li><a href="#lessons-learned-and-conclusions">Lessons learned and conclusions</a></li>
   </ul>
 </nav>
 
