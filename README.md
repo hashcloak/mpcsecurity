@@ -2,7 +2,7 @@
 
 MPCSecurity aims to provide documentation and security best practices around implementing multiparty computation systems and their related primitives.
 
-As we are seeing more and more MPC protocols being deployed in practice, we are seeing more vulnerabilities and attacks that developers need to keep an eye out for. At [HashCloak](www.hashcloak.com), we audit, advise and ourselves build MPC systems and we hope to share our findings and research with the wider cryptography community.
+As we are seeing more and more MPC protocols being deployed in practice, we are seeing more vulnerabilities and attacks that developers need to keep an eye out for. At [HashCloak](https://hashcloak.com), we audit, advise and ourselves build MPC systems and we hope to share our findings and research with the wider cryptography community.
 
 ## Contribute
 
